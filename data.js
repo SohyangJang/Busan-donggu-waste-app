@@ -1,5 +1,3 @@
-function nKo(s){return s.toLowerCase().replace(/[^가-힣a-z0-9 ]/g," ").replace(/\s+/g," ").trim();}
-
 const LANGS={
 ko:{name:"한국어",norm:nKo,
   ui:{h1:"음식물쓰레기? <span>일반쓰레기?</span> 알려줄게!",sub:"음식 품목을 입력하면 어느 쓰레기통에 넣는지 알려드립니다.",slb:"품목명으로 검색",ph:"예: 달걀껍데기, 수박, 생선뼈...",btn:"확인 ↗",how:"버리는 방법",clbl:"예시 검색어",empty:"위에 음식 항목을 입력하면\n어느 쓰레기통인지 알려드려요.",nf:q=>`"${q}" 검색 결과가 없습니다.`,fine:"올바른 쓰레기봉투를 사용하지 않으면 최대 <strong>₩1,000,000</strong> 과태료가 부과됩니다.",tl:{food:"음식물쓰레기",general:"일반쓰레기",special:"특수처리"},bl:{food:"음식물쓰레기봉투",general:"종량제봉투",special:""}},
