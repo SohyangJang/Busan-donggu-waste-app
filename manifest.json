@@ -1,6 +1,6 @@
 {
-  "name": "부산 동구 쓰레기 분류 체커",
-  "short_name": "동구 분리배출",
+  "name": "어디에 버리지? - 부산동구",
+  "short_name": "어디에 버리지?",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
