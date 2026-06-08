@@ -1,8 +1,10 @@
-const CACHE_NAME = 'donggu-waste-v20260608';
+const CACHE_NAME = 'donggu-waste-v202606081717';
 
 const urlsToCache = [
   './',
   './index.html',
+  './app.js',
+  './data.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png'
