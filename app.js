@@ -21,6 +21,7 @@ function setLang(k){
   buildChips(l);
   document.getElementById("ra").innerHTML=`<div class="empty"><div class="ico">&#128465;</div><p>${l.ui.empty.replace("\n","<br>")}</p></div>`;
   document.getElementById("q").value="";
+  updateScheduleImage();
 }
 
 function buildChips(l){
@@ -60,6 +61,28 @@ function go(){
     </div>`;
   }).join("");
 }
+
+function updateScheduleImage(){
+
+  const images={
+    ko:"schedule-ko.jpg",
+    en:"schedule-en.jpg",
+    zh:"schedule-zh.jpg",
+    vi:"schedule-vi.jpg"
+  };
+
+  const titles={
+    ko:"요일별 배출요령",
+    en:"Collection Schedule",
+    zh:"投放日期指南",
+    vi:"Hướng dẫn ngày đổ rác"
+  };
+
+  document.getElementById("schedule-image").src=images[cur];
+  document.getElementById("schedule-link").href=images[cur];
+  document.getElementById("schedule-title").textContent=titles[cur];
+}
+
 
 const lr=document.getElementById("lr");
 Object.entries(LANGS).forEach(([k,v])=>{
