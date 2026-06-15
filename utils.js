@@ -25,3 +25,13 @@ function nVi(s){
 function nZh(s){
   return s.replace(/\s+/g,"").toLowerCase();
 }
+
+function nRu(s){
+return String(s||"")
+.toLowerCase()
+.replace(/ё/g,"е")
+.replace(/[^\u0400-\u04FFa-z0-9 ]/g," ")
+.replace(/\s+/g," ")
+.trim();
+}
+
