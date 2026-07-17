@@ -77,6 +77,10 @@ function go(){
   const l=LANGS[cur];
   const q=l.norm(raw);
   if(!q)return;
+  
+  // [★추가] 검색을 시도하는 순간 Supabase에 검색 로그 저장
+  saveSearchLog(raw, "general");
+  
   const area=document.getElementById("ra");
   const matches=l.db.filter(item=>item.t.some(t=>{
     const nt=l.norm(t);
