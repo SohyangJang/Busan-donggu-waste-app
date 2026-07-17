@@ -15,7 +15,7 @@ function nRu(s){  return String(s||"").toLowerCase().replace(/ё/g,"е").replace
 let cur="ko";
 
 // [20260717추가] Supabase에 검색 로그를 비동기로 저장하는 함수
-async function saveSearchLog(searchWord, resultType = 'general') {
+async function saveSearchLog(searchWord, resultType = 'general', lang = 'ko') {
   if (!searchWord || !searchWord.trim()) return;
   if (!window.supabaseClient) {
     console.error("Supabase 클라이언트가 로드되지 않았습니다.");
@@ -23,24 +23,24 @@ async function saveSearchLog(searchWord, resultType = 'general') {
   }
 
   try {
-    const { error } = await window.supabaseClient
+    const { data, error } = await window.supabaseClient
       .from('search_logs')
       .insert([
-        {
-          keyword: searchWord.trim(),
-          result_type: resultType,
-          language: cur, // 현재 선택된 언어('ko', 'en' 등)를 자동으로 기록
-          source: 'web'
+        { 
+          keyword: searchWord, 
+          result_type: resultType, 
+          language: lang, // 전달받은 언어(ko, en 등)가 여기에 대입됩니다.
+          source: 'web' 
         }
       ]);
 
     if (error) {
-      console.error('Supabase 저장 실패:', error.message);
+      console.error("Supabase 저장 실패:", error.message);
     } else {
-      console.log('Supabase 저장 성공:', searchWord);
+      console.log("Supabase 저장 성공!");
     }
   } catch (err) {
-    console.error('네트워크 에러 발생:', err);
+    console.error("Supabase 통신 에러:", err);
   }
 }
 
@@ -84,9 +84,11 @@ function go(){
     const nt=l.norm(t);
     return nt.includes(q)||q.includes(nt)||(nt.split(" ").some(w=>w.length>1&&q.includes(w)));
   }));
-  //2.카테고리추출
+  
+  // 2. [핵심] 찾은 결과물에서 카테고리 정보(m.c)를 동적으로 추출합니다.
+  // 검색 결과가 있으면 첫 번째 결과의 카테고리(food, general 등)를 쓰고, 없으면 'none'으로 처리합니다.
   let detectedType = "none";
-  if (matches.length > 0) {
+  if (matches && matches.length > 0) {
     detectedType = matches[0].c; 
   }
 
