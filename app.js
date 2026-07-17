@@ -1,10 +1,20 @@
 const SUPABASE_URL = "https://ootgfnycumxevuilhmwl.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vdGdmbnljdW14ZXZ1aWxobXdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyMzAyMDIsImV4cCI6MjA5OTgwNjIwMn0.bk5abiU_GzTYYCx1Vww5NOnRc85AxdyaTj9IAZyVE5w";
 
-window.supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+// [안전 장치 추가] window.supabase가 완전히 로드되었는지 확인하고 클라이언트를 만듭니다.
+if (window.supabase) {
+    window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+} else {
+    // 혹시라도 로딩이 늦어지면 라이브러리가 완전히 로드되는 시점(onload)에 클라이언트를 만듭니다.
+    window.addEventListener('load', () => {
+        if (window.supabase) {
+            window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            console.log("Supabase 클라이언트가 뒤늦게 로드되었습니다.");
+        } else {
+            console.error("Supabase 라이브러리 로드에 완전히 실패했습니다. 브라우저 차단 설정을 확인해 주세요.");
+        }
+    });
+}
 
 
 function nKo(s){return s.toLowerCase().replace(/[^가-힣a-z0-9 ]/g," ").replace(/\s+/g," ").trim();}
