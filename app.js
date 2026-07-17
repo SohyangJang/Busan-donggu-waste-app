@@ -95,7 +95,36 @@ function go(){
   //3. Supabase에 검색 로그 저장
  saveSearchLog(raw, detectedType, cur);
   
-  if(!matches.length){area.innerHTML=`<div class="nf">${l.ui.nf(raw)}</div>`;return;}
+  if(!matches.length){
+
+  let html = `<div class="nf">${l.ui.nf(raw)}</div>`;
+
+  // 한국어에서만 분리배출.kr 안내
+  if(cur === "ko"){
+
+    const url =
+      "https://xn--oy2b29bd3a601b.kr/front/dischargeMethod/dictionary.do?niIdx=&pageIndex=1&searchCnd=1&searchWrd="
+      + encodeURIComponent(raw);
+
+    html += `
+      <div class="external-search">
+        <p style="margin-top:15px;">
+          동구청 DB에 없는 품목입니다.
+        </p>
+
+        <a href="${url}"
+           target="_blank"
+           class="external-btn">
+           🔍 분리배출 품목사전에서 검색하기
+        </a>
+
+      </div>
+    `;
+  }
+
+  area.innerHTML = html;
+  return;
+}
   area.innerHTML=matches.map(m=>{
     const bl=l.ui.bl[m.c];
     const ko=m.c==="food"?"음식물쓰레기봉투":m.c==="general"?"종량제봉투":"";
