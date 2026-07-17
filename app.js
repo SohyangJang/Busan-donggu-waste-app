@@ -77,15 +77,22 @@ function go(){
   const l=LANGS[cur];
   const q=l.norm(raw);
   if(!q)return;
-  
-  // [★추가] 검색을 시도하는 순간 Supabase에 검색 로그 저장
-  saveSearchLog(raw, "general");
-  
+
+  //1.검색결과매칭
   const area=document.getElementById("ra");
   const matches=l.db.filter(item=>item.t.some(t=>{
     const nt=l.norm(t);
     return nt.includes(q)||q.includes(nt)||(nt.split(" ").some(w=>w.length>1&&q.includes(w)));
   }));
+  //2.카테고리추출
+  let detectedType = "none";
+  if (matches.length > 0) {
+    detectedType = matches[0].c; 
+  }
+
+  //3. Supabase에 검색 로그 저장
+ saveSearchLog(raw, detectedType, cur);
+  
   if(!matches.length){area.innerHTML=`<div class="nf">${l.ui.nf(raw)}</div>`;return;}
   area.innerHTML=matches.map(m=>{
     const bl=l.ui.bl[m.c];
