@@ -8,6 +8,36 @@ function nRu(s){  return String(s||"").toLowerCase().replace(/ё/g,"е").replace
 
 let cur="ko";
 
+// [20260717추가] Supabase에 검색 로그를 비동기로 저장하는 함수
+async function saveSearchLog(searchWord, resultType = 'general') {
+  if (!searchWord || !searchWord.trim()) return;
+  if (!window.supabaseClient) {
+    console.error("Supabase 클라이언트가 로드되지 않았습니다.");
+    return;
+  }
+
+  try {
+    const { error } = await window.supabaseClient
+      .from('search_logs')
+      .insert([
+        {
+          keyword: searchWord.trim(),
+          result_type: resultType,
+          language: cur, // 현재 선택된 언어('ko', 'en' 등)를 자동으로 기록
+          source: 'web'
+        }
+      ]);
+
+    if (error) {
+      console.error('Supabase 저장 실패:', error.message);
+    } else {
+      console.log('Supabase 저장 성공:', searchWord);
+    }
+  } catch (err) {
+    console.error('네트워크 에러 발생:', err);
+  }
+}
+
 function setLang(k){
   cur=k;
   const l=LANGS[k];
