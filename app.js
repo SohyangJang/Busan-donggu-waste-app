@@ -109,7 +109,7 @@ function go(){
     html += `
       <div class="external-search">
         <p style="margin-top:15px;">
-          동구청 DB에 없는 품목입니다.
+          음식물 유래 폐기물 DB에 없는 품목입니다.
         </p>
 
         <a href="${url}"
