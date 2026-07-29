@@ -2,11 +2,16 @@
 <html lang="ko">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>어디에버리지 Admin Dashboard</title>
 
     <link rel="stylesheet" href="dashboard.css">
+
 </head>
 
 <body>
@@ -14,79 +19,167 @@
 <header class="topbar">
 
     <div class="logo">
+
         <h1>어디에버리지</h1>
+
         <span>Admin Dashboard</span>
+
     </div>
 
-    <button class="logout-btn">
-        로그아웃
-    </button>
+    <div class="top-actions">
+
+        <button class="csv-btn">
+            CSV 다운로드
+        </button>
+
+        <button class="logout-btn">
+            로그아웃
+        </button>
+
+    </div>
 
 </header>
+
 
 <main class="container">
 
     <!-- KPI -->
+
     <section class="kpi-grid">
 
-        <div class="card">
-            <h3>총 검색건수</h3>
-            <p id="totalSearch">-</p>
+        <div class="card kpi-card">
+
+            <div class="kpi-icon">🔍</div>
+
+            <div class="kpi-info">
+
+                <h3>총 검색건수</h3>
+
+                <p id="totalSearch">-</p>
+
+            </div>
+
         </div>
 
-        <div class="card">
-            <h3>오늘 검색건수</h3>
-            <p id="todaySearch">-</p>
+
+        <div class="card kpi-card">
+
+            <div class="kpi-icon">📅</div>
+
+            <div class="kpi-info">
+
+                <h3>오늘 검색건수</h3>
+
+                <p id="todaySearch">-</p>
+
+            </div>
+
         </div>
 
-        <div class="card">
-            <h3>검색 성공률</h3>
-            <p id="successRate">-</p>
+
+        <div class="card kpi-card">
+
+            <div class="kpi-icon">✅</div>
+
+            <div class="kpi-info">
+
+                <h3>검색 성공률</h3>
+
+                <p id="successRate">-</p>
+
+            </div>
+
         </div>
 
-        <div class="card">
-            <h3>QR 유입률</h3>
-            <p id="qrRate">-</p>
+
+        <div class="card kpi-card">
+
+            <div class="kpi-icon">📱</div>
+
+            <div class="kpi-info">
+
+                <h3>QR 유입률</h3>
+
+                <p id="qrRate">-</p>
+
+            </div>
+
         </div>
 
     </section>
 
-    <!-- 최근 7일 검색량 -->
+
+
+    <!-- 최근 7일 -->
+
     <section class="section-card">
-        <h2>최근 7일 검색량</h2>
-        <div id="weeklyChart">
-            (차트 예정)
+
+        <h2>📈 최근 7일 검색량</h2>
+
+        <div id="weeklyChart"></div>
+
+    </section>
+
+
+
+    <!-- 2열 -->
+
+    <section class="two-column">
+
+        <div class="section-card">
+
+            <h2>🌍 언어별 검색 현황</h2>
+
+            <div id="languageStats"></div>
+
         </div>
+
+
+        <div class="section-card">
+
+            <h2>🗂 검색 유형</h2>
+
+            <div id="categoryStats"></div>
+
+        </div>
+
     </section>
 
-    <!-- 언어 -->
-    <section class="section-card">
-        <h2>언어별 검색 현황</h2>
-        <div id="languageStats"></div>
+
+
+    <!-- 2열 -->
+
+    <section class="two-column">
+
+        <div class="section-card">
+
+            <h2>🔥 TOP10 검색어</h2>
+
+            <div id="topKeywords"></div>
+
+        </div>
+
+
+        <div class="section-card">
+
+            <h2>⚠ 검색 실패 목록</h2>
+
+            <div id="failedSearches"></div>
+
+        </div>
+
     </section>
 
-    <!-- 검색 유형 -->
-    <section class="section-card">
-        <h2>검색 유형</h2>
-        <div id="categoryStats"></div>
-    </section>
 
-    <!-- TOP10 -->
-    <section class="section-card">
-        <h2>TOP10 검색어</h2>
-        <div id="topKeywords"></div>
-    </section>
 
     <!-- 최근 검색 -->
-    <section class="section-card">
-        <h2>최근 검색 목록</h2>
-        <div id="recentSearches"></div>
-    </section>
 
-    <!-- 검색 실패 -->
     <section class="section-card">
-        <h2>검색 실패 목록</h2>
-        <div id="failedSearches"></div>
+
+        <h2>🕒 최근 검색 목록</h2>
+
+        <div id="recentSearches"></div>
+
     </section>
 
 </main>
@@ -94,4 +187,5 @@
 <script src="dashboard.js"></script>
 
 </body>
+
 </html>
