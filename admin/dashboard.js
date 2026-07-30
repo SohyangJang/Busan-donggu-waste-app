@@ -256,6 +256,7 @@ async function initDashboard(){
     console.log("Dashboard Start");
 
     await loadKPI();
+   await loadStatistics();
 
 }
 
@@ -266,4 +267,318 @@ document.addEventListener(
     initDashboard
 
 );
+/* ==========================================================
+   PART 2
+   언어별 통계 / 검색 유형 통계
+   ========================================================== */
+
+
+/* ==========================================================
+   11. LANGUAGE LABEL
+   ========================================================== */
+
+const languageNames = {
+
+    ko:"한국어",
+    en:"영어",
+    zh:"중국어",
+    vi:"베트남어",
+    ru:"러시아어"
+
+};
+
+
+
+/* ==========================================================
+   12. CATEGORY LABEL
+   ========================================================== */
+
+const categoryNames = {
+
+    food:"음식물쓰레기",
+    general:"일반쓰레기",
+    special:"특수처리",
+    none:"검색실패"
+
+};
+
+
+
+/* ==========================================================
+   13. BAR GRAPH HTML
+   ========================================================== */
+
+function createBar(label,value){
+
+    return `
+
+    <div class="stat-row">
+
+        <div class="stat-label">
+            ${label}
+        </div>
+
+
+        <div class="stat-bar">
+
+            <div class="stat-fill"
+                 style="width:${value}%">
+            </div>
+
+        </div>
+
+
+        <div class="stat-value">
+            ${value.toFixed(1)}%
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+
+
+/* ==========================================================
+   14. LANGUAGE STATS
+   ========================================================== */
+
+async function loadLanguageStats(){
+
+    const area =
+    document.getElementById("languageStats");
+
+
+    if(!area) return;
+
+
+    try{
+
+
+        const {data,error}=await db
+
+        .from("search_logs")
+
+        .select("language");
+
+
+        if(error) throw error;
+
+
+
+        const total=data.length;
+
+
+        if(total===0){
+
+            area.innerHTML="데이터 없음";
+
+            return;
+
+        }
+
+
+
+        const count={};
+
+
+        data.forEach(item=>{
+
+
+            const lang =
+            item.language || "ko";
+
+
+            count[lang] =
+            (count[lang]||0)+1;
+
+
+        });
+
+
+
+        let html="";
+
+
+
+        Object.keys(languageNames)
+        .forEach(lang=>{
+
+
+            const value =
+
+            ((count[lang]||0)/total)*100;
+
+
+
+            html += createBar(
+
+                languageNames[lang],
+
+                value
+
+            );
+
+
+        });
+
+
+
+        area.innerHTML=html;
+
+
+
+    }
+
+    catch(err){
+
+
+        console.error(
+            "언어 통계 오류:",
+            err
+        );
+
+
+        area.innerHTML=
+        "데이터 불러오기 실패";
+
+
+    }
+
+}
+
+
+
+/* ==========================================================
+   15. CATEGORY STATS
+   ========================================================== */
+
+async function loadCategoryStats(){
+
+
+    const area =
+    document.getElementById("categoryStats");
+
+
+    if(!area) return;
+
+
+
+    try{
+
+
+        const {data,error}=await db
+
+        .from("search_logs")
+
+        .select("result_type");
+
+
+
+        if(error) throw error;
+
+
+
+        const total=data.length;
+
+
+
+        if(total===0){
+
+            area.innerHTML="데이터 없음";
+
+            return;
+
+        }
+
+
+
+        const count={};
+
+
+
+        data.forEach(item=>{
+
+
+            const type =
+            item.result_type || "none";
+
+
+            count[type] =
+            (count[type]||0)+1;
+
+
+        });
+
+
+
+        let html="";
+
+
+
+        Object.keys(categoryNames)
+
+        .forEach(type=>{
+
+
+            const value =
+
+            ((count[type]||0)/total)*100;
+
+
+
+            html += createBar(
+
+                categoryNames[type],
+
+                value
+
+            );
+
+
+        });
+
+
+
+        area.innerHTML=html;
+
+
+
+    }
+
+    catch(err){
+
+
+        console.error(
+            "검색 유형 오류:",
+            err
+        );
+
+
+        area.innerHTML=
+        "데이터 불러오기 실패";
+
+
+    }
+
+
+}
+
+
+
+/* ==========================================================
+   16. UPDATE INIT
+   ========================================================== */
+
+async function loadStatistics(){
+
+
+    await loadLanguageStats();
+
+
+    await loadCategoryStats();
+
+
+}
 
