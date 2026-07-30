@@ -224,6 +224,7 @@ if ('serviceWorker' in navigator) {
   });
 
 function showFeedback(keyword){
+    console.log("제보창 실행", keyword);
 
     const fb=document.getElementById("feedbackBox");
     fb.style.display = "block";
