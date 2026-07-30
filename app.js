@@ -162,6 +162,7 @@ function go(){
   }
 
   area.innerHTML = html;
+  showFeedback(raw);
   return;
 }
   area.innerHTML=matches.map(m=>{
@@ -179,7 +180,6 @@ function go(){
     </div>`;
   }).join("");
 
-  showFeedback(q.value);
 }
 
 function updateScheduleImage(){
