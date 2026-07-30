@@ -178,9 +178,8 @@ function go(){
       <div class="steps">${m.s.map((s,i)=>`<div class="step"><span class="sn ${m.c}">${i+1}</span><span>${s}</span></div>`).join("")}</div>
     </div>`;
   }).join("");
-  const fb = document.getElementById("feedbackBox");
-   fb.style.display = "none";
-   fb.innerHTML = "";
+
+  showFeedback(q.value);
 }
 
 function updateScheduleImage(){
