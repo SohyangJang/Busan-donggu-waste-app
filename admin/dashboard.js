@@ -13,7 +13,7 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vdGdmbnljdW14ZXZ1aWxobXdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyMzAyMDIsImV4cCI6MjA5OTgwNjIwMn0.bk5abiU_GzTYYCx1Vww5NOnRc85AxdyaTj9IAZyVE5w";
 
-const supabase =
+const db =
 window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
@@ -73,7 +73,7 @@ async function loadTotalSearch(){
 
     try{
 
-        const {count,error}=await supabase
+        const {count,error}=await db
         .from("search_logs")
         .select("*",{count:"exact",head:true});
 
@@ -106,7 +106,7 @@ async function loadTodaySearch(){
 
     try{
 
-        const {count,error}=await supabase
+        const {count,error}=await db
 
         .from("search_logs")
 
@@ -143,13 +143,13 @@ async function loadSuccessRate(){
 
     try{
 
-        const {count:total}=await supabase
+        const {count:total}=await db
 
         .from("search_logs")
 
         .select("*",{count:"exact",head:true});
 
-        const {count:fail}=await supabase
+        const {count:fail}=await db
 
         .from("search_logs")
 
@@ -193,13 +193,13 @@ async function loadQRRate(){
 
     try{
 
-        const {count:total}=await supabase
+        const {count:total}=await db
 
         .from("search_logs")
 
         .select("*",{count:"exact",head:true});
 
-        const {count:qr}=await supabase
+        const {count:qr}=await db
 
         .from("search_logs")
 
