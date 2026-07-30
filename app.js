@@ -286,6 +286,25 @@ function showFeedback(keyword){
     };
 
 }  
+
+function openFeedback(){
+    const fb = document.getElementById("feedbackBox");
+    fb.style.display = "block";
+
+    fb.innerHTML = `
+      <div class="feedback-card">
+        <hr style="margin:20px 0;border:none;border-top:1px solid #eee;">
+        <h3>🔍 원하는 품목이 없나요?</h3>
+        <p>
+          찾으시는 품목이 없거나<br>
+          검색 결과에 오류가 있다면 알려주세요.
+        </p>
+        <button id="feedbackBtn">
+          💬 카카오톡으로 제보하기
+        </button>
+      </div>
+    `;
+}  
 function hideFeedback(){
 
     document.getElementById("feedbackBox").innerHTML="";
