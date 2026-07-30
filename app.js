@@ -15,6 +15,10 @@ function nRu(s){  return String(s||"").toLowerCase().replace(/ё/g,"е").replace
 let cur="ko";
 
 // [20260717추가] Supabase에 검색 로그를 비동기로 저장하는 함수
+
+const params = new URLSearchParams(window.location.search);
+const source = params.get("source") || "web";
+
 async function saveSearchLog(searchWord, resultType = 'general', lang = 'ko') {
   if (!searchWord || !searchWord.trim()) return;
   if (!window.supabaseClient) {
@@ -30,7 +34,7 @@ async function saveSearchLog(searchWord, resultType = 'general', lang = 'ko') {
           keyword: searchWord, 
           result_type: resultType, 
           language: lang, // 전달받은 언어(ko, en 등)가 여기에 대입됩니다.
-          source: 'web' 
+          source: source 
         }
       ]);
 
