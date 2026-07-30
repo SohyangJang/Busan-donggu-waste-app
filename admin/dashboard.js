@@ -256,7 +256,8 @@ async function initDashboard(){
     console.log("Dashboard Start");
 
     await loadKPI();
-   await loadStatistics();
+    await loadStatistics();
+    await loadOperationData();
 
 }
 
@@ -578,6 +579,398 @@ async function loadStatistics(){
 
 
     await loadCategoryStats();
+
+
+}
+
+/* ==========================================================
+   PART 3
+   TOP10 검색어 / 검색 실패 / 최근 검색
+   ========================================================== */
+
+
+/* ==========================================================
+   17. TOP10 KEYWORDS
+   ========================================================== */
+
+async function loadTopKeywords(){
+
+    const area =
+    document.getElementById("topKeywords");
+
+
+    if(!area) return;
+
+
+    try{
+
+
+        const {data,error}=await db
+
+        .from("search_logs")
+
+        .select("keyword");
+
+
+        if(error) throw error;
+
+
+
+        const count={};
+
+
+
+        data.forEach(item=>{
+
+
+            const keyword =
+            item.keyword?.trim();
+
+
+            if(keyword){
+
+                count[keyword]=
+                (count[keyword]||0)+1;
+
+            }
+
+
+        });
+
+
+
+        const ranking =
+
+        Object.entries(count)
+
+        .sort((a,b)=>b[1]-a[1])
+
+        .slice(0,10);
+
+
+
+        if(ranking.length===0){
+
+            area.innerHTML="데이터 없음";
+
+            return;
+
+        }
+
+
+
+        let html="";
+
+
+        ranking.forEach((item,index)=>{
+
+
+            html += `
+
+            <div class="rank-row">
+
+                <span class="rank-number">
+                    ${index+1}
+                </span>
+
+
+                <span class="rank-keyword">
+                    ${item[0]}
+                </span>
+
+
+                <span class="rank-count">
+                    ${item[1]}회
+                </span>
+
+            </div>
+
+            `;
+
+
+        });
+
+
+
+        area.innerHTML=html;
+
+
+
+    }
+
+    catch(err){
+
+
+        console.error(
+            "TOP10 오류:",
+            err
+        );
+
+
+        area.innerHTML=
+        "데이터 불러오기 실패";
+
+
+    }
+
+
+}
+
+
+
+/* ==========================================================
+   18. FAILED SEARCH
+   ========================================================== */
+
+async function loadFailedSearches(){
+
+    const area =
+    document.getElementById("failedSearches");
+
+
+    if(!area) return;
+
+
+
+    try{
+
+
+        const {data,error}=await db
+
+        .from("search_logs")
+
+        .select("keyword,created_at")
+
+        .eq("result_type","none")
+
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        )
+
+        .limit(20);
+
+
+
+        if(error) throw error;
+
+
+
+        if(data.length===0){
+
+            area.innerHTML=
+            "검색 실패 데이터 없음";
+
+            return;
+
+        }
+
+
+
+        let html="";
+
+
+
+        data.forEach(item=>{
+
+
+            html += `
+
+            <div class="fail-row">
+
+                <span>
+                    ${item.keyword}
+                </span>
+
+            </div>
+
+            `;
+
+
+        });
+
+
+
+        area.innerHTML=html;
+
+
+
+    }
+
+    catch(err){
+
+
+        console.error(
+            "검색 실패 오류:",
+            err
+        );
+
+
+        area.innerHTML=
+        "데이터 불러오기 실패";
+
+
+    }
+
+
+}
+
+
+
+/* ==========================================================
+   19. RECENT SEARCH
+   ========================================================== */
+
+async function loadRecentSearches(){
+
+
+    const area =
+    document.getElementById("recentSearches");
+
+
+    if(!area) return;
+
+
+
+    try{
+
+
+        const {data,error}=await db
+
+        .from("search_logs")
+
+        .select(
+            "keyword,result_type,language,source,created_at"
+        )
+
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        )
+
+        .limit(20);
+
+
+
+        if(error) throw error;
+
+
+
+        if(data.length===0){
+
+            area.innerHTML=
+            "최근 검색 데이터 없음";
+
+            return;
+
+        }
+
+
+
+        let html="";
+
+
+
+        data.forEach(item=>{
+
+
+            const time =
+
+            new Date(item.created_at)
+
+            .toLocaleTimeString(
+                "ko-KR",
+                {
+                    hour:"2-digit",
+                    minute:"2-digit"
+                }
+            );
+
+
+
+            html += `
+
+            <div class="recent-row">
+
+
+                <span class="recent-time">
+                    ${time}
+                </span>
+
+
+                <span class="recent-keyword">
+                    ${item.keyword}
+                </span>
+
+
+                <span class="recent-type">
+                    ${item.result_type}
+                </span>
+
+
+                <span class="recent-lang">
+                    ${item.language}
+                </span>
+
+
+                <span class="recent-source">
+                    ${item.source || "web"}
+                </span>
+
+
+            </div>
+
+            `;
+
+
+        });
+
+
+
+        area.innerHTML=html;
+
+
+
+    }
+
+    catch(err){
+
+
+        console.error(
+            "최근 검색 오류:",
+            err
+        );
+
+
+        area.innerHTML=
+        "데이터 불러오기 실패";
+
+
+    }
+
+
+}
+
+
+
+/* ==========================================================
+   20. PART3 LOAD
+   ========================================================== */
+
+async function loadOperationData(){
+
+
+    await loadTopKeywords();
+
+
+    await loadFailedSearches();
+
+
+    await loadRecentSearches();
 
 
 }
