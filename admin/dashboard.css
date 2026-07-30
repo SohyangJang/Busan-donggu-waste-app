@@ -1933,6 +1933,75 @@ img{
     font-size:14px;
     font-weight:600;
 }
+.rank-row,
+.fail-row,
+.recent-row{
+
+    display:flex;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+
+}
+
+
+.rank-number{
+
+    width:30px;
+    font-weight:bold;
+}
+
+
+.rank-keyword{
+
+    flex:1;
+
+}
+
+
+.rank-count{
+
+    color:#777;
+
+}
+
+
+.fail-row{
+
+    color:#555;
+
+}
+
+
+.recent-time{
+
+    width:70px;
+
+    color:#888;
+
+}
+
+
+.recent-keyword{
+
+    flex:1;
+
+    font-weight:600;
+
+}
+
+
+.recent-type,
+.recent-lang,
+.recent-source{
+
+    width:70px;
+
+    text-align:center;
+
+    font-size:13px;
+
+}
 
 
 /* ==========================================================
