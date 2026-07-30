@@ -59,6 +59,43 @@ function setLang(k){
   document.getElementById("ra").innerHTML=`<div class="empty"><div class="ico">&#128465;</div><p>${l.ui.empty.replace("\n","<br>")}</p></div>`;
   document.getElementById("q").value="";
   updateScheduleImage();
+  const fb = document.getElementById("feedbackBox");
+
+if (fb) {
+    fb.innerHTML = `
+        <div class="feedback">
+            <h3>${k==="ko" ? "원하는 품목이 없나요?" :
+                 k==="en" ? "Can't find your item?" :
+                 k==="zh" ? "找不到想查询的物品吗？" :
+                 k==="vi" ? "Không tìm thấy vật cần tìm?" :
+                 "Не нашли нужный предмет?"}</h3>
+
+            <p>
+                ${k==="ko"
+                    ? "검색되지 않는 품목이나 분류 오류를 알려주시면 검토 후 반영하겠습니다."
+                    : k==="en"
+                    ? "Tell us about missing items or incorrect classifications."
+                    : k==="zh"
+                    ? "如果有遗漏或分类错误，请告诉我们。"
+                    : k==="vi"
+                    ? "Hãy cho chúng tôi biết nếu có mục bị thiếu hoặc phân loại sai."
+                    : "Сообщите нам, если предмет отсутствует или классифицирован неверно."}
+            </p>
+
+            <button id="feedbackBtn">
+                💬 ${k==="ko" ? "카카오톡으로 제보하기"
+                    : k==="en" ? "Report via KakaoTalk"
+                    : k==="zh" ? "通过 KakaoTalk 举报"
+                    : k==="vi" ? "Báo qua KakaoTalk"
+                    : "Сообщить через KakaoTalk"}
+            </button>
+        </div>
+    `;
+
+    document.getElementById("feedbackBtn").onclick = openFeedback;
+}
+  
+  
 }
 
 function buildChips(l){
@@ -106,6 +143,8 @@ function go(){
       "https://xn--oy2b29bd3a601b.kr/front/dischargeMethod/dictionary.do?niIdx=&pageIndex=1&searchCnd=1&searchWrd="
       + encodeURIComponent(raw);
 
+    const feedback = "http://pf.kakao.com/_HwHxnX/chat";   // ← 2026.7.30변경
+    
     html += `
       <div class="external-search">
         <p style="margin-top:15px;">
@@ -181,4 +220,71 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js');
   });
+
+function showFeedback(keyword){
+
+    const fb=document.getElementById("feedbackBox");
+
+    fb.innerHTML=`
+        <div class="feedback-card">
+        <hr style="margin:20px 0;border:none;border-top:1px solid #eee;">
+            <h3>🔍 원하는 품목이 없나요?</h3>
+
+            <p>
+                찾으시는 품목이 없거나<br>
+                검색 결과에 오류가 있다면 알려주세요.
+            </p>
+
+            <button id="feedbackBtn">
+                💬 카카오톡으로 제보하기
+            </button>
+
+        </div>
+    `;
+
+    document.getElementById("feedbackBtn").onclick=async()=>{
+
+        const text=
+`[어디에버리지 의견]
+
+검색어 : ${keyword}
+
+문의내용 :
+
+□ 검색되지 않음
+
+□ 분류 오류
+
+□ 번역 오류
+
+□ 기타
+
+`;
+
+        try{
+            await navigator.clipboard.writeText(text);
+
+            alert(
+"검색어가 복사되었습니다.\n\n카카오톡에서 붙여넣기 후 전송해주세요."
+            );
+
+        }catch(e){
+         alert(
+               "카카오톡으로 이동합니다.\n\n검색어를 직접 입력해서 제보해주세요."
+              );
+        }
+
+       window.open(
+    "http://pf.kakao.com/_HwHxnX/chat",
+    "_blank"
+        );
+
+    };
+
+}  
+function hideFeedback(){
+
+    document.getElementById("feedbackBox").innerHTML="";
+
+}  
 }
