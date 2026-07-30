@@ -180,6 +180,10 @@ function go(){
     </div>`;
   }).join("");
 
+  console.log("검색 성공 후 showFeedback 호출");
+  console.log("① area.innerHTML 완료");
+  showFeedback(raw);
+  console.log("② showFeedback 호출 완료");
 }
 
 function updateScheduleImage(){
