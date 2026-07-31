@@ -975,3 +975,497 @@ async function loadOperationData(){
 
 }
 
+/* ==========================================================
+   PART 4-1
+   최근 7일 검색량 (Chart.js)
+   ========================================================== */
+
+let weeklyChart = null;
+
+/* ==========================================================
+   날짜를 YYYY-MM-DD(KST)로 변환
+   ========================================================== */
+
+function formatKSTDate(date){
+
+    const kst = new Date(
+        date.getTime() + (9 * 60 * 60 * 1000)
+    );
+
+    return kst.toISOString().slice(0,10);
+
+}
+
+
+/* ==========================================================
+   최근 7일 배열 생성
+   ========================================================== */
+
+function createLast7Days(){
+
+    const labels = [];
+    const keys = [];
+
+    const today = new Date();
+
+    for(let i=6;i>=0;i--){
+
+        const d = new Date(today);
+
+        d.setDate(today.getDate()-i);
+
+        keys.push(formatKSTDate(d));
+
+        labels.push(
+
+            `${d.getMonth()+1}/${d.getDate()}`
+
+        );
+
+    }
+
+    return {
+
+        labels,
+
+        keys
+
+    };
+
+}
+
+
+/* ==========================================================
+   최근 7일 검색량
+   ========================================================== */
+
+async function loadWeeklyChart(){
+
+    const canvas =
+    document.getElementById("weeklyChart");
+
+    if(!canvas) return;
+
+    try{
+
+        const {labels,keys}
+        = createLast7Days();
+
+        const countMap={};
+
+        keys.forEach(day=>{
+
+            countMap[day]=0;
+
+        });
+
+        const firstDay =
+
+            new Date();
+
+        firstDay.setDate(
+            firstDay.getDate()-6
+        );
+
+        firstDay.setHours(
+            0,0,0,0
+        );
+
+        const {data,error}=await db
+
+        .from("search_logs")
+
+        .select("created_at")
+
+        .gte(
+            "created_at",
+            firstDay.toISOString()
+        );
+
+        if(error) throw error;
+
+        data.forEach(item=>{
+
+            const day =
+
+                formatKSTDate(
+
+                    new Date(item.created_at)
+
+                );
+
+            if(countMap.hasOwnProperty(day)){
+
+                countMap[day]++;
+
+            }
+
+        });
+
+        const values =
+
+            keys.map(day=>countMap[day]);
+
+        if(weeklyChart){
+
+            weeklyChart.destroy();
+
+        }
+
+        weeklyChart =
+
+        new Chart(canvas,{
+
+            type:"bar",
+
+            data:{
+
+                labels:labels,
+
+                datasets:[{
+
+                    label:"검색량",
+
+                    data:values,
+
+                    backgroundColor:"#7b4dff",
+
+                    hoverBackgroundColor:"#946dff",
+
+                    borderRadius:10,
+
+                    borderSkipped:false,
+
+                    maxBarThickness:42
+
+                }]
+
+            },
+
+            options:{
+
+                responsive:true,
+
+                maintainAspectRatio:false,
+
+                animation:{
+
+                    duration:900
+
+                },
+
+                plugins:{
+
+                    legend:{
+
+                        display:false
+
+                    },
+
+                    tooltip:{
+
+                        callbacks:{
+
+                            label:function(context){
+
+                                return context.raw + "건";
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales:{
+
+                    x:{
+
+                        grid:{
+
+                            display:false
+
+                        }
+
+                    },
+
+                    y:{
+
+                        beginAtZero:true,
+
+                        ticks:{
+
+                            precision:0,
+
+                            stepSize:1
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
+
+        console.log(
+
+            "최근 7일 차트 로딩 완료"
+
+        );
+
+    }
+
+    catch(err){
+
+        console.error(
+
+            "최근 7일 차트 오류",
+
+            err
+
+        );
+
+    }
+
+}
+
+/* ==========================================================
+   PART 4-2A
+   CSV DOWNLOAD (Ver.1 Final)
+   ========================================================== */
+
+async function downloadCSV(){
+
+    try{
+
+        console.log("CSV 다운로드 시작");
+
+        const {data,error}=await db
+
+            .from("search_logs")
+
+            .select("*")
+
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            );
+
+        if(error) throw error;
+
+        if(!data || data.length===0){
+
+            alert("다운로드할 데이터가 없습니다.");
+
+            return;
+
+        }
+
+        const headers=[
+            "id",
+            "created_at",
+            "keyword",
+            "result_type",
+            "language",
+            "source"
+        ];
+
+        let csv=headers.join(",")+"\n";
+
+        data.forEach(row=>{
+
+            const values=headers.map(col=>{
+
+                let value=row[col];
+
+                if(value===null || value===undefined){
+
+                    value="";
+
+                }
+
+                value=String(value)
+
+                    .replace(/"/g,'""')
+
+                    .replace(/\r/g," ")
+
+                    .replace(/\n/g," ");
+
+                return `"${value}"`;
+
+            });
+
+            csv+=values.join(",")+"\n";
+
+        });
+
+        /* Excel UTF-8 BOM */
+
+        const BOM="\uFEFF";
+
+        const blob=new Blob(
+
+            [BOM+csv],
+
+            {
+
+                type:"text/csv;charset=utf-8;"
+
+            }
+
+        );
+
+        const url=
+
+            URL.createObjectURL(blob);
+
+        const link=
+
+            document.createElement("a");
+
+        const today=
+
+            new Date()
+
+            .toISOString()
+
+            .slice(0,10);
+
+        link.href=url;
+
+        link.download=
+
+            `search_logs_${today}.csv`;
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(url);
+
+        console.log("CSV 다운로드 완료");
+
+    }
+
+    catch(err){
+
+        console.error(
+
+            "CSV 다운로드 오류",
+
+            err
+
+        );
+
+        alert(
+
+            "CSV 다운로드에 실패했습니다."
+
+        );
+
+    }
+
+}
+
+/* ==========================================================
+   PART 4-2B
+   Dashboard Event / Init (Ver.1 Final)
+   ========================================================== */
+
+
+/* ==========================================================
+   CSV 버튼 이벤트
+   ========================================================== */
+
+function bindDashboardEvents(){
+
+    const csvButton =
+        document.querySelector(".csv-btn");
+
+    if(csvButton){
+
+        csvButton.addEventListener(
+
+            "click",
+
+            downloadCSV
+
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   Dashboard 초기화
+   ========================================================== */
+
+async function initDashboard(){
+
+    try{
+
+        console.log("=================================");
+        console.log("Dashboard Start");
+        console.log("=================================");
+
+        console.log("① KPI 로딩...");
+        await loadKPI();
+
+        console.log("② 통계 로딩...");
+        await loadStatistics();
+
+        console.log("③ 운영 데이터 로딩...");
+        await loadOperationData();
+
+        console.log("④ 최근 7일 차트...");
+        await loadWeeklyChart();
+
+        console.log("⑤ 이벤트 연결...");
+        bindDashboardEvents();
+
+        console.log("=================================");
+        console.log("Dashboard Ready");
+        console.log("=================================");
+
+    }
+
+    catch(err){
+
+        console.error(
+
+            "Dashboard 초기화 실패",
+
+            err
+
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   페이지 로드
+   ========================================================== */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function(){
+
+        initDashboard();
+
+    }
+
+);
+
