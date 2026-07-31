@@ -247,27 +247,7 @@ async function loadKPI(){
 
 }
 
-/* ==========================================================
-   10. DASHBOARD INIT
-   ========================================================== */
 
-async function initDashboard(){
-
-    console.log("Dashboard Start");
-
-    await loadKPI();
-    await loadStatistics();
-    await loadOperationData();
-
-}
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    initDashboard
-
-);
 /* ==========================================================
    PART 2
    언어별 통계 / 검색 유형 통계
