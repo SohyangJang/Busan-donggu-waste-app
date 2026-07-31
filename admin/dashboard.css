@@ -541,37 +541,21 @@ img{
    11. CHART AREA
    ========================================================== */
 
-#weeklyChart{
+.chart-container{
+
+    position:relative;
 
     width:100%;
 
-    min-height:320px;
+    height:320px;
 
-    border-radius:16px;
+}
 
-    background:
+#weeklyChart{
 
-    linear-gradient(
+    width:100% !important;
 
-        180deg,
-
-        #FCFBFF,
-
-        #F6F2FF
-
-    );
-
-    border:2px dashed var(--border);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:var(--subtext);
-
-    font-size:15px;
+    height:100% !important;
 
 }
 
