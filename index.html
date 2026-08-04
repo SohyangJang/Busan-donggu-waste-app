@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title> 어디에 버리지? — 부산 동구</title>
+<title>어디에 버리지? — 부산 동구</title>
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#005fa8">
@@ -12,235 +12,174 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="동구 분리배출">
 <link rel="apple-touch-icon" href="icon-192.png">
-
 </head>
 <body>
 <div class="wrap">
 
+  <!-- 히어로 & 상단 영역 -->
   <div class="hero-wrap">
     <div class="topbar">
       <div class="top-left">부산광역시 동구 지역 정보</div>
       <div class="top-right">민원 · 환경 · 생활정보</div>
     </div>
 
-<div class="hero">
+    <div class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-pattern"></div>
 
-  <div class="hero-overlay"></div>
+      <div class="header">
+        <div class="gov-badge">
+          <span class="pin">📍</span>
+          <span>BUSAN DONG-GU</span>
+        </div>
 
-  <div class="hero-pattern"></div>
+        <div class="slogan">
+          생활폐기물 배출안내 서비스
+        </div>
 
-  <div class="header">
+        <div class="hero-divider"></div>
 
-    <div class="gov-badge">
-      <span class="pin">📍</span>
-      <span>BUSAN DONG-GU</span>
-    </div>
+        <h1 id="h1title">
+          어디에 <span id="h1em">버리지?</span>
+        </h1>
 
-    <div class="slogan">
-      생활폐기물 배출안내 서비스
-    </div>
+        <p id="h1sub">
+          음식물유래 폐기물 분류부터<br>
+          생활폐기물 배출방법까지
+        </p>
 
-    <div class="hero-divider"></div>
+        <div class="hero-highlight">
+          검색 한 번으로 쉽고 빠르게 안내합니다.
+        </div>
 
-    <h1 id="h1title">
-      어디에 <span id="h1em">버리지?</span>
-    </h1>
+        <!-- 3개 퀵 아이콘 카드 -->
+        <div class="quick-icons">
+          <div class="qi">
+            <div class="qi-icon">♻️</div>
+            <div>
+              <strong>생활환경</strong>
+              <span>환경정보</span>
+            </div>
+          </div>
 
-    <p id="h1sub">
-      음식물유래 폐기물 분류부터<br>
-      생활폐기물 배출방법까지
+          <div class="qi">
+            <div class="qi-icon">🧾</div>
+            <div>
+              <strong>민원안내</strong>
+              <span>생활민원</span>
+            </div>
+          </div>
+
+          <div class="qi">
+            <div class="qi-icon">🌏</div>
+            <div>
+              <strong>다국어</strong>
+              <span>4 Languages</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 부산 동구 공식 누리집 링크 카드 -->
+        <div class="donggu-link">
+          <a href="https://www.bsdonggu.go.kr/index.donggu?menuCd=DOM_000000104005003000"
+             target="_blank"
+             rel="noopener noreferrer">
+            <img src="linkimage.png" alt="부산 동구 공식누리집">
+            <div class="donggu-text">
+              <strong>부산 동구 공식누리집</strong>
+              <span>음식물류폐기물 배출안내 바로가기 →</span>
+            </div>
+          </a>
+        </div>
+
+      </div> <!-- /.header -->
+    </div> <!-- /.hero -->
+  </div> <!-- /.hero-wrap -->
+
+  <!-- 검색 및 언어 선택 카드 (히어로 영역 바깥으로 분리) -->
+  <div class="search-card">
+    <div class="section-title">언어 선택</div>
+    <div class="lang-row" id="lr"></div>
+
+    <div class="search-heading">무엇을 버리시나요?</div>
+    <p class="search-desc">
+      생활폐기물 품목을 입력하면 올바른 배출방법을 안내합니다.
     </p>
 
-    <div class="hero-highlight">
-      검색 한 번으로 쉽고 빠르게 안내합니다.
-    </div>
-
-    <div class="quick-icons">
-
-      <div class="qi">
-        <div class="qi-icon">♻️</div>
-        <div>
-          <strong>생활환경</strong>
-          <span>환경정보</span>
-        </div>
+    <div class="scard">
+      <span class="slb" id="slb"></span>
+      <div class="sr">
+        <input type="text" id="q" autocomplete="off"/>
+        <button id="sb" onclick="go()"></button>
       </div>
-
-      <div class="qi">
-        <div class="qi-icon">🧾</div>
-        <div>
-          <strong>민원안내</strong>
-          <span>생활민원</span>
-        </div>
+      <div class="chips">
+        <span class="chip-lbl" id="chip-lbl"></span>
+        <div id="ch" style="display:flex;flex-wrap:wrap;gap:5px;width:100%;"></div>
       </div>
-
-      <div class="qi">
-        <div class="qi-icon">🌏</div>
-        <div>
-          <strong>다국어</strong>
-          <span>4 Languages</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="donggu-link">
-
-      <a href="https://www.bsdonggu.go.kr/index.donggu?menuCd=DOM_000000104005003000"
-         target="_blank"
-         rel="noopener noreferrer">
-
-        <img src="linkimage.png"
-             alt="부산 동구 공식누리집">
-
-        <div class="donggu-text">
-
-          <strong>
-            부산 동구 공식누리집
-          </strong>
-
-          <span>
-            음식물류폐기물 배출안내 바로가기 →
-          </span>
-
-        </div>
-
-      </a>
-
-    </div>
-
-  </div>
-
-</div>
-<div class="search-card">
-  <div class="section-title">
-
-언어 선택
-
-  </div>
-  <div class="lang-row" id="lr"></div>
-  <div class="search-heading">
-
-무엇을 버리시나요?
-
-</div>
-
-<p class="search-desc">
-
-생활폐기물 품목을 입력하면
-올바른 배출방법을 안내합니다.
-
-</p>
-  <div class="scard">
-    <span class="slb" id="slb"></span>
-    <div class="sr">
-      <input type="text" id="q" autocomplete="off"/>
-      <button id="sb" onclick="go()"></button>
-    </div>
-    <div class="chips">
-      <span class="chip-lbl" id="chip-lbl"></span>
-      <div id="ch" style="display:flex;flex-wrap:wrap;gap:5px;width:100%;"></div>
     </div>
   </div>
-</div>
 
-<div class="result-area" id="ra">
-  <div class="empty">
-    <div class="ico">&#128465;</div>
-    <p id="empty-msg"></p>
+  <!-- 검색 결과 및 이하 컨텐츠 -->
+  <div class="result-area" id="ra">
+    <div class="empty">
+      <div class="ico">&#128465;</div>
+      <p id="empty-msg"></p>
+    </div>
   </div>
-</div>
 
+  <div id="feedbackBox"></div>
 
-<div id="feedbackBox">
-</div>
-
-
-  
   <div class="fine-banner" id="fn"></div>
 
-<div class="schedule-section">
-
-  <div class="schedule-title" id="schedule-title">
-    배출요일 안내
+  <div class="schedule-section">
+    <div class="schedule-title" id="schedule-title">배출요일 안내</div>
+    <a id="schedule-link" href="schedule-ko.jpg" target="_blank">
+      <img id="schedule-image" src="schedule-ko.jpg" alt="배출요일 안내">
+    </a>
   </div>
 
-  <a id="schedule-link"
-     href="schedule-ko.jpg"
-     target="_blank">
-
-    <img
-      id="schedule-image"
-      src="schedule-ko.jpg"
-      alt="배출요일 안내">
-  </a>
-
-</div>
-
-<div class="link-buttons">
-
-    <a class="link-btn"
-       href="https://naver.me/5uloCfds"
-       target="_blank"
-       rel="noopener noreferrer">
+  <div class="link-buttons">
+    <a class="link-btn" href="https://naver.me/5uloCfds" target="_blank" rel="noopener noreferrer">
       📍 동구 음식물류폐기물 전용용기 판매소 위치보기
     </a>
-
-    <a class="link-btn"
-       href="https://naver.me/I5wszTJd"
-       target="_blank"
-       rel="noopener noreferrer">
+    <a class="link-btn" href="https://naver.me/I5wszTJd" target="_blank" rel="noopener noreferrer">
       🛒 음식물쓰레기 60L 납부필증 판매소 위치보기
     </a>
-
   </div>  
-  
-<div class="contact-section">
-  <div class="contact-title">
-    미수거 문의 안내 · Collection Inquiry
-  </div>
 
-  <div class="contact-grid">
-
-    <div class="contact-item">
-      <div class="area">
-        초량1·2·3·6동<br>
-        <span>Choryang 1, 2, 3, 6-dong</span>
-        <br><br>
-
-        수정1·2·4동<br>
-        <span>Sujeong 1, 2, 4-dong</span>
+  <div class="contact-section">
+    <div class="contact-title">미수거 문의 안내 · Collection Inquiry</div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="area">
+          초량1·2·3·6동<br>
+          <span>Choryang 1, 2, 3, 6-dong</span>
+          <br><br>
+          수정1·2·4동<br>
+          <span>Sujeong 1, 2, 4-dong</span>
+        </div>
+        <a class="phone" href="tel:0516365633">☎ 051-636-5633 동부환경</a>
       </div>
 
-      <a class="phone" href="tel:0516365633">
-        ☎ 051-636-5633 동부환경
-      </a>
-    </div>
-
-    <div class="contact-item">
-      <div class="area">
-        수정5동<br>
-        <span>Sujeong 5-dong</span>
-        <br><br>
-
-        좌천동<br>
-        <span>Jwacheon-dong</span>
-        <br><br>
-
-        범일1·2·5동<br>
-        <span>Beomil 1, 2, 5-dong</span>
+      <div class="contact-item">
+        <div class="area">
+          수정5동<br>
+          <span>Sujeong 5-dong</span>
+          <br><br>
+          좌천동<br>
+          <span>Jwacheon-dong</span>
+          <br><br>
+          범일1·2·5동<br>
+          <span>Beomil 1, 2, 5-dong</span>
+        </div>
+        <a class="phone" href="tel:0516310933">☎ 051-631-0933 부산환경</a>
       </div>
-
-      <a class="phone" href="tel:0516310933">
-        ☎ 051-631-0933 부산환경
-      </a>
     </div>
-
   </div>
-</div>
 
+  <footer>본 서비스는 주민 편의 증대를 위해 부산 동구청 직원이 자발적으로 기획·개발한 테스트 버전입니다</footer>
 
-<footer>본 서비스는 주민 편의 증대를 위해 부산 동구청 직원이 자발적으로 기획·개발한 테스트 버전입니다 </footer>
-</div>
+</div> <!-- /.wrap -->
 
 <script defer src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script defer src="utils.js"></script>
