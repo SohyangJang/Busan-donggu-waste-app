@@ -297,61 +297,44 @@ button{
 /* =========================================================
    QUICK MENU
 ========================================================= */
+/* 기본 가로 3열 유지 */
 .quick-icons{
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:14px;
-
-margin-top:32px;
-
+  display:grid;
+  grid-template-columns: repeat(3, 1fr); /* 3개 균등 분배 */
+  gap: 8px; /* 간격을 살짝 줄임 */
+  margin-top: 28px;
 }
 
 .qi{
-
-background:white;
-
-border-radius:18px;
-
-padding:18px 12px;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-text-align:center;
-
-gap:8px;
-
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 8px; /* 모바일 대응을 위해 좌우 여백을 슬림하게 변경 */
+  background: rgba(255, 255, 255, .12);
+  border-radius: 16px;
+  color: white;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .2);
+  min-width: 0; /* 글자가 넘쳐서 깨지는 현상 방지 */
 }
 
 .qi-icon{
-
-font-size:28px;
-
+  font-size: 18px;
+  flex-shrink: 0;
 }
 
 .qi strong{
-
-display:block;
-
-font-size:15px;
-
-color:#333;
-
+  display: block;
+  font-size: 12px;
+  white-space: nowrap; /* 줄바꿈 방지 */
 }
 
 .qi span{
-
-font-size:12px;
-
-color:#888;
-
+  font-size: 10px;
+  opacity: .8;
+  white-space: nowrap;
 }
+
 
 .donggu-link{
 
@@ -1277,11 +1260,11 @@ font-size:14px;
     }
 
 
-    .quick-icons{
+  /*  .quick-icons{
 
         grid-template-columns:1fr;
 
-    }
+    }*/
 
 
 }
