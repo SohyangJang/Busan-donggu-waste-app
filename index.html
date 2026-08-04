@@ -758,7 +758,83 @@ color:#666;
 font-size:14px;
 
 }  
-  
+/* ==========================================
+   Search Card
+========================================== */
+
+.search-card{
+
+position:relative;
+
+margin:-34px auto 28px;
+
+width:min(92%,720px);
+
+background:#fff;
+
+border-radius:26px;
+
+padding:24px;
+
+box-shadow:
+
+0 10px 30px rgba(0,0,0,.08);
+
+z-index:20;
+
+}
+
+@media (max-width:640px){
+
+.search-card{
+
+margin:-26px 16px 24px;
+
+padding:20px;
+
+border-radius:22px;
+
+}
+
+} 
+.section-title{
+
+font-size:13px;
+
+font-weight:700;
+
+letter-spacing:.08em;
+
+color:#6b7280;
+
+text-transform:uppercase;
+
+margin-bottom:12px;
+
+} 
+.search-heading{
+
+margin-top:18px;
+
+font-size:22px;
+
+font-weight:800;
+
+color:#1f2937;
+
+}
+
+.search-desc{
+
+margin:8px 0 20px;
+
+line-height:1.6;
+
+font-size:15px;
+
+color:#6b7280;
+
+}  
 </style>
 
 <link rel="manifest" href="manifest.json">
@@ -867,9 +943,25 @@ font-size:14px;
   </div>
 
 </div>
+<div class="search-card">
+  <div class="section-title">
 
+언어 선택
+
+  </div>
   <div class="lang-row" id="lr"></div>
+  <div class="search-heading">
 
+무엇을 버리시나요?
+
+</div>
+
+<p class="search-desc">
+
+생활폐기물 품목을 입력하면
+올바른 배출방법을 안내합니다.
+
+</p>
   <div class="scard">
     <span class="slb" id="slb"></span>
     <div class="sr">
@@ -881,6 +973,7 @@ font-size:14px;
       <div id="ch" style="display:flex;flex-wrap:wrap;gap:5px;width:100%;"></div>
     </div>
   </div>
+</div>
 
 <div class="result-area" id="ra">
   <div class="empty">
