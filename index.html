@@ -509,6 +509,255 @@ margin-top:1rem;
     font-size:16px;
     cursor:pointer;
 }
+/* ===========================
+   HERO Ver.2
+=========================== */
+
+.hero{
+
+padding:48px 28px 36px;
+
+position:relative;
+
+overflow:hidden;
+
+background:
+
+linear-gradient(135deg,#6F48FF 0%,#9B6CFF 100%);
+
+border-radius:0 0 34px 34px;
+
+box-shadow:0 14px 35px rgba(123,77,255,.25);
+
+}
+
+.hero-pattern{
+
+position:absolute;
+
+width:260px;
+
+height:260px;
+
+right:-70px;
+
+top:-70px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.08);
+
+filter:blur(4px);
+
+}
+
+.gov-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:10px 18px;
+
+border-radius:999px;
+
+background:rgba(255,255,255,.12);
+
+border:1px solid rgba(255,255,255,.25);
+
+color:white;
+
+font-size:14px;
+
+font-weight:600;
+
+backdrop-filter:blur(10px);
+
+}
+
+.pin{
+
+font-size:16px;
+
+}
+
+.slogan{
+
+margin-top:22px;
+
+font-size:15px;
+
+color:rgba(255,255,255,.88);
+
+letter-spacing:.08em;
+
+text-transform:uppercase;
+
+}
+
+.hero-divider{
+
+margin:22px 0;
+
+width:80px;
+
+height:4px;
+
+border-radius:999px;
+
+background:#FFD54F;
+
+}
+
+#h1title{
+
+font-size:48px;
+
+font-weight:800;
+
+line-height:1.15;
+
+color:white;
+
+}
+
+#h1em{
+
+color:#FFD54F;
+
+}
+
+#h1sub{
+
+margin-top:20px;
+
+font-size:18px;
+
+line-height:1.7;
+
+color:white;
+
+}
+
+.hero-highlight{
+
+margin-top:18px;
+
+display:inline-block;
+
+padding:10px 18px;
+
+background:rgba(255,255,255,.15);
+
+border-radius:999px;
+
+font-size:15px;
+
+color:#fff;
+
+backdrop-filter:blur(8px);
+
+}
+
+.quick-icons{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:14px;
+
+margin-top:32px;
+
+}
+
+.qi{
+
+background:white;
+
+border-radius:18px;
+
+padding:18px 12px;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+text-align:center;
+
+gap:8px;
+
+}
+
+.qi-icon{
+
+font-size:28px;
+
+}
+
+.qi strong{
+
+display:block;
+
+font-size:15px;
+
+color:#333;
+
+}
+
+.qi span{
+
+font-size:12px;
+
+color:#888;
+
+}
+
+.donggu-link{
+
+margin-top:28px;
+
+}
+
+.donggu-link a{
+
+background:white;
+
+border-radius:22px;
+
+padding:18px;
+
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.donggu-text strong{
+
+font-size:18px;
+
+}
+
+.donggu-text span{
+
+margin-top:6px;
+
+display:block;
+
+color:#666;
+
+font-size:14px;
+
+}  
   
 </style>
 
@@ -530,47 +779,94 @@ margin-top:1rem;
       <div class="top-right">민원 · 환경 · 생활정보</div>
     </div>
 
-    <div class="hero">
-      
-<div class="hero-overlay"></div>
+<div class="hero">
 
-      <div class="header">
-        <div class="gov-badge">&#9632; BUSAN DONG-GU, WHERE TO THROW</div>
+  <div class="hero-overlay"></div>
 
-        <div class="slogan">
-           올바른 분리배출을 위한 첫걸음<br>
-          <strong>생활폐기물 배출안내 서비스</strong>
-        </div>
+  <div class="hero-pattern"></div>
 
-        <h1 id="h1title">음식물쓰레기? <span id="h1em">일반쓰레기?</span> 어디에버리지?</h1>
+  <div class="header">
 
-        <p id="h1sub">
-          품목을 입력하면 어느 쓰레기통에 넣는지,
-          어떻게 버리는지 알려드립니다.
-        </p>
-
-        <div class="quick-icons">
-          <div class="qi">♻️ 생활환경</div>
-          <div class="qi">🧾 민원안내</div>
-          <div class="qi">🌏 다국어지원</div>
-        </div>
-        <div class="donggu-link">
-  <a href="https://www.bsdonggu.go.kr/index.donggu?menuCd=DOM_000000104005003000"
-     target="_blank"
-     rel="noopener noreferrer">
-
-    <img src="linkimage.png" alt="부산 동구 공식누리집">
-
-    <div class="donggu-text">
-      <strong>부산 동구 공식누리집</strong>
-      <span>음식물류폐기물 배출 안내 페이지 바로가기 →</span>
+    <div class="gov-badge">
+      <span class="pin">📍</span>
+      <span>BUSAN DONG-GU</span>
     </div>
 
-  </a>
-</div>
+    <div class="slogan">
+      생활폐기물 배출안내 서비스
+    </div>
+
+    <div class="hero-divider"></div>
+
+    <h1 id="h1title">
+      어디에 <span id="h1em">버리지?</span>
+    </h1>
+
+    <p id="h1sub">
+      음식물류폐기물 배출 여부부터<br>
+      생활폐기물 배출방법까지
+    </p>
+
+    <div class="hero-highlight">
+      검색 한 번으로 쉽고 빠르게 안내합니다.
+    </div>
+
+    <div class="quick-icons">
+
+      <div class="qi">
+        <div class="qi-icon">♻️</div>
+        <div>
+          <strong>생활환경</strong>
+          <span>환경정보</span>
+        </div>
       </div>
+
+      <div class="qi">
+        <div class="qi-icon">🧾</div>
+        <div>
+          <strong>민원안내</strong>
+          <span>생활민원</span>
+        </div>
+      </div>
+
+      <div class="qi">
+        <div class="qi-icon">🌏</div>
+        <div>
+          <strong>다국어</strong>
+          <span>4 Languages</span>
+        </div>
+      </div>
+
     </div>
+
+    <div class="donggu-link">
+
+      <a href="https://www.bsdonggu.go.kr/index.donggu?menuCd=DOM_000000104005003000"
+         target="_blank"
+         rel="noopener noreferrer">
+
+        <img src="linkimage.png"
+             alt="부산 동구 공식누리집">
+
+        <div class="donggu-text">
+
+          <strong>
+            부산 동구 공식누리집
+          </strong>
+
+          <span>
+            음식물류폐기물 배출안내 바로가기 →
+          </span>
+
+        </div>
+
+      </a>
+
+    </div>
+
   </div>
+
+</div>
 
   <div class="lang-row" id="lr"></div>
 
