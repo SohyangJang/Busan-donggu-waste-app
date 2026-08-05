@@ -1319,3 +1319,330 @@ font-size:14px;
 
 
    }
+/* ==========================================
+   Common Animation
+========================================== */
+
+.fade-up{
+    animation:fadeUp .35s ease both;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+
+}
+
+
+
+.scale-hover{
+
+    transition:
+        transform .2s,
+        box-shadow .2s;
+
+}
+
+.scale-hover:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 14px 28px rgba(0,0,0,.12);
+
+}
+
+
+
+/* ==========================================
+   Card Common
+========================================== */
+
+.card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    box-shadow:
+    0 8px 24px rgba(0,0,0,.06);
+
+}
+
+
+
+/* ==========================================
+   Section Space
+========================================== */
+
+.section{
+
+    margin-top:28px;
+
+}
+
+
+
+.section:first-child{
+
+    margin-top:0;
+
+}
+
+
+
+/* ==========================================
+   Link Transition
+========================================== */
+
+a{
+
+    transition:.2s;
+
+}
+
+
+
+button{
+
+    transition:.2s;
+
+}
+
+
+
+/* ==========================================
+   Focus
+========================================== */
+
+button:focus,
+
+input:focus,
+
+a:focus{
+
+    outline:none;
+
+}
+
+
+
+/* ==========================================
+   Selection
+========================================== */
+
+::selection{
+
+    background:#d9c8ff;
+
+    color:#222;
+
+}
+
+
+
+/* ==========================================
+   Scroll
+========================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#f4f4f4;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#cfc4ff;
+
+    border-radius:999px;
+
+}
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#b49dff;
+
+}
+
+
+
+/* ==========================================
+   Utility
+========================================== */
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.mt-10{
+
+    margin-top:10px;
+
+}
+
+.mt-20{
+
+    margin-top:20px;
+
+}
+
+.mt-30{
+
+    margin-top:30px;
+
+}
+
+.mb-10{
+
+    margin-bottom:10px;
+
+}
+
+.mb-20{
+
+    margin-bottom:20px;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+.flex{
+
+    display:flex;
+
+}
+
+.flex-center{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
+/* ==========================================
+   Footer
+========================================== */
+
+footer{
+
+    padding:40px 20px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+}
+
+
+
+/* ==========================================
+   Image Responsive
+========================================== */
+
+img{
+
+    max-width:100%;
+
+    height:auto;
+
+}
+
+
+
+/* ==========================================
+   Prevent Mobile Zoom
+========================================== */
+
+input,
+
+button,
+
+select,
+
+textarea{
+
+    font-size:16px;
+
+}
+
+
+
+/* ==========================================
+   Mobile
+========================================== */
+
+@media (max-width:768px){
+
+    .wrap{
+
+        padding:0 16px 36px;
+
+    }
+
+    .hero{
+
+        border-radius:0 0 28px 28px;
+
+    }
+
+}
+
+
+
+@media (max-width:480px){
+
+    .search-heading{
+
+        font-size:20px;
+
+    }
+
+    .section-title{
+
+        font-size:12px;
+
+    }
+
+    .fine-banner{
+
+        font-size:13px;
+
+    }
+
+}
