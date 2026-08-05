@@ -663,13 +663,14 @@ input{
 .sr{
 
     display:flex;
-
+    flex-direction: column;
     gap:10px;
+    width: 100%;
 
 }
 
 .sr input{
-
+    width: 100%;
     flex:1;
 
     height:56px;
@@ -697,7 +698,8 @@ input{
 }
 
 .sr button{
-
+    width: 100%;
+    height: 56px;   
     border:none;
 
     padding:0 28px;
