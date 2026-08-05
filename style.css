@@ -786,3 +786,753 @@ input{
     color:var(--purple);
 
 }
+
+/* ==========================================================
+   RESULT AREA
+========================================================== */
+
+.result-area{
+
+    margin-top:20px;
+
+}
+
+.empty{
+
+    text-align:center;
+
+    padding:80px 20px;
+
+    color:#9CA3AF;
+
+}
+
+.empty .ico{
+
+    font-size:54px;
+
+    margin-bottom:16px;
+
+}
+
+.empty p{
+
+    font-size:15px;
+
+    line-height:1.7;
+
+}
+
+
+/* ==========================================================
+   RESULT CARD
+========================================================== */
+
+.rc{
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:24px;
+
+    margin-bottom:18px;
+
+    box-shadow:0 12px 28px rgba(15,23,42,.07);
+
+    animation:fadeUp .25s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+.rc.food{
+
+    border-left:6px solid #22C55E;
+
+}
+
+.rc.general{
+
+    border-left:6px solid #3B82F6;
+
+}
+
+.rc.special{
+
+    border-left:6px solid #F59E0B;
+
+}
+
+.rh{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+    margin-bottom:18px;
+
+}
+
+.rname{
+
+    font-size:24px;
+
+    font-weight:800;
+
+    color:#1F2937;
+
+    line-height:1.3;
+
+}
+
+.bdg{
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+.bdg.food{
+
+    background:#DCFCE7;
+
+    color:#166534;
+
+}
+
+.bdg.general{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}
+
+.bdg.special{
+
+    background:#FDE68A;
+
+    color:#92400E;
+
+}
+
+.btag{
+
+    text-align:right;
+
+    font-size:12px;
+
+    color:#9CA3AF;
+
+}
+
+.btag small{
+
+    display:block;
+
+    margin-top:4px;
+
+}
+
+.divider{
+
+    height:1px;
+
+    background:#ECECEC;
+
+    margin:18px 0;
+
+}
+
+.hlb{
+
+    font-size:12px;
+
+    color:#8B95A5;
+
+    font-weight:700;
+
+    margin-bottom:16px;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+}
+
+.steps{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.step{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:14px;
+
+    line-height:1.8;
+
+    color:#374151;
+
+}
+
+.sn{
+
+    width:30px;
+
+    height:30px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+}
+
+.food .sn{
+
+    background:#22C55E;
+
+}
+
+.general .sn{
+
+    background:#3B82F6;
+
+}
+
+.special .sn{
+
+    background:#F59E0B;
+
+}
+
+
+/* ==========================================================
+   FEEDBACK
+========================================================== */
+
+#feedbackBox{
+
+    display:none;
+
+    margin-top:24px;
+
+}
+
+.feedback-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:26px;
+
+    text-align:center;
+
+    box-shadow:0 12px 26px rgba(15,23,42,.07);
+
+}
+
+.feedback-card h3{
+
+    font-size:22px;
+
+    margin-bottom:12px;
+
+}
+
+.feedback-card p{
+
+    color:#6B7280;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+
+}
+
+#feedbackBtn{
+
+    width:100%;
+
+    height:54px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#FEE500;
+
+    color:#3C1E1E;
+
+    font-size:16px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+}
+
+
+/* ==========================================================
+   FINE BANNER
+========================================================== */
+
+.fine-banner{
+
+    margin-top:30px;
+
+    padding:18px 22px;
+
+    border-radius:22px;
+
+    background:linear-gradient(135deg,#6F48FF,#9B6CFF);
+
+    color:#fff;
+
+    text-align:center;
+
+    line-height:1.8;
+
+    box-shadow:0 12px 28px rgba(111,72,255,.25);
+
+}
+
+.fine-banner strong{
+
+    color:#FFD54F;
+
+}
+
+/* =====================================================
+   PART 3
+   Schedule / Link / Contact / Footer / Feedback
+===================================================== */
+
+/* ------------------------------
+   Schedule
+------------------------------ */
+
+.schedule-section{
+    margin-top:32px;
+    background:#fff;
+    border-radius:24px;
+    padding:26px;
+    box-shadow:0 10px 28px rgba(15,23,42,.06);
+}
+
+.schedule-title{
+    font-size:20px;
+    font-weight:800;
+    color:#374151;
+    margin-bottom:18px;
+}
+
+#schedule-link{
+    display:block;
+    text-decoration:none;
+}
+
+#schedule-image{
+    display:block;
+    width:100%;
+    border-radius:18px;
+    border:1px solid #E5E7EB;
+    transition:.25s;
+}
+
+#schedule-image:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 24px rgba(0,0,0,.08);
+}
+
+/* ------------------------------
+   Quick Links
+------------------------------ */
+
+.link-buttons{
+    margin-top:26px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.link-btn{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:58px;
+
+    padding:0 20px;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,#7B4DFF,#9D6BFF);
+
+    color:#fff;
+
+    font-weight:700;
+
+    font-size:15px;
+
+    text-decoration:none;
+
+    transition:.25s;
+}
+
+.link-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 28px rgba(123,77,255,.28);
+
+}
+
+/* ------------------------------
+   Contact
+------------------------------ */
+
+.contact-section{
+
+    margin-top:32px;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:26px;
+
+    box-shadow:0 10px 28px rgba(15,23,42,.06);
+
+}
+
+.contact-title{
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:#374151;
+
+    margin-bottom:22px;
+
+}
+
+.contact-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+
+}
+
+.contact-item{
+
+    border:1px solid #E5E7EB;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    background:#FAFBFC;
+
+}
+
+.area{
+
+    font-size:15px;
+
+    line-height:1.9;
+
+    color:#374151;
+
+    font-weight:700;
+
+}
+
+.area span{
+
+    display:block;
+
+    margin-top:2px;
+
+    font-size:13px;
+
+    color:#6B7280;
+
+    font-weight:400;
+
+}
+
+.phone{
+
+    margin-top:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:50px;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#7B4DFF,#9D6BFF);
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.2s;
+
+}
+
+.phone:hover{
+
+    opacity:.93;
+
+}
+
+/* ------------------------------
+   Feedback
+------------------------------ */
+
+#feedbackBox{
+
+    display:none;
+
+    margin-top:28px;
+
+}
+
+.feedback-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:26px;
+
+    text-align:center;
+
+    box-shadow:0 8px 22px rgba(0,0,0,.06);
+
+}
+
+.feedback-card h3{
+
+    font-size:20px;
+
+    margin-bottom:14px;
+
+    color:#374151;
+
+}
+
+.feedback-card p{
+
+    color:#6B7280;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+
+}
+
+#feedbackBtn{
+
+    width:100%;
+
+    height:54px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#FEE500;
+
+    color:#3B1E1E;
+
+    font-weight:800;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+/* ------------------------------
+   Fine Banner
+------------------------------ */
+
+.fine-banner{
+
+    margin-top:28px;
+
+    padding:18px 22px;
+
+    border-radius:20px;
+
+    background:linear-gradient(135deg,#6F48FF,#9D6BFF);
+
+    color:white;
+
+    text-align:center;
+
+    line-height:1.8;
+
+    font-size:14px;
+
+}
+
+.fine-banner strong{
+
+    color:#FFE066;
+
+}
+
+/* ------------------------------
+   Footer
+------------------------------ */
+
+footer{
+
+    margin:42px 0 24px;
+
+    text-align:center;
+
+    color:#94A3B8;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+}
+
+/* ------------------------------
+   Responsive
+------------------------------ */
+
+@media (max-width:768px){
+
+    .contact-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media (max-width:640px){
+
+    .schedule-section,
+
+    .contact-section{
+
+        padding:20px;
+
+    }
+
+    .schedule-title,
+
+    .contact-title{
+
+        font-size:18px;
+
+    }
+
+    .link-btn{
+
+        min-height:54px;
+
+        font-size:14px;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .schedule-section,
+
+    .contact-section{
+
+        border-radius:20px;
+
+    }
+
+    .contact-item{
+
+        padding:18px;
+
+    }
+
+    .phone{
+
+        height:48px;
+
+        font-size:14px;
+
+    }
+
+    footer{
+
+        font-size:12px;
+
+    }
+
+}
