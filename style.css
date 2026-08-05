@@ -672,11 +672,8 @@ input{
 .sr input{
     width: 100%;
     flex:1;
-
-    height:56px;
-
+    height:60px;
     border-radius:16px;
-
     border:1px solid #D6DAE2;
 
     padding:0 18px;
@@ -699,16 +696,16 @@ input{
 
 .sr button{
     width: 100%;
-    height: 56px;   
+    height: 36px;   
     border:none;
 
     padding:0 28px;
 
-    border-radius:16px;
+    border-radius:14px;
 
     color:#fff;
 
-    font-size:15px;
+    font-size:14px;
 
     font-weight:700;
 
