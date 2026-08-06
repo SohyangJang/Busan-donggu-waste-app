@@ -1052,7 +1052,59 @@ input{
     background:#F59E0B;
 
 }
+/* ==========================================
+   검색 결과 없음 - 외부 분리배출 사전 연계 영역
+   ========================================== */
 
+/* 상위 컨테이너 */
+.external-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 0 20px 0;
+}
+
+/* "음식물 유래 폐기물 DB에 없는 품목입니다." 문구 */
+.external-search p {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  margin-top: 15px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+/* "🔍 분리배출 품목사전에서 검색하기" 보라색 버튼 */
+.external-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 20px;
+  background-color: #7047eb; /* 테마 보라색 */
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 12px; /* 라운드 처리 */
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(112, 71, 235, 0.25);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* 버튼 마우스 호버 & 클릭 모션 */
+.external-btn:hover {
+  background-color: #5c35d2;
+  transform: translateY(-1px);
+}
+
+.external-btn:active {
+  transform: translateY(0);
+}
 
 /* ==========================================================
    FEEDBACK
