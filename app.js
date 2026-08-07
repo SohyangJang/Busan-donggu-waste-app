@@ -55,7 +55,7 @@ function setLang(k){
   document.getElementById("h1title").innerHTML=l.ui.h1;
   document.getElementById("h1sub").textContent=l.ui.sub;
   document.getElementById("slogan").textContent=l.ui.slogan;
-  document.getElementById("heroHighlight").textContent=l.ui.highlight;
+  document.getElementById("hero-Highlight").textContent=l.ui.highlight;
 
 document.getElementById("quick1Title").textContent=l.ui.quick1Title;
 document.getElementById("quick1Sub").textContent=l.ui.quick1Sub;
