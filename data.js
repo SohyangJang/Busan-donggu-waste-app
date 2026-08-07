@@ -69,7 +69,7 @@ en:{name:"English",norm:nEn,
     {t:["fish innard","fish entrail","soft fish","fish scrap"],c:"food",d:"Fish innards & soft fish scraps",s:["Fish bones & sharp fins → standard waste bag","Soft parts → food waste bag (음식물쓰레기 전용용기)"]},
     {t:["cooking oil","waste cooking oil","used oil","oil"],c:"special",d:"Waste cooking oil",s:["Small amounts: absorb with paper towel/newspaper → standard waste bag","Large amounts: contact a licensed professional waste disposal company","Collection box: deliver to designated waste oil box (check with apartment management)"]},
     {t:["rice","old rice","stale rice","uncooked rice","white rice","brown rice"],c:"food",d:"Rice,old rice, uncooked rice",s:["Dispose of in a food waste container."]},
-    {t:["potato","sprouted potato","sweet potato","spoiled sweet potato"],c:"food",d:"Potato,sprouted potato,sweet potato,spoiled sweet potato,s:["Dispose of in a food waste bag."]}
+    {t:["potato","sprouted potato","sweet potato","spoiled sweet potato"],c:"food",d:"Potato,sprouted potato,sweet potato,spoiled sweet potato",s:["Dispose of in a food waste bag."]}
   ]
 },
 
