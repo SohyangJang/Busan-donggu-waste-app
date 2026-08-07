@@ -54,6 +54,20 @@ function setLang(k){
   document.querySelectorAll(".lb").forEach(b=>b.classList.toggle("on",b.dataset.l===k));
   document.getElementById("h1title").innerHTML=l.ui.h1;
   document.getElementById("h1sub").textContent=l.ui.sub;
+  document.getElementById("slogan").textContent=l.ui.slogan;
+  document.getElementById("heroHighlight").textContent=l.ui.highlight;
+
+document.getElementById("quick1Title").textContent=l.ui.quick1Title;
+document.getElementById("quick1Sub").textContent=l.ui.quick1Sub;
+
+document.getElementById("quick2Title").textContent=l.ui.quick2Title;
+document.getElementById("quick2Sub").textContent=l.ui.quick2Sub;
+
+document.getElementById("quick3Title").textContent=l.ui.quick3Title;
+document.getElementById("quick3Sub").textContent=l.ui.quick3Sub;
+
+document.getElementById("dongguTitle").textContent=l.ui.dongguTitle;
+document.getElementById("dongguSub").textContent=l.ui.dongguSub;
   document.getElementById("slb").textContent=l.ui.slb;
   document.getElementById("q").placeholder=l.ui.ph;
   document.getElementById("sb").textContent=l.ui.btn;
