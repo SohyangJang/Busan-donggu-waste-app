@@ -103,7 +103,7 @@ input{
 
 .wrap{
 
-    width:min(100%,760px);
+    width:min(100%,720px);
 
     margin:auto;
 
@@ -159,7 +159,7 @@ input{
 
     overflow:hidden;
 
-    padding:48px 28px 36px;
+    padding:24px 28px 26px;
 
     border-radius:0 0 34px 34px;
 
@@ -240,9 +240,9 @@ input{
 
     gap:10px;
 
-    padding:
-
-    10px 18px;
+    padding:8px 16px;
+    font-size:14px;
+    
 
     border-radius:999px;
 
@@ -271,21 +271,7 @@ input{
    HERO TEXT
 ========================= */
 
-.slogan{
-
-    margin-top:22px;
-
-    color:
-
-    rgba(255,255,255,.88);
-
-    font-size:15px;
-
-    letter-spacing:.08em;
-
-    text-transform:uppercase;
-
-}
+.slogan{margin-top:14px; color:rgba(255,255,255,.88);font-size:14px; letter-spacing:.08em; text-transform:uppercase;} /*22->14 변경 2026.0807*/
 
 .hero-divider{
 
@@ -293,7 +279,7 @@ input{
 
     height:4px;
 
-    margin:22px 0;
+    margin:14px 0 16px;
 
     border-radius:999px;
 
@@ -303,11 +289,11 @@ input{
 
 #h1title{
 
-    font-size:46px;
+    font-size:42px;
 
     font-weight:800;
 
-    line-height:1.15;
+    line-height:1.08;
 
     letter-spacing:-.04em;
 
@@ -321,11 +307,11 @@ input{
 
 #h1sub{
 
-    margin-top:20px;
+    margin-top:14px;
 
-    font-size:18px;
+    font-size:17px;
 
-    line-height:1.8;
+    line-height:1.6;
 
     color:
 
@@ -336,28 +322,13 @@ input{
 .hero-highlight{
 
     display:inline-flex;
-
     align-items:center;
-
-    margin-top:22px;
-
-    padding:
-
-    11px 18px;
-
+    margin-top:16px;
+    padding:8px 18px;
     border-radius:999px;
-
-    background:
-
-    rgba(255,255,255,.14);
-
-    border:
-
-    1px solid
-
-    rgba(255,255,255,.20);
-
-    font-size:14px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.20);
+    font-size:13px;
 
 }
 /* ==========================================================
@@ -372,7 +343,7 @@ input{
 
     gap:14px;
 
-    margin-top:34px;
+    margin-top:24px;
 
 }
 
@@ -382,7 +353,7 @@ input{
 
     border-radius:22px;
 
-    padding:18px 14px;
+    padding:16px 12px;
 
     text-align:center;
 
@@ -398,13 +369,7 @@ input{
 
 }
 
-.qi-icon{
-
-    font-size:28px;
-
-    margin-bottom:10px;
-
-}
+.qi-icon{font-size:28px;  margin-bottom:6px;}
 
 .qi strong{
 
@@ -437,7 +402,7 @@ input{
 
 .donggu-link{
 
-    margin-top:28px;
+    margin-top:220x;
 
 }
 
@@ -449,7 +414,7 @@ input{
 
     gap:18px;
 
-    padding:18px;
+    padding:14px 16px;
 
     background:#fff;
 
@@ -469,7 +434,7 @@ input{
 
 .donggu-link img{
 
-    width:110px;
+    width:92px;
 
     flex-shrink:0;
 
