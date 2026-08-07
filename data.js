@@ -31,8 +31,8 @@ ko:{name:"한국어",norm:nKo,
     {t:["지방","생고기","고기자투리","고기"],c:"food",d:"다듬은 지방 및 생고기 자투리",s:["큰 뼈 → 종량제봉투","부드러운 작은 조각·지방 → 음식물쓰레기 전용용기에 배출"]},
     {t:["생선내장","생선자투리","연한생선살","생선"],c:"food",d:"생선 내장 및 연한 생선 살",s:["생선뼈·날카로운 지느러미 → 종량제봉투","내장·연한 부위 → 음식물쓰레기 전용용기에 배출"]},
     {t:["폐식용유","사용한식용유","기름","식용유"],c:"special",d:"폐식용유",s:["소량: 신문지나 키친타월에 흡수 후 종량제봉투에 배출","대량: 전문 폐기물 처리 업체에 연락","아파트 내 폐유 수거함에 배출 (관리실 확인)"]},
-    {t:["쌀","묵은쌀","오래된쌀","생쌀","백미","현미"],c:"food",d:"쌀(묵은 쌀)",s:["음식물쓰레기 전용용기에 배출"]},
-    {t:["감자","싹이 난 감자","고구마","상한고구마"],c:"food",d:"감자",s:["음식물쓰레기 전용봉투에 배출"]}
+    {t:["쌀","묵은쌀","오래된쌀","생쌀","백미","현미"],c:"food",d:"쌀,묵은 쌀, 오래된 쌀, 생쌀, 잡곡, 현미",s:["음식물쓰레기 전용용기에 배출"]},
+    {t:["감자","싹이 난 감자","고구마","상한고구마"],c:"food",d:"감자, 싹이 난 감자, 고구마, 상한 고구마",s:["음식물쓰레기 전용봉투에 배출"]}
   ]
 },
     
@@ -68,8 +68,8 @@ en:{name:"English",norm:nEn,
     {t:["trimmed fat","raw meat","meat scrap","meat fat"],c:"food",d:"Trimmed fat & raw meat scraps",s:["Large bones → standard waste bag","Small soft pieces & fat → food waste bag (음식물쓰레기 전용용기)"]},
     {t:["fish innard","fish entrail","soft fish","fish scrap"],c:"food",d:"Fish innards & soft fish scraps",s:["Fish bones & sharp fins → standard waste bag","Soft parts → food waste bag (음식물쓰레기 전용용기)"]},
     {t:["cooking oil","waste cooking oil","used oil","oil"],c:"special",d:"Waste cooking oil",s:["Small amounts: absorb with paper towel/newspaper → standard waste bag","Large amounts: contact a licensed professional waste disposal company","Collection box: deliver to designated waste oil box (check with apartment management)"]},
-    {t:["rice","old rice","stale rice","uncooked rice","white rice","brown rice"],c:"food",d:"Rice (old rice)",s:["Dispose of in a food waste container."]},
-    {t:["potato","sprouted potato","sweet potato","spoiled sweet potato"],c:"food",d:"Potato",s:["Dispose of in a food waste bag."]}
+    {t:["rice","old rice","stale rice","uncooked rice","white rice","brown rice"],c:"food",d:"Rice,old rice, uncooked rice",s:["Dispose of in a food waste container."]},
+    {t:["potato","sprouted potato","sweet potato","spoiled sweet potato"],c:"food",d:"Potato,sprouted potato,sweet potato,spoiled sweet potato,s:["Dispose of in a food waste bag."]}
   ]
 },
 
@@ -108,8 +108,8 @@ zh:{name:"中文",norm:nZh,
     {t:["脂肪","生肉","肉碎","肉"],c:"food",d:"修剪脂肪和生肉碎",s:["大骨头 → 计量垃圾袋","小块软肉和脂肪 → 食物垃圾袋 (음식물쓰레기 전용용기)"]},
     {t:["鱼内脏","鱼肠","软质鱼肉","鱼"],c:"food",d:"鱼内脏和软质鱼肉",s:["鱼骨·鱼鳍 → 计量垃圾袋","软质部分 → 食物垃圾袋 (음식물쓰레기 전용용기)"]},
     {t:["废食用油","废弃食用油","食用油","油"], c:"special", d:"废弃食用油", s:["少量：用报纸或纸巾吸附后放入计量垃圾袋", "大量：联系有资质的专业废弃物处理公司", "废油回收箱（咨询物业）"]},
-    {t:["大米","陈米","旧米","生米","白米","糙米"],c:"food",d:"大米（陈米）",s:["请放入厨余垃圾专用容器。"]},
-    {t:["土豆","发芽土豆","红薯","变质红薯"],c:"food",d:"土豆",s:["请放入厨余垃圾专用袋。"]}
+    {t:["大米","陈米","旧米","生米","白米","糙米"],c:"food",d:"大米, 陈米,旧米,生米,白米,糙米",s:["请放入厨余垃圾专用容器。"]},
+    {t:["土豆","发芽土豆","红薯","变质红薯"],c:"food",d:"土豆,发芽土豆,红薯,变质红薯",s:["请放入厨余垃圾专用袋。"]}
   ]
 },
 
@@ -145,8 +145,8 @@ vi:{name:"Tiếng Việt",norm:nVi,
     {t:["mo cat tia","mỡ cắt tỉa","thit song","thịt sống","manh thit","mảnh thịt","mo thit","mỡ thịt"],c:"food",d:"Mỡ cắt tỉa & vụn thịt sống",s:["Xương lớn → Túi rác tiêu chuẩn","Miếng nhỏ mềm & mỡ → Túi rác thực phẩm (음식물쓰레기 전용용기)"]},
     {t:["noi tang ca","nội tạng cá","ruot ca","ruột cá","thit ca","thịt cá"],c:"food",d:"Nội tạng cá & thịt cá mềm",s:["Xương cá & vây sắc → Túi rác tiêu chuẩn","Phần mềm → Túi rác thực phẩm (음식물쓰레기 전용용기)"]},
     {t:["dau an","dầu ăn","dau chien","dầu chiên"],c:"special",d:"Dầu ăn đã qua sử dụng",s:["Lượng nhỏ: thấm bằng giấy báo rồi bỏ vào Túi rác tiêu chuẩn","Lượng lớn: liên hệ công ty xử lý chất thải chuyên nghiệp","Thùng thu gom: mang đến thùng dầu thải chuyên dụng (hỏi BQL chung cư)"]},
-    {t:["gạo","gạo cũ","gạo để lâu","gạo sống","gạo trắng","gạo lứt"],c:"food",d:"Gạo (gạo cũ)",s:["Bỏ vào thùng đựng rác thực phẩm."]},
-    {t:["khoai tây","khoai tây mọc mầm","khoai lang","khoai lang hỏng"],c:"food",d:"Khoai tây",s:["Bỏ vào túi đựng rác thực phẩm."]}
+    {t:["gạo","gạo cũ","gạo để lâu","gạo sống","gạo trắng","gạo lứt"],c:"food",d:"Gạo,gạo để lâu,gạo sống,gạo trắng,gạo lứt",s:["Bỏ vào thùng đựng rác thực phẩm."]},
+    {t:["khoai tây","khoai tây mọc mầm","khoai lang","khoai lang hỏng"],c:"food",d:"Khoai tây,khoai tây mọc mầm,khoai lang,khoai lang hỏng",s:["Bỏ vào túi đựng rác thực phẩm."]}
   ]
 },
 
@@ -212,8 +212,8 @@ ru:{name:"Русский",norm:nRu,
 {t:["рыбные внутренности","рыбное филе","мягкая рыба"],c:"food",d:"Внутренности и мягкие части рыбы",s:["Кости выбрасывать отдельно","Мягкие части — в пищевые отходы"]},
 
 {t:["отработанное масло","растительное масло","кухонное масло"],c:"special",d:"Отработанное пищевое масло",s:["Небольшое количество впитать бумагой","Большое количество сдавать в пункт сбора"]},
-{t:["рис","старый рис","лежалый рис","сырой рис","белый рис","бурый рис"],c:"food",d:"Рис (старый рис)",s:["Выбрасывать в контейнер для пищевых отходов."]},
-{t:["картофель","проросший картофель","батат","испорченный батат"],c:"food",d:"Картофель",s:["Выбрасывать в пакет для пищевых отходов."]}    
+{t:["рис","старый рис","лежалый рис","сырой рис","белый рис","бурый рис"],c:"food",d:"Рис,старый рис,лежалый рис,сырой рис,белый рис,бурый рис,s:["Выбрасывать в контейнер для пищевых отходов."]},
+{t:["картофель","проросший картофель","батат","испорченный батат"],c:"food",d:"Картофель,проросший картофель,батат,испорченный батат",s:["Выбрасывать в пакет для пищевых отходов."]}    
 ]
    }
 };
