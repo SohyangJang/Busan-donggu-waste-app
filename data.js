@@ -67,7 +67,7 @@ en:{name:"English",norm:nEn,
     {t:["bread","cake","baked goods","pastry"],c:"food",d:"Bread & soft baked goods",s:["Drain any liquids","Place in food waste bag (음식물쓰레기 전용용기)"]},
     {t:["trimmed fat","raw meat","meat scrap","meat fat"],c:"food",d:"Trimmed fat & raw meat scraps",s:["Large bones → standard waste bag","Small soft pieces & fat → food waste bag (음식물쓰레기 전용용기)"]},
     {t:["fish innard","fish entrail","soft fish","fish scrap"],c:"food",d:"Fish innards & soft fish scraps",s:["Fish bones & sharp fins → standard waste bag","Soft parts → food waste bag (음식물쓰레기 전용용기)"]},
-    {t:["cooking oil","waste cooking oil","used oil","oil"],c:"special",d:"Waste cooking oil",s:["Small amounts: absorb with paper towel/newspaper → standard waste bag","Large amounts: contact a licensed professional waste disposal company","Collection box: deliver to designated waste oil box (check with apartment management)"]}
+    {t:["cooking oil","waste cooking oil","used oil","oil"],c:"special",d:"Waste cooking oil",s:["Small amounts: absorb with paper towel/newspaper → standard waste bag","Large amounts: contact a licensed professional waste disposal company","Collection box: deliver to designated waste oil box (check with apartment management)"]},
     {t:["rice","old rice","stale rice","uncooked rice","white rice","brown rice"],c:"food",d:"Rice (old rice)",s:["Dispose of in a food waste container."]},
     {t:["potato","sprouted potato","sweet potato","spoiled sweet potato"],c:"food",d:"Potato",s:["Dispose of in a food waste bag."]}
   ]
