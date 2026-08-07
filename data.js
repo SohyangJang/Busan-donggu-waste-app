@@ -1,7 +1,7 @@
 const LANGS={
 ko:{name:"한국어",norm:nKo,
   ui:{h1:"음식물쓰레기? <span>일반쓰레기?</span> 어디에버리지?",sub:"음식 품목을 입력하면 어떻게 버려야하는지 알려드립니다.",slb:"품목명으로 검색",ph:"예: 달걀껍데기, 수박, 생선뼈...",btn:"확인 ↗",how:"버리는 방법",clbl:"예시 검색어",empty:"항목을 입력하면\n어느 쓰레기통인지 알려드려요.",nf:q=>`"${q}" 검색 결과가 없습니다.`,fine:"올바른 쓰레기봉투를 사용하지 않으면 최대 <strong>₩1,000,000</strong> 과태료가 부과됩니다.",tl:{food:"음식물쓰레기",general:"일반쓰레기",special:"특수처리"},bl:{food:"음식물쓰레기 전용용기",general:"종량제봉투",special:""},
-      slogan: "생활폐기물 배출안내 서비스",highlight: "검색 한 번으로 쉽고 빠르게 안내합니다.",quick1Title: "생활환경",quick1Sub: "환경정보",quick2Title: "민원안내",quick2Sub: "생활민원",quick3Title: "다국어",quick3Sub: "5 Languages",dongguTitle: "부산 동구 공식누리집",dongguSub: "음식물류폐기물 배출안내 바로가기 →"},
+      slogan: "생활폐기물 배출안내 서비스",highlight: "검색 한 번으로 쉽고 빠르게 안내합니다.",quick1Title: "생활환경",quick1Sub: "환경정보",quick2Title: "민원안내",quick2Sub: "생활민원",quick3Title: "다국어",quick3Sub: "5개 언어",dongguTitle: "부산 동구 공식누리집",dongguSub: "음식물류폐기물 배출안내 바로가기 →"},
   sg:["달걀껍데기","생선뼈","김치","바나나껍질","닭뼈","커피찌꺼기","식빵","수박","폐식용유","된장","밥","배추"],
   db:[
     {t:["파뿌리","양파껍질","마늘껍질","양파뿌리","마늘뿌리","대파뿌리"],c:"general",d:"파·마늘·양파 뿌리 및 껍질",s:["종량제봉투에 넣어 배출","단단하고 섬유질이 많아 음식물쓰레기 불가"]},
