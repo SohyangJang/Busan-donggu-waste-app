@@ -1,6 +1,7 @@
 const LANGS={
 ko:{name:"한국어",norm:nKo,
-  ui:{h1:"음식물쓰레기? <span>일반쓰레기?</span> 어디에버리지?",sub:"음식 품목을 입력하면 어떻게 버려야하는지 알려드립니다.",slb:"품목명으로 검색",ph:"예: 달걀껍데기, 수박, 생선뼈...",btn:"확인 ↗",how:"버리는 방법",clbl:"예시 검색어",empty:"항목을 입력하면\n어느 쓰레기통인지 알려드려요.",nf:q=>`"${q}" 검색 결과가 없습니다.`,fine:"올바른 쓰레기봉투를 사용하지 않으면 최대 <strong>₩1,000,000</strong> 과태료가 부과됩니다.",tl:{food:"음식물쓰레기",general:"일반쓰레기",special:"특수처리"},bl:{food:"음식물쓰레기 전용용기",general:"종량제봉투",special:""}},
+  ui:{h1:"음식물쓰레기? <span>일반쓰레기?</span> 어디에버리지?",sub:"음식 품목을 입력하면 어떻게 버려야하는지 알려드립니다.",slb:"품목명으로 검색",ph:"예: 달걀껍데기, 수박, 생선뼈...",btn:"확인 ↗",how:"버리는 방법",clbl:"예시 검색어",empty:"항목을 입력하면\n어느 쓰레기통인지 알려드려요.",nf:q=>`"${q}" 검색 결과가 없습니다.`,fine:"올바른 쓰레기봉투를 사용하지 않으면 최대 <strong>₩1,000,000</strong> 과태료가 부과됩니다.",tl:{food:"음식물쓰레기",general:"일반쓰레기",special:"특수처리"},bl:{food:"음식물쓰레기 전용용기",general:"종량제봉투",special:""},
+      slogan: "생활폐기물 배출안내 서비스",highlight: "검색 한 번으로 쉽고 빠르게 안내합니다.",quick1Title: "생활환경",quick1Sub: "환경정보",quick2Title: "민원안내",quick2Sub: "생활민원",quick3Title: "다국어",quick3Sub: "5 Languages",dongguTitle: "부산 동구 공식누리집",dongguSub: "음식물류폐기물 배출안내 바로가기 →"},
   sg:["달걀껍데기","생선뼈","김치","바나나껍질","닭뼈","커피찌꺼기","식빵","수박","폐식용유","된장","밥","배추"],
   db:[
     {t:["파뿌리","양파껍질","마늘껍질","양파뿌리","마늘뿌리","대파뿌리"],c:"general",d:"파·마늘·양파 뿌리 및 껍질",s:["종량제봉투에 넣어 배출","단단하고 섬유질이 많아 음식물쓰레기 불가"]},
@@ -37,7 +38,8 @@ ko:{name:"한국어",norm:nKo,
 },
     
 en:{name:"English",norm:nEn,
-  ui:{h1:"General Waste?Food Waste? <span>Where Should I Throw It? </span>",sub:"Enter an item name to find the correct disposal method.",slb:"Search by item",ph:"e.g. eggshell, watermelon, fish bone...",btn:"Search ↗",how:"How to dispose",clbl:"Try these",empty:"Enter a food item above\nto check which bin it goes in.",nf:q=>`No match found for "${q}".`,fine:"Improper disposal can result in fines up to <strong>₩1,000,000</strong>. Always use the correct bag.",tl:{food:"Food waste",general:"General waste",special:"Special disposal"},bl:{food:"Food waste bag",general:"Standard waste bag",special:""}},
+  ui:{h1:"General Waste?Food Waste? <span>Where Should I Throw It? </span>",sub:"Enter an item name to find the correct disposal method.",slb:"Search by item",ph:"e.g. eggshell, watermelon, fish bone...",btn:"Search ↗",how:"How to dispose",clbl:"Try these",empty:"Enter a food item above\nto check which bin it goes in.",nf:q=>`No match found for "${q}".`,fine:"Improper disposal can result in fines up to <strong>₩1,000,000</strong>. Always use the correct bag.",tl:{food:"Food waste",general:"General waste",special:"Special disposal"},bl:{food:"Food waste bag",general:"Standard waste bag",special:""},
+  slogan:"Food Waste Disposal Guide",highlight:"Find disposal information quickly with just one search.",quick1Title:"Environment",quick1Sub:"Environmental Information",quick2Title:"Civil Services",quick2Sub:"Resident Services",quick3Title:"Languages",quick3Sub:"5 Languages",dongguTitle:"Busan Dong-gu Official Website",dongguSub:"Food Waste Disposal Guide →"},
   sg:["eggshell","fish bone","kimchi","banana peel","chicken bone","coffee grounds","bread","watermelon","cooking oil","doenjang","cooked rice","cabbage"],
   db:[
     {t:["green onion root","onion skin","garlic skin","onion root","garlic root","onion","garlic"],c:"general",d:"Onion / garlic roots & outer skins",s:["Place in standard waste bag (종량제봉투)","Fibrous roots and dry skins cannot go in food waste"]},
@@ -75,9 +77,8 @@ en:{name:"English",norm:nEn,
 
 zh:{name:"中文",norm:nZh,
   ui:{h1:"一般垃圾？食物垃圾？ <span>该扔到哪里？</span>",sub:"输入食物名称，即可查询应放入哪个垃圾桶及处理方法。",slb:"按物品名称搜索",ph:"例：蛋壳、西瓜、鱼骨...",btn:"查询 ↗",how:"处理方法",clbl:"常用搜索",empty:"请在上方输入食物名称\n查看应放入哪个垃圾桶。",nf:q=>`未找到"${q}"的相关结果。`,fine:"违规投放垃圾最高可被罚款 <strong>₩1,000,000</strong>。请务必使用正确的垃圾袋。",tl:{
-  food:"食物垃圾",
-  general:"一般垃圾",
-  special:"特殊处理"},bl:{food:"食物垃圾袋",general:"计量垃圾袋",special:""}},
+  food:"食物垃圾", general:"一般垃圾", special:"特殊处理"},bl:{food:"食物垃圾袋",general:"计量垃圾袋",special:""},
+     slogan:"生活垃圾分类指南",highlight:"只需搜索一次，即可快速获取分类信息。",quick1Title:"生活环境",quick1Sub:"环境信息",quick2Title:"便民服务",quick2Sub:"生活服务",quick3Title:"多语言",quick3Sub:"5种语言",dongguTitle:"釜山东区官方网站",dongguSub:"厨余垃圾分类指南 →"},
   sg:["蛋壳","鱼骨","泡菜","香蕉皮","鸡骨","咖啡渣","面包","西瓜","废食用油","大酱","剩饭","卷心菜"],
   db:[
     {t:["葱根","洋葱皮","蒜皮","蒜根","葱","洋葱","大蒜"],c:"general",d:"葱·蒜·洋葱的根部和外皮",s:["放入计量垃圾袋 (종량제봉투)","根部和干皮不可放入食物垃圾桶"]},
@@ -114,7 +115,8 @@ zh:{name:"中文",norm:nZh,
 },
 
 vi:{name:"Tiếng Việt",norm:nVi,
-  ui:{h1:"Rác Thường Hay Rác Thực Phẩm? <span>Bỏ Vào Đâu?</span>",sub:"Nhập tên thực phẩm để biết nên bỏ vào thùng rác nào và cách xử lý đúng.",slb:"Tìm kiếm theo tên mục",ph:"Ví dụ: vỏ trứng, dưa hấu, xương cá...",btn:"Kiểm tra ↗",how:"Cách vứt rác",clbl:"Gợi ý tìm kiếm",empty:"Nhập tên thực phẩm ở trên\nđể kiểm tra nên bỏ vào thùng rác nào.",nf:q=>`Không tìm thấy kết quả cho "${q}".`,fine:"Vứt rác sai quy định có thể bị phạt đến <strong>₩1.000.000</strong>. Luôn dùng đúng loại túi rác.",tl:{food:"Rác thực phẩm",general:"Rác thường",special:"Xử lý đặc biệt"},bl:{food:"Túi rác thực phẩm",general:"Túi rác tiêu chuẩn",special:""}},
+  ui:{h1:"Rác Thường Hay Rác Thực Phẩm? <span>Bỏ Vào Đâu?</span>",sub:"Nhập tên thực phẩm để biết nên bỏ vào thùng rác nào và cách xử lý đúng.",slb:"Tìm kiếm theo tên mục",ph:"Ví dụ: vỏ trứng, dưa hấu, xương cá...",btn:"Kiểm tra ↗",how:"Cách vứt rác",clbl:"Gợi ý tìm kiếm",empty:"Nhập tên thực phẩm ở trên\nđể kiểm tra nên bỏ vào thùng rác nào.",nf:q=>`Không tìm thấy kết quả cho "${q}".`,fine:"Vứt rác sai quy định có thể bị phạt đến <strong>₩1.000.000</strong>. Luôn dùng đúng loại túi rác.",tl:{food:"Rác thực phẩm",general:"Rác thường",special:"Xử lý đặc biệt"},bl:{food:"Túi rác thực phẩm",general:"Túi rác tiêu chuẩn",special:""}
+     slogan:"Hướng dẫn phân loại rác sinh hoạt",highlight:"Chỉ cần tìm kiếm một lần để nhận hướng dẫn nhanh chóng.",quick1Title:"Môi trường",quick1Sub:"Thông tin môi trường",quick2Title:"Dịch vụ hành chính",quick2Sub:"Dịch vụ công",quick3Title:"Đa ngôn ngữ",quick3Sub:"5 ngôn ngữ",dongguTitle:"Trang web chính thức quận Dong-gu, Busan",dongguSub:"Hướng dẫn phân loại rác thực phẩm →"},
   sg:["vỏ trứng","xương cá","kimchi","vỏ chuối","xương gà","bã cà phê","bánh mì","dưa hấu","dầu ăn","tương ớt","cơm thừa","bắp cải"],
   db:[
     {t:["vo hanh","vỏ hành","re hanh","rễ hành","vo toi","vỏ tỏi","re toi","rễ tỏi","hanh","hành","toi","tỏi"],c:"general",d:"Vỏ & rễ hành tây, tỏi",s:["Bỏ vào Túi rác tiêu chuẩn (종량제봉투)","Rễ và vỏ cứng không được cho vào thùng rác thực phẩm"]},
@@ -154,7 +156,8 @@ ru:{name:"Русский",norm:nRu,
   ui:{h1:"Пищевые отходы? <span>Общий мусор?</span> Куда выбросить?",sub:"Введите название отходов и узнайте, как правильно их утилизировать.",
     slb:"Поиск по названию",ph:"Например: арбуз, яичная скорлупа, лампа",btn:"Поиск",
   clbl:"Часто ищут",empty:"Введите название отходов для поиска.",nf:q=>`По запросу "${q}" ничего не найдено.`,how:"Способ утилизации",fine:"Нарушение правил вывоза отходов может привести к штрафу до 1 000 000 вон.",
-      tl:{food:"Пищевые отходы",general:"Общий мусор",special:"Специальная утилизация"},bl:{food:"Пакет для пищевых отходов",general:"Платный пакет",special:""},call:"Контакты",schedule:"График вывоза отходов"},
+      tl:{food:"Пищевые отходы",general:"Общий мусор",special:"Специальная утилизация"},bl:{food:"Пакет для пищевых отходов",general:"Платный пакет",special:""},
+      slogan:"Руководство по утилизации бытовых отходов",highlight:"Найдите нужную информацию всего за один поиск.",quick1Title:"Окружающая среда",quick1Sub:"Экологическая информация",quick2Title:"Госуслуги",quick2Sub:"Услуги для жителей",quick3Title:"Языки",quick3Sub:"5 языков",dongguTitle:"Официальный сайт района Тонгу, Пусан",dongguSub:"Руководство по утилизации пищевых отходов →",call:"Контакты",schedule:"График вывоза отходов"},
   sg:[  "яичная скорлупа",  "рыбная кость",  "кофейная гуща",  "куриная кость",  "ракушка",  "луковая шелуха",  "чайный пакетик",  "кожура ананаса"],
   db:[
 {t:["корень лука","луковая шелуха","шелуха чеснока","корень чеснока","корень зелёного лука"],c:"general",d:"Корни и шелуха лука, чеснока и зелёного лука",s:["Выбрасывать в платный пакет","Слишком жёсткие для пищевых отходов"]},
