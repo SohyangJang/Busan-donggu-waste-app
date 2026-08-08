@@ -119,33 +119,21 @@ input{
 .topbar{
 
     height:42px;
-
     padding:0 18px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     font-size:12px;
-
     color:#fff;
-
     background:#5B3DF5;
-
 }
 
 .top-left{
-
     font-weight:700;
-
 }
 
 .top-right{
-
     opacity:.9;
-
 }
 
 
@@ -154,79 +142,38 @@ input{
 ========================= */
 
 .hero{
-
     position:relative;
-
     overflow:hidden;
-
     padding:24px 28px 26px;
-
     border-radius:0 0 34px 34px;
-
     background:
-
-    linear-gradient(
-        135deg,
-        #6F48FF 0%,
-        #9B6CFF 100%
-    );
-
+    linear-gradient(135deg,#6F48FF 0%,#9B6CFF 100%);
     color:#fff;
-
-    box-shadow:
-
-    0 18px 45px
-
-    rgba(111,72,255,.25);
-
+    box-shadow: 0 18px 45px rgba(111,72,255,.25);
 }
 
 .hero-overlay{
-
     position:absolute;
-
     inset:0;
-
     background:
-
     linear-gradient(
-
     rgba(255,255,255,.06),
-
     rgba(255,255,255,0)
-
     );
-
 }
 
 .hero-pattern{
-
     position:absolute;
-
     width:260px;
-
     height:260px;
-
     right:-70px;
-
     top:-70px;
-
     border-radius:50%;
-
     background:
-
     rgba(255,255,255,.08);
-
 }
 
-.header{
-
-    position:relative;
-
-    z-index:2;
-
-}
-
+.header{position:relative; z-index:2;}
 
 /* =========================
    GOV BADGE
@@ -236,14 +183,13 @@ input{
     display:inline-flex;
     align-items:center;
     gap:10px;
-    padding:8px 16px;
+    padding:4px 16px;
     font-size:14px;
     border-radius:999px;
     background:rgba(255,255,255,.14);
     border:1px solid rgba(255,255,255,.25);
     backdrop-filter:blur(10px);
 }
-
 .pin{font-size:14px;}
 
 
@@ -251,7 +197,12 @@ input{
    HERO TEXT
 ========================= */
 
-.slogan{margin-top:14px; color:rgba(255,255,255,.88);font-size:14px; letter-spacing:.08em; text-transform:uppercase;} /*22->14 변경 2026.0807*/
+.slogan{
+   margin-top:14px; 
+   color:rgba(255,255,255,.88);
+   font-size:14px; 
+   letter-spacing:.08em;
+   text-transform:uppercase;} /*22->14 변경 2026.0807*/
 
 .hero-divider{
     width:240px;
@@ -266,13 +217,10 @@ input{
     font-weight:800;
     line-height:1.08;
     letter-spacing:-.04em;
-
 }
 
 #h1em{
-
     color:var(--yellow);
-
 }
 
 #h1sub{
@@ -300,29 +248,29 @@ input{
 .quick-icons{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:14px;
-    margin-top:16px;
+    gap:10px;
+    margin-top:4px;
 }
 
 .qi{background:#fff; 
     border-radius:22px;
-    padding:8px 12px;
+    padding:4px 12px;
     text-align:center;
     box-shadow:0 10px 24px rgba(0,0,0,.08);
     transition:.25s;
 }
 
 .qi:hover{
-
     transform:translateY(-4px);
-
 }
 
-.qi-icon{font-size:28px;  margin-bottom:6px;}
-
+.qi-icon{
+   font-size:20px;  
+   margin-bottom:2px;
+}
 .qi strong{
     display:block;
-    font-size:15px;
+    font-size:14px;
     color:#222;
     font-weight:700;
 }
@@ -330,7 +278,7 @@ input{
 .qi span{
     display:block;
     margin-top:2px;
-    font-size:13px;
+    font-size:12px;
     color:#777;
 }
 
