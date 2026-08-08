@@ -336,31 +336,18 @@ input{
 ========================================================== */
 
 .quick-icons{
-
     display:grid;
-
     grid-template-columns:repeat(3,1fr);
-
     gap:14px;
-
     margin-top:24px;
-
 }
 
-.qi{
-
-    background:#fff;
-
+.qi{background:#fff; 
     border-radius:22px;
-
-    padding:16px 12px;
-
+    padding:12px 12px;
     text-align:center;
-
     box-shadow:0 10px 24px rgba(0,0,0,.08);
-
     transition:.25s;
-
 }
 
 .qi:hover{
@@ -400,11 +387,7 @@ input{
    DONGGU LINK CARD
 ========================================================== */
 
-.donggu-link{
-
-    margin-top:220x;
-
-}
+.donggu-link{margin-top:24x;}
 
 .donggu-link a{
 
