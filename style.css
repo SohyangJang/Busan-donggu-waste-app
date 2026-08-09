@@ -178,17 +178,18 @@ input{
 /* =========================
    GOV BADGE
 ========================= */
-
+/*busandong-gu*/
 .gov-badge{
     display:inline-flex;
     align-items:center;
     gap:10px;
-    padding:4px 16px;
+    padding:2px 16px;
     font-size:14px;
     border-radius:999px;
     background:rgba(255,255,255,.14);
     border:1px solid rgba(255,255,255,.25);
     backdrop-filter:blur(10px);
+    align-items: center; 
 }
 .pin{font-size:14px;}
 
@@ -196,27 +197,30 @@ input{
 /* =========================
    HERO TEXT
 ========================= */
-
+/*생활폐기물 배출안내 서비스*/
 .slogan{
-   margin-top:14px; 
+   margin-top:10px; 
    color:rgba(255,255,255,.88);
    font-size:14px; 
    letter-spacing:.08em;
    text-transform:uppercase;} /*22->14 변경 2026.0807*/
+   align-items: center; 
 
 .hero-divider{
     width:240px;
     height:4px;
-    margin:14px 0 16px;
+    margin:10px 0 10px;
     border-radius:999px;
     background:var(--yellow);
+    align-items: center; 
 }
-
+/*어디에 버리지?*/
 #h1title{
-    font-size:30px;
+    font-size:32px;
     font-weight:800;
     line-height:1.08;
     letter-spacing:-.04em;
+    align-items: center; 
 }
 
 #h1em{
@@ -224,21 +228,23 @@ input{
 }
 
 #h1sub{
-    margin-top:14px;
-    font-size:17px;
+    margin-top:10px;
+    font-size:16px;
     line-height:1.6;
     color:rgba(255,255,255,.94);
+     align-items: center; 
 }
-
+/*검색 한번으로 쉽고 빠르게 안내합니다*/
 .hero-highlight{
     display:inline-flex;
     align-items:center;
-    margin-top:16px;
-    padding:8px 18px;
+    margin-top:10px;
+    padding:4px 12px;
     border-radius:999px;
     background:rgba(255,255,255,.14);
     border:1px solid rgba(255,255,255,.20);
     font-size:16px;
+    align-items: center; 
 
 }
 /* ==========================================================
@@ -254,7 +260,7 @@ input{
 
 .qi{background:#fff; 
     border-radius:22px;
-    padding:4px 12px;
+    padding:2px 12px;
     text-align:center;
     box-shadow:0 10px 24px rgba(0,0,0,.08);
     transition:.25s;
@@ -288,7 +294,7 @@ input{
 ========================================================== */
 
 .donggu-link{
-   margin-top:14px;
+   margin-top:10px;
 }
 .donggu-link a{
     display:flex;
