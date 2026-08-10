@@ -150,6 +150,11 @@ input{
     linear-gradient(135deg,#6F48FF 0%,#9B6CFF 100%);
     color:#fff;
     box-shadow: 0 18px 45px rgba(111,72,255,.25);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 }
 
 .hero-overlay{
@@ -189,7 +194,6 @@ input{
     background:rgba(255,255,255,.14);
     border:1px solid rgba(255,255,255,.25);
     backdrop-filter:blur(10px);
-    align-items: center; 
 }
 .pin{font-size:14px;}
 
@@ -204,7 +208,6 @@ input{
    font-size:14px; 
    letter-spacing:.08em;
    text-transform:uppercase;} /*22->14 변경 2026.0807*/
-   align-items: center; 
 
 .hero-divider{
     width:240px;
@@ -212,7 +215,6 @@ input{
     margin:10px 0 10px;
     border-radius:999px;
     background:var(--yellow);
-    align-items: center; 
 }
 /*어디에 버리지?*/
 #h1title{
@@ -220,7 +222,6 @@ input{
     font-weight:800;
     line-height:1.08;
     letter-spacing:-.04em;
-    align-items: center; 
 }
 
 #h1em{
@@ -232,7 +233,6 @@ input{
     font-size:16px;
     line-height:1.6;
     color:rgba(255,255,255,.94);
-     align-items: center; 
 }
 /*검색 한번으로 쉽고 빠르게 안내합니다*/
 .hero-highlight{
@@ -244,8 +244,6 @@ input{
     background:rgba(255,255,255,.14);
     border:1px solid rgba(255,255,255,.20);
     font-size:16px;
-    align-items: center; 
-
 }
 /* ==========================================================
    QUICK MENU
