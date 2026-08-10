@@ -341,287 +341,255 @@ input{
   }
 }
 
-
-
 /* ==========================================================
    SEARCH CARD
 ========================================================== */
 
 .search-card{
-
     position:relative;
-
     width:min(92%,760px);
-
     margin:24px auto 30px;
-
     padding:28px;
-
     background:#fff;
-
     border-radius:28px;
-
     box-shadow:var(--shadow);
-
     z-index:30;
-
-}
-
-.section-title{
-
-    font-size:12px;
-
-    font-weight:700;
-
-    color:#7B8794;
-
-    letter-spacing:.12em;
-
-    text-transform:uppercase;
-
 }
 
 .search-heading{
-
     margin-top:18px;
-
     font-size:30px;
-
     font-weight:800;
-
     color:#1f2937;
-
     letter-spacing:-.03em;
-
 }
 
 .search-desc{
-
     margin-top:10px;
-
     margin-bottom:24px;
-
     font-size:15px;
-
     color:#6b7280;
-
     line-height:1.7;
-
 }
-
 
 /* ==========================================================
    LANGUAGE
 ========================================================== */
 
 .lang-row{
-
     display:flex;
-
     flex-wrap:wrap;
-
-    gap:10px;
-
-    margin-bottom:24px;
-
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-bottom:26px;
 }
 
 .lb{
-
     border:none;
-
     background:#F3F4F6;
-
     color:#6b7280;
-
-    padding:10px 18px;
-
+    padding:8px 17px;
+    min-height:42px;
     border-radius:999px;
-
     cursor:pointer;
-
-    transition:.25s;
-
+    transition:.2s;
     font-size:14px;
-
     font-weight:700;
-
+    line-height:1;
+    white-space:nowrap;
 }
 
 .lb:hover{
-
     background:#EEE9FF;
-
     color:var(--purple);
-
 }
 
 .lb.on{
-
     color:#fff;
-
     background:linear-gradient(135deg,#7B4DFF,#9B6CFF);
-
-    box-shadow:0 8px 18px rgba(123,77,255,.24);
-
+    box-shadow:0 7px 16px rgba(123,77,255,.22);
 }
-
 
 /* ==========================================================
    SEARCH BOX
 ========================================================== */
 
 .scard{
-
     padding:22px;
-
     border-radius:22px;
-
     border:1px solid var(--line);
-
     background:#FAFAFA;
-
 }
 
 .slb{
-
     display:block;
-
     margin-bottom:12px;
-
     font-size:12px;
-
     font-weight:700;
-
     color:#8b95a5;
-
 }
 
 .sr{
-
     display:flex;
-    flex-direction: column;
+    flex-direction:column;
     gap:10px;
-    width: 100%;
-
+    width:100%;
 }
 
 .sr input{
-    width: 100%;
+    width:100%;
+    height:58px;
     flex:1;
-    height:60px;
     border-radius:16px;
     border:1px solid #D6DAE2;
-
     padding:0 18px;
-
     font-size:16px;
-
-    transition:.25s;
-
+    color:#1f2937;
+    background:#fff;
+    transition:.2s;
 }
 
 .sr input:focus{
-
     outline:none;
-
     border-color:var(--purple);
-
     box-shadow:0 0 0 4px rgba(123,77,255,.10);
+}
 
+.sr input::placeholder{
+    color:#9aa1ad;
 }
 
 .sr button{
-    width: 100%;
-    height: 36px;   
+    width:100%;
+    height:48px;
     border:none;
-
     padding:0 28px;
-
     border-radius:14px;
-
     color:#fff;
-
-    font-size:14px;
-
+    font-size:15px;
     font-weight:700;
-
     cursor:pointer;
-
     background:linear-gradient(135deg,#7B4DFF,#9B6CFF);
-
-    transition:.25s;
-
+    transition:.2s;
 }
 
 .sr button:hover{
-
-    transform:translateY(-2px);
-
+    transform:translateY(-1px);
+    box-shadow:0 7px 16px rgba(123,77,255,.2);
 }
 
+.sr button:active{
+    transform:scale(.98);
+}
 
 /* ==========================================================
    EXAMPLE CHIPS
 ========================================================== */
 
 .chips{
-
     margin-top:20px;
-
 }
 
 .chip-lbl{
-
     display:block;
-
-    margin-bottom:12px;
-
+    margin-bottom:10px;
     font-size:12px;
-
     color:#8b95a5;
-
     font-weight:700;
-
 }
 
 #ch{
-
     display:flex;
-
     flex-wrap:wrap;
-
-    gap:10px;
-
+    gap:7px;
 }
 
 .chip{
-
-    padding:9px 16px;
-
+    padding:7px 13px;
+    min-height:34px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
     border-radius:999px;
-
     background:#F3F4F6;
-
     border:1px solid transparent;
-
     cursor:pointer;
-
-    transition:.25s;
-
-    font-size:14px;
-
+    transition:.2s;
+    font-size:13px;
+    line-height:1;
+    color:#374151;
+    white-space:nowrap;
 }
 
 .chip:hover{
-
     background:#EEE9FF;
-
     border-color:#DDD6FE;
-
     color:var(--purple);
-
 }
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:640px){
+    .search-card{
+        width:calc(100% - 28px);
+        margin:22px auto 26px;
+        padding:24px 20px;
+        border-radius:24px;
+    }
+
+    .lang-row{
+        gap:7px;
+        margin-bottom:24px;
+    }
+
+    .lb{
+        padding:8px 15px;
+        min-height:40px;
+        font-size:13px;
+    }
+
+    .search-heading{
+        margin-top:14px;
+        font-size:28px;
+    }
+
+    .search-desc{
+        margin-bottom:20px;
+        font-size:14px;
+        line-height:1.65;
+    }
+
+    .scard{
+        padding:18px;
+        border-radius:20px;
+    }
+
+    .sr input{
+        height:58px;
+        font-size:15px;
+    }
+
+    .sr button{
+        height:46px;
+        font-size:14px;
+    }
+
+    .chips{
+        margin-top:18px;
+    }
+
+    .chip{
+        padding:7px 12px;
+        min-height:33px;
+        font-size:12.5px;
+    }
+}
+
+
+    
 
 /* ==========================================================
    RESULT AREA
