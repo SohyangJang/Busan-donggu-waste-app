@@ -480,7 +480,15 @@ input{
 .sr button:active{
     transform:scale(.98);
 }
-
+.recycle-hint{
+  display:block;
+  margin:10px 0 2px;
+  text-align:center;
+  font-size:12px;
+  font-weight:600;
+  color:#777;
+  line-height:1.5;
+}
 /* ==========================================================
    EXAMPLE CHIPS
 ========================================================== */
