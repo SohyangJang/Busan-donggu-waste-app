@@ -74,6 +74,11 @@ document.getElementById("dongguSub").textContent=l.ui.dongguSub;
   document.getElementById("fn").innerHTML=l.ui.fine;
   document.getElementById("chip-lbl").textContent=l.ui.clbl;
   buildChips(l);
+  const recycleHint = document.getElementById("recycle-hint");
+
+if(recycleHint){
+  recycleHint.style.display = k === "ko" ? "block" : "none";
+}
   document.getElementById("ra").innerHTML=`<div class="empty"><div class="ico">&#128465;</div><p>${l.ui.empty.replace("\n","<br>")}</p></div>`;
   document.getElementById("q").value="";
   updateScheduleImage();
