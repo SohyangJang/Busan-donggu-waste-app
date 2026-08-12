@@ -855,6 +855,23 @@ input{
     background:#F59E0B;
 
 }
+/* =========================
+   SEARCH NOT FOUND
+========================= */
+
+.nf{
+   width: 100%;
+   box-sizing: border-box;
+   margin:0 auto;
+   padding:28px 20px 18px;
+   text-align:center;
+   font-size:20px;
+   font-weight:700;
+   line-height:1.5;
+   color:#252936;
+   word-break: keep-all;
+}
+
 /* ==========================================
    검색 결과 없음 - 외부 분리배출 사전 연계 영역
    ========================================== */
