@@ -154,7 +154,6 @@ input{
     flex-direction: column;
     align-items: center;
 }
-}
 
 .hero-overlay{
     position:absolute;
@@ -206,7 +205,7 @@ input{
    color:rgba(255,255,255,.88);
    font-size:14px; 
    letter-spacing:.08em;
-   text-transform:uppercase;} /*22->14 변경 2026.0807*/
+   text-transform:uppercase;} /* 22->14 변경 2026.0807 */
 
 .hero-divider{
     width:240px;
@@ -215,7 +214,7 @@ input{
     border-radius:999px;
     background:var(--yellow);
 }
-/*어디에 버리지?*/
+/* 어디에 버리지? */
 #h1title{
     font-size:32px;
     font-weight:800;
