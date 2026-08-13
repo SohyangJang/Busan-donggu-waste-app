@@ -370,6 +370,10 @@ input{
     color:#6b7280;
     line-height:1.7;
 }
+/* 외국어 페이지에서는 검색 안내 문구 숨김 */
+.search-intro-hidden {
+  display: none !important;
+}
 
 /* ==========================================================
    LANGUAGE
