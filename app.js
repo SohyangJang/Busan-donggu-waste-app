@@ -74,6 +74,11 @@ document.getElementById("dongguSub").textContent=l.ui.dongguSub;
   document.getElementById("fn").innerHTML=l.ui.fine;
   document.getElementById("chip-lbl").textContent=l.ui.clbl;
   buildChips(l);
+  const searchHeading = document.getElementById("search-heading");
+const searchDesc = document.getElementById("search-desc");
+
+if(searchHeading) searchHeading.style.display = k === "ko" ? "block" : "none";
+if(searchDesc) searchDesc.style.display = k === "ko" ? "block" : "none";
   const recycleHint = document.getElementById("recycle-hint");
 
 if(recycleHint){
