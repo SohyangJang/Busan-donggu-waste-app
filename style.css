@@ -1442,10 +1442,8 @@ footer{
 
 @media (max-width:768px){
 
-    .contact-grid{
-        grid-template-columns:1fr;
-    },
-   .bulk-grid{
+    .contact-grid,
+    .bulk-grid{
         grid-template-columns:1fr;
 }
 
