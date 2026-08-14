@@ -1229,6 +1229,96 @@ input{
     opacity:.93;
 
 }
+/* ------------------------------
+   Large Waste
+------------------------------ */
+
+.bulk-section{
+
+    margin-top:18px;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:20px;
+
+    box-shadow:0 10px 28px rgba(15,23,42,.06);
+
+}
+
+.bulk-title{
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:#374151;
+
+    margin-bottom:16px;
+
+}
+
+.bulk-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+
+}
+
+.bulk-item{
+
+    border:1px solid #E5E7EB;
+
+    border-radius:20px;
+
+    padding:16px;
+
+    background:#FAFBFC;
+
+}
+
+.bulk-phone{
+
+    margin-top:12px;
+
+    min-height:50px;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#7B4DFF,#9D6BFF);
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:3px;
+
+}
+
+.bulk-phone span{
+
+    font-size:11px;
+
+    font-weight:500;
+
+    opacity:.9;
+
+}
+
 
 /* ------------------------------
    Feedback
@@ -1353,29 +1443,24 @@ footer{
 @media (max-width:768px){
 
     .contact-grid{
-
         grid-template-columns:1fr;
-
-    }
-
+    },
+   .bulk-grid{
+        grid-template-columns:1fr;
 }
 
 @media (max-width:640px){
 
     .schedule-section,
-
-    .contact-section{
-
+    .contact-section,
+    .bulk-section{
         padding:20px;
-
     }
 
     .schedule-title,
-
-    .contact-title{
-
+    .contact-title,
+    .bulk-title{
         font-size:18px;
-
     }
 
     .link-btn{
