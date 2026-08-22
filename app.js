@@ -195,7 +195,7 @@ function go(){
 }
   area.innerHTML=matches.map(m=>{
     const bl=l.ui.bl[m.c];
-    const ko=m.c==="food"?"음식물쓰레기봉투":m.c==="general"?"종량제봉투":"";
+    const ko=m.c==="food"?"음식물쓰레기전용용기":m.c==="general"?"종량제봉투":"";
     return`<div class="rc ${m.c}">
       <div class="rh">
         <span class="bdg ${m.c}">${l.ui.tl[m.c]}</span>
