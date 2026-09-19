@@ -1,0 +1,1592 @@
+/* ==========================================================
+   BUSAN DONG-GU WASTE GUIDE
+   STYLE.CSS
+   Part 1-1
+========================================================== */
+
+/* =========================
+   ROOT
+========================= */
+
+:root{
+
+    --purple:#7B4DFF;
+    --purple-dark:#6D28D9;
+    --purple-light:#9B6CFF;
+
+    --yellow:#FFD54F;
+
+    --bg:#F5F7FC;
+
+    --white:#ffffff;
+
+    --text:#1F2937;
+
+    --sub:#6B7280;
+
+    --line:#E5E7EB;
+
+    --shadow:0 14px 40px rgba(15,23,42,.08);
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Noto Sans KR",
+    "Segoe UI",
+    sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    line-height:1.6;
+
+}
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+button{
+
+    font-family:inherit;
+
+}
+
+input{
+
+    font-family:inherit;
+
+}
+
+
+/* =========================
+   LAYOUT
+========================= */
+
+.wrap{
+
+    width:min(100%,720px);
+
+    margin:auto;
+
+    padding-bottom:60px;
+
+}
+
+
+/* =========================
+   TOP BAR (기존 호환)
+========================= */
+
+.topbar{
+
+    height:42px;
+    padding:0 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:12px;
+    color:#fff;
+    background:#5B3DF5;
+}
+
+.top-left{
+    font-weight:700;
+}
+
+.top-right{
+    opacity:.9;
+}
+
+/* =========================
+   DISTRICT BAR (구군 선택)
+========================= */
+
+.district-bar{
+    background:#5B3DF5;
+    padding:0 18px;
+    min-height:52px;
+    display:flex;
+    align-items:center;
+}
+
+.district-bar-inner{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    width:100%;
+    flex-wrap:wrap;
+    padding:8px 0;
+}
+
+.district-bar-label{
+    color:rgba(255,255,255,.9);
+    font-size:13px;
+    font-weight:700;
+    white-space:nowrap;
+    flex-shrink:0;
+}
+
+.district-select-wrap{
+    flex:1;
+    min-width:180px;
+    max-width:340px;
+    position:relative;
+}
+
+.district-select-wrap::after{
+    content:"▾";
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#5B3DF5;
+    font-size:14px;
+    pointer-events:none;
+}
+
+.district-select{
+    width:100%;
+    height:36px;
+    padding:0 36px 0 14px;
+    border:none;
+    border-radius:999px;
+    background:#fff;
+    color:#1F2937;
+    font-size:14px;
+    font-weight:700;
+    font-family:inherit;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+    transition:.2s;
+    outline:none;
+}
+
+.district-select:focus{
+    box-shadow:0 0 0 3px rgba(255,255,255,.4);
+}
+
+@media(max-width:480px){
+    .district-bar{
+        padding:0 12px;
+    }
+    .district-bar-inner{
+        gap:8px;
+    }
+    .district-select-wrap{
+        min-width:0;
+        max-width:none;
+    }
+    .district-select{
+        font-size:13px;
+    }
+}
+
+
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+    padding:24px 28px 26px;
+    border-radius:0 0 34px 34px;
+    background:
+    linear-gradient(135deg,#6F48FF 0%,#9B6CFF 100%);
+    color:#fff;
+    box-shadow: 0 18px 45px rgba(111,72,255,.25);
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(
+    rgba(255,255,255,.06),
+    rgba(255,255,255,0)
+    );
+}
+
+.hero-pattern{
+    position:absolute;
+    width:260px;
+    height:260px;
+    right:-70px;
+    top:-70px;
+    border-radius:50%;
+    background:
+    rgba(255,255,255,.08);
+}
+
+.header{position:relative; z-index:2;}
+
+/* =========================
+   GOV BADGE
+========================= */
+/*busandong-gu*/
+.gov-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:2px 16px;
+    font-size:14px;
+    border-radius:999px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.25);
+    backdrop-filter:blur(10px);
+}
+.pin{font-size:14px;}
+
+
+/* =========================
+   HERO TEXT
+========================= */
+/*생활폐기물 배출안내 서비스*/
+.slogan{
+   margin-top:10px; 
+   color:rgba(255,255,255,.88);
+   font-size:14px; 
+   letter-spacing:.08em;
+   text-transform:uppercase;} /* 22->14 변경 2026.0807 */
+
+.hero-divider{
+    width:240px;
+    height:4px;
+    margin:10px auto;
+    border-radius:999px;
+    background:var(--yellow);
+}
+/* 어디에 버리지? */
+#h1title{
+    font-size:32px;
+    font-weight:800;
+    line-height:1.08;
+    letter-spacing:-.04em;
+}
+
+#h1em{
+    color:var(--yellow);
+}
+
+#h1sub{
+    margin-top:10px;
+    font-size:16px;
+    line-height:1.6;
+    color:rgba(255,255,255,.94);
+}
+/*검색 한번으로 쉽고 빠르게 안내합니다*/
+.hero-highlight{
+    display:inline-flex;
+    align-items:center;
+    margin-top:10px;
+    padding:4px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.20);
+    font-size:16px;
+}
+/* ==========================================================
+   QUICK MENU
+========================================================== */
+
+.quick-icons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:4px;
+}
+
+.qi{background:#fff; 
+    border-radius:22px;
+    padding:2px 12px;
+    text-align:center;
+    box-shadow:0 10px 24px rgba(0,0,0,.08);
+    transition:.25s;
+}
+
+.qi:hover{
+    transform:translateY(-4px);
+}
+
+.qi-icon{
+   font-size:20px;  
+   margin-bottom:2px;
+}
+.qi strong{
+    display:block;
+    font-size:14px;
+    color:#222;
+    font-weight:700;
+}
+
+.qi span{
+    display:block;
+    margin-top:2px;
+    font-size:12px;
+    color:#777;
+}
+
+
+/* ==========================================================
+   DONGGU LINK CARD
+========================================================== */
+
+.donggu-link{
+   margin-top:10px;
+}
+.donggu-link a{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:14px 16px;
+    background:#fff;
+    border-radius:22px;
+    box-shadow:0 12px 26px rgba(0,0,0,.08);
+    transition:.25s;
+}
+
+.donggu-link a:hover{
+    transform:translateY(-2px);
+}
+
+.donggu-link img{
+    width:260px;
+    flex-shrink:0;
+}
+
+.donggu-text{
+    flex:1;
+}
+
+.donggu-text strong{
+    display:block;
+    font-size:18px;
+    color:#222;
+    font-weight:800;
+}
+
+.donggu-text span{
+    display:block;
+    margin-top:6px;
+    color:#6b7280;
+    font-size:14px;
+}
+/* 모바일 화면 (768px 이하) 전용 스타일 */
+@media (max-width: 768px) {
+  .donggu-link img {
+    width: 92px; /* 모바일에서만 이미지 크기를 92px로 조정 */
+  }
+
+  .donggu-link a {
+    gap: 12px;   /* 모바일 화면에 맞게 이미지와 텍스트 간격도 약간 줄여줍니다 */
+  }
+}
+
+/* ==========================================================
+   SEARCH CARD
+========================================================== */
+
+.search-card{
+    position:relative;
+    width:min(92%,760px);
+    margin:24px auto 30px;
+    padding:28px;
+    background:#fff;
+    border-radius:28px;
+    box-shadow:var(--shadow);
+    z-index:30;
+}
+
+.search-heading{
+    margin-top:18px;
+    font-size:30px;
+    font-weight:800;
+    color:#1f2937;
+    letter-spacing:-.03em;
+}
+
+.search-desc{
+    margin-top:10px;
+    margin-bottom:24px;
+    font-size:15px;
+    color:#6b7280;
+    line-height:1.7;
+}
+/* 외국어 페이지에서는 검색 안내 문구 숨김 */
+.search-intro-hidden {
+  display: none !important;
+}
+
+/* ==========================================================
+   LANGUAGE
+========================================================== */
+
+.lang-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-bottom:26px;
+}
+
+.lb{
+    border:none;
+    background:#F3F4F6;
+    color:#6b7280;
+    padding:8px 17px;
+    min-height:42px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:.2s;
+    font-size:14px;
+    font-weight:700;
+    line-height:1;
+    white-space:nowrap;
+}
+
+.lb:hover{
+    background:#EEE9FF;
+    color:var(--purple);
+}
+
+.lb.on{
+    color:#fff;
+    background:linear-gradient(135deg,#7B4DFF,#9B6CFF);
+    box-shadow:0 7px 16px rgba(123,77,255,.22);
+}
+
+/* ==========================================================
+   SEARCH BOX
+========================================================== */
+
+.scard{
+    padding:22px;
+    border-radius:22px;
+    border:1px solid var(--line);
+    background:#FAFAFA;
+}
+
+.slb{
+    display:block;
+    margin-bottom:12px;
+    font-size:12px;
+    font-weight:700;
+    color:#8b95a5;
+}
+
+.sr{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    width:100%;
+}
+
+.sr input{
+    width:100%;
+    height:58px;
+    border-radius:16px;
+    border:1px solid #D6DAE2;
+    padding:0 18px;
+    font-size:16px;
+    color:#1f2937;
+    background:#fff;
+    transition:.2s;
+}
+
+.sr input:focus{
+    outline:none;
+    border-color:var(--purple);
+    box-shadow:0 0 0 4px rgba(123,77,255,.10);
+}
+
+.sr input::placeholder{
+    color:#9aa1ad;
+}
+
+.sr button{
+    width:100%;
+    height:40px;
+    border:none;
+    padding:0 28px;
+    border-radius:14px;
+    color:#fff;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    background:linear-gradient(135deg,#7B4DFF,#9B6CFF);
+    transition:.2s;
+}
+
+.sr button:hover{
+    transform:translateY(-1px);
+    box-shadow:0 7px 16px rgba(123,77,255,.2);
+}
+
+.sr button:active{
+    transform:scale(.98);
+}
+.recycle-hint{
+  display:block;
+  margin:10px 0 2px;
+  text-align:center;
+  font-size:12px;
+  font-weight:600;
+  color:#777;
+  line-height:1.5;
+}
+/* ==========================================================
+   EXAMPLE CHIPS
+========================================================== */
+
+.chips{
+    margin-top:20px;
+}
+
+.chip-lbl{
+    display:block;
+    margin-bottom:10px;
+    font-size:12px;
+    color:#8b95a5;
+    font-weight:700;
+}
+
+#ch{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.chip{
+    padding:7px 13px;
+    min-height:34px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:999px;
+    background:#F3F4F6;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:.2s;
+    font-size:13px;
+    line-height:1;
+    color:#374151;
+    white-space:nowrap;
+}
+
+.chip:hover{
+    background:#EEE9FF;
+    border-color:#DDD6FE;
+    color:var(--purple);
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:640px){
+    .search-card{
+        width:calc(100% - 10px);
+        margin:16px auto 26px;
+        padding:20px 20px;
+        border-radius:24px;
+    }
+
+    .lang-row{
+        gap:7px;
+        margin-bottom:18px;
+    }
+
+    .lb{
+        padding:8px 15px;
+        min-height:32px;
+        font-size:13px;
+    }
+
+    .search-heading{
+        margin-top:12px;
+        font-size:24px;
+    }
+
+    .search-desc{
+        margin-bottom:12px;
+        font-size:14px;
+        line-height:1.65;
+    }
+
+    .scard{
+        padding:14px;
+        border-radius:20px;
+    }
+
+    .sr input{
+        height:58px;
+        font-size:15px;
+    }
+
+    .sr button{
+        height:40px;
+        font-size:14px;
+    }
+
+    .chips{
+        margin-top:12px;
+    }
+
+    .chip{
+        padding:7px 12px;
+        min-height:28px;
+        font-size:12.5px;
+    }
+}
+
+
+    
+
+/* ==========================================================
+   RESULT AREA
+========================================================== */
+
+.result-area{
+
+    margin-top:20px;
+
+}
+
+.empty{
+
+    text-align:center;
+
+    padding:80px 20px;
+
+    color:#9CA3AF;
+
+}
+
+.empty .ico{
+
+    font-size:54px;
+
+    margin-bottom:16px;
+
+}
+
+.empty p{
+
+    font-size:15px;
+
+    line-height:1.7;
+
+}
+
+
+/* ==========================================================
+   RESULT CARD
+========================================================== */
+
+.rc{
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:24px;
+
+    margin-bottom:18px;
+
+    box-shadow:0 12px 28px rgba(15,23,42,.07);
+
+    animation:fadeUp .25s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+.rc.food{
+
+    border-left:6px solid #22C55E;
+
+}
+
+.rc.general{
+
+    border-left:6px solid #3B82F6;
+
+}
+
+.rc.special{
+
+    border-left:6px solid #F59E0B;
+
+}
+
+.rh{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+    margin-bottom:18px;
+
+}
+
+.rname{
+
+    font-size:24px;
+
+    font-weight:800;
+
+    color:#1F2937;
+
+    line-height:1.3;
+
+}
+
+.bdg{
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+.bdg.food{
+
+    background:#DCFCE7;
+
+    color:#166534;
+
+}
+
+.bdg.general{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}
+
+.bdg.special{
+
+    background:#FDE68A;
+
+    color:#92400E;
+
+}
+
+.btag{
+
+    text-align:right;
+
+    font-size:12px;
+
+    color:#9CA3AF;
+
+}
+
+.btag small{
+
+    display:block;
+
+    margin-top:4px;
+
+}
+
+.divider{
+
+    height:1px;
+
+    background:#ECECEC;
+
+    margin:18px 0;
+
+}
+
+.hlb{
+
+    font-size:12px;
+
+    color:#8B95A5;
+
+    font-weight:700;
+
+    margin-bottom:16px;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+}
+
+.steps{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.step{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:14px;
+
+    line-height:1.8;
+
+    color:#374151;
+
+}
+
+.sn{
+
+    width:30px;
+
+    height:30px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+}
+
+.food .sn{
+
+    background:#22C55E;
+
+}
+
+.general .sn{
+
+    background:#3B82F6;
+
+}
+
+.special .sn{
+
+    background:#F59E0B;
+
+}
+/* =========================
+   SEARCH NOT FOUND
+========================= */
+
+.nf{
+   width: 100%;
+   box-sizing: border-box;
+   margin:0 auto;
+   padding:28px 20px 18px;
+   text-align:center;
+   font-size:20px;
+   font-weight:700;
+   line-height:1.5;
+   color:#252936;
+   word-break: keep-all;
+}
+
+/* ==========================================
+   검색 결과 없음 - 외부 분리배출 사전 연계 영역
+   ========================================== */
+
+/* 상위 컨테이너 */
+.external-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 0 20px 0;
+}
+
+/* "음식물 유래 폐기물 DB에 없는 품목입니다." 문구 */
+.external-search p {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  margin-top: 15px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+/* "🔍 분리배출 품목사전에서 검색하기" 보라색 버튼 */
+.external-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 20px;
+  background-color: #7047eb; /* 테마 보라색 */
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 12px; /* 라운드 처리 */
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(112, 71, 235, 0.25);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* 버튼 마우스 호버 & 클릭 모션 */
+.external-btn:hover {
+  background-color: #5c35d2;
+  transform: translateY(-1px);
+}
+
+.external-btn:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================
+   FEEDBACK
+========================================================== */
+
+#feedbackBox{
+
+    display:none;
+
+    margin-top:24px;
+
+}
+
+.feedback-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:26px;
+
+    text-align:center;
+
+    box-shadow:0 12px 26px rgba(15,23,42,.07);
+
+}
+
+.feedback-card h3{
+
+    font-size:22px;
+
+    margin-bottom:12px;
+
+}
+
+.feedback-card p{
+
+    color:#6B7280;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+
+}
+
+#feedbackBtn{
+
+    width:100%;
+
+    height:54px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#FEE500;
+
+    color:#3C1E1E;
+
+    font-size:16px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+}
+
+
+/* ==========================================================
+   FINE BANNER
+========================================================== */
+
+.fine-banner{
+
+    margin-top:30px;
+
+    padding:18px 22px;
+
+    border-radius:22px;
+
+    background:linear-gradient(135deg,#6F48FF,#9B6CFF);
+
+    color:#fff;
+
+    text-align:center;
+
+    line-height:1.8;
+
+    box-shadow:0 12px 28px rgba(111,72,255,.25);
+
+}
+
+.fine-banner strong{
+
+    color:#FFD54F;
+
+}
+
+/* =====================================================
+   PART 3
+   Schedule / Link / Contact / Footer / Feedback
+===================================================== */
+
+/* ------------------------------
+   Schedule
+------------------------------ */
+
+.schedule-section{
+    margin-top:32px;
+    background:#fff;
+    border-radius:24px;
+    padding:26px;
+    box-shadow:0 10px 28px rgba(15,23,42,.06);
+}
+
+.schedule-title{
+    font-size:20px;
+    font-weight:800;
+    color:#374151;
+    margin-bottom:18px;
+}
+
+#schedule-link{
+    display:block;
+    text-decoration:none;
+}
+
+#schedule-image{
+    display:block;
+    width:100%;
+    border-radius:18px;
+    border:1px solid #E5E7EB;
+    transition:.25s;
+}
+
+#schedule-image:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 24px rgba(0,0,0,.08);
+}
+
+/* ------------------------------
+   Quick Links
+------------------------------ */
+
+.link-buttons{
+    margin-top:26px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.link-btn{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:58px;
+
+    padding:0 20px;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,#7B4DFF,#9D6BFF);
+
+    color:#fff;
+
+    font-weight:700;
+
+    font-size:15px;
+
+    text-decoration:none;
+
+    transition:.25s;
+}
+
+.link-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 28px rgba(123,77,255,.28);
+
+}
+
+/* ------------------------------
+   Contact
+------------------------------ */
+
+.contact-section{
+
+    margin-top:32px;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:26px;
+
+    box-shadow:0 10px 28px rgba(15,23,42,.06);
+
+}
+
+.contact-title{
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:#374151;
+
+    margin-bottom:22px;
+
+}
+
+.contact-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+
+    gap:18px;
+
+}
+
+.contact-item{
+
+    border:1px solid #E5E7EB;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    background:#FAFBFC;
+
+}
+
+.area{
+
+    font-size:15px;
+
+    line-height:1.9;
+
+    color:#374151;
+
+    font-weight:700;
+
+}
+
+.area span{
+
+    display:block;
+
+    margin-top:2px;
+
+    font-size:13px;
+
+    color:#6B7280;
+
+    font-weight:400;
+
+}
+
+.phone{
+
+    margin-top:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:50px;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#7B4DFF,#9D6BFF);
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.2s;
+
+}
+
+.phone:hover{
+
+    opacity:.93;
+
+}
+/* ------------------------------
+   Large Waste
+------------------------------ */
+
+.bulk-section{
+
+    margin-top:18px;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:20px;
+
+    box-shadow:0 10px 28px rgba(15,23,42,.06);
+
+}
+
+.bulk-title{
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:#374151;
+
+    margin-bottom:16px;
+
+}
+
+.bulk-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+
+    gap:12px;
+
+}
+
+.bulk-item{
+
+    border:1px solid #E5E7EB;
+
+    border-radius:20px;
+
+    padding:16px;
+
+    background:#FAFBFC;
+
+}
+
+.bulk-phone{
+
+    margin-top:12px;
+
+    min-height:50px;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#7B4DFF,#9D6BFF);
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:3px;
+
+}
+
+.bulk-phone span{
+
+    font-size:11px;
+
+    font-weight:500;
+
+    opacity:.9;
+
+}
+
+
+/* ------------------------------
+   Feedback
+------------------------------ */
+
+#feedbackBox{
+
+    display:none;
+
+    margin-top:28px;
+
+}
+
+.feedback-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:26px;
+
+    text-align:center;
+
+    box-shadow:0 8px 22px rgba(0,0,0,.06);
+
+}
+
+.feedback-card h3{
+
+    font-size:20px;
+
+    margin-bottom:14px;
+
+    color:#374151;
+
+}
+
+.feedback-card p{
+
+    color:#6B7280;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+
+}
+
+#feedbackBtn{
+
+    width:100%;
+
+    height:54px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#FEE500;
+
+    color:#3B1E1E;
+
+    font-weight:800;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+/* ------------------------------
+   Fine Banner
+------------------------------ */
+
+.fine-banner{
+
+    margin-top:28px;
+
+    padding:18px 22px;
+
+    border-radius:20px;
+
+    background:linear-gradient(135deg,#6F48FF,#9D6BFF);
+
+    color:white;
+
+    text-align:center;
+
+    line-height:1.8;
+
+    font-size:14px;
+
+}
+
+.fine-banner strong{
+
+    color:#FFE066;
+
+}
+
+/* ------------------------------
+   Footer
+------------------------------ */
+
+footer{
+
+    margin:42px 0 24px;
+
+    text-align:center;
+
+    color:#94A3B8;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+}
+
+/* ------------------------------
+   Responsive
+------------------------------ */
+
+@media (max-width:768px){
+
+    .contact-grid,
+    .bulk-grid{
+        grid-template-columns:1fr;
+}
+
+@media (max-width:640px){
+
+    .schedule-section,
+    .contact-section,
+    .bulk-section{
+        padding:20px;
+    }
+
+    .schedule-title,
+    .contact-title,
+    .bulk-title{
+        font-size:18px;
+    }
+
+    .link-btn{
+
+        min-height:54px;
+
+        font-size:14px;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .schedule-section,
+
+    .contact-section{
+
+        border-radius:20px;
+
+    }
+
+    .contact-item{
+
+        padding:18px;
+
+    }
+
+    .phone{
+
+        height:48px;
+
+        font-size:14px;
+
+    }
+
+    footer{
+
+        font-size:12px;
+
+    }
+
+}

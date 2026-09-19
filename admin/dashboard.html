@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>어디에버리지 Admin Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+
+        <h1>어디에버리지</h1>
+
+        <span>Admin Dashboard</span>
+
+    </div>
+
+    <div class="top-actions">
+
+       <button id="downloadCsv" class="csv-btn">
+            CSV 다운로드
+        </button>
+
+        <button class="logout-btn">
+            로그아웃
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <!-- KPI -->
+
+    <section class="kpi-grid">
+
+        <div class="card kpi-card">
+
+            <div class="kpi-icon">🔍</div>
+
+            <div class="kpi-info">
+
+                <h3>총 검색건수</h3>
+
+                <p id="totalSearch">-</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card kpi-card">
+
+            <div class="kpi-icon">📅</div>
+
+            <div class="kpi-info">
+
+                <h3>오늘 검색건수</h3>
+
+                <p id="todaySearch">-</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card kpi-card">
+
+            <div class="kpi-icon">✅</div>
+
+            <div class="kpi-info">
+
+                <h3>검색 성공률</h3>
+
+                <p id="successRate">-</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card kpi-card">
+
+            <div class="kpi-icon">📱</div>
+
+            <div class="kpi-info">
+
+                <h3>QR 유입률</h3>
+
+                <p id="qrRate">-</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 최근 7일 -->
+
+   <section class="section-card">
+
+    <h2>📈 최근 7일 검색량</h2>
+
+    <div class="chart-container">
+
+        <canvas id="weeklyChart"></canvas>
+
+    </div>
+
+    </section>
+ 
+
+
+    <!-- 2열 -->
+
+    <section class="two-column">
+
+        <div class="section-card">
+
+            <h2>🌍 언어별 검색 현황</h2>
+
+            <div id="languageStats"></div>
+
+        </div>
+
+
+        <div class="section-card">
+
+            <h2>🗂 검색 유형</h2>
+
+            <div id="categoryStats"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 2열 -->
+
+    <section class="two-column">
+
+        <div class="section-card">
+
+            <h2>🔥 TOP10 검색어</h2>
+
+            <div id="topKeywords"></div>
+
+        </div>
+
+
+        <div class="section-card">
+
+            <h2>⚠ 검색 실패 목록</h2>
+
+            <div id="failedSearches"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- 최근 검색 -->
+
+    <section class="section-card">
+
+        <h2>🕒 최근 검색 목록</h2>
+
+        <div id="recentSearches"></div>
+
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>    
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
+<script src="dashboard.js"></script>
+
+
+</body>
+
+</html>
