@@ -1,4 +1,4 @@
-const CACHE_NAME = 'donggu-waste-v260822';
+const CACHE_NAME = 'donggu-waste-v260919';
 
 const urlsToCache = [
   './',
@@ -6,6 +6,8 @@ const urlsToCache = [
   './style.css',
   './app.js',
   './data.js',
+  './districts.js',
+  './utils.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png'
@@ -15,6 +17,8 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
+
+  self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
@@ -27,6 +31,8 @@ self.addEventListener('activate', event => {
       )
     )
   );
+
+  self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
