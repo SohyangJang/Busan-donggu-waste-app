@@ -367,7 +367,7 @@ const DISTRICTS = {
     ],
     bulk: [
       { area: "강서구 전 지역", areaEn: "Gangseo-gu All Areas", tel: "0519727550", label: "부산광역시자원재활용센터",
-       url: "https://https://bbegi.com/", // 👈 URL 추가
+       url: "https://bbegi.com/", // 👈 URL 추가
         urlLabel: "온라인 수거 신청" // 👈 필요시 라벨 추가 (생략 가능, 생략시 기본값 '온라인 수거 신청'으로 동작)
        }
     ],
