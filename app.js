@@ -256,34 +256,7 @@ function setLang(k){
   updateScheduleImage();
   renderDistrictSections(curDistrict, k);
 
-  const fb = document.getElementById("feedbackBox");
-  if (fb) {
-    fb.style.display = "block";
-    fb.innerHTML = `
-      <div class="feedback">
-        <h3>${k==="ko" ? "원하는 품목이 없나요?" :
-             k==="en" ? "Can't find your item?" :
-             k==="zh" ? "找不到想查询的物品吗？" :
-             k==="vi" ? "Không tìm thấy vật cần tìm?" :
-             "Не нашли нужный предмет?"}</h3>
-        <p>
-          ${k==="ko" ? "검색되지 않는 품목이나 분류 오류를 알려주시면 검토 후 반영하겠습니다." :
-            k==="en" ? "Tell us about missing items or incorrect classifications." :
-            k==="zh" ? "如果有遗漏或分类错误，请告诉我们。" :
-            k==="vi" ? "Hãy cho chúng tôi biết nếu có mục bị thiếu hoặc phân loại sai." :
-            "Сообщите нам, если предмет отсутствует или классифицирован неверно."}
-        </p>
-        <button id="feedbackBtn">
-          💬 ${k==="ko" ? "카카오톡으로 제보하기" :
-               k==="en" ? "Report via KakaoTalk" :
-               k==="zh" ? "通过 KakaoTalk 举报" :
-               k==="vi" ? "Báo qua KakaoTalk" :
-               "Сообщить через KakaoTalk"}
-        </button>
-      </div>
-    `;
-    document.getElementById("feedbackBtn").onclick = () => showFeedback(document.getElementById("q").value.trim());
-  }
+ 
 }
 
 function buildChips(l){
@@ -310,6 +283,17 @@ function go(){
     return nt.includes(q) || q.includes(nt) || (nt.split(" ").some(w => w.length > 1 && q.includes(w)));
   }));
 
+// 검색어와 정확히 일치하는 품목을 먼저 표시
+  matches.sort((a, b) => {
+  const aExact = a.t.some(t => l.norm(t) === q);
+  const bExact = b.t.some(t => l.norm(t) === q);
+
+  if (aExact && !bExact) return -1;
+  if (!aExact && bExact) return 1;
+
+  return 0;
+});
+  
   let detectedType = "none";
   if (matches && matches.length > 0) {
     detectedType = matches[0].c; 
@@ -489,15 +473,6 @@ function hideFeedback(){
   if (fb) fb.innerHTML = "";
 }
 
-function openFeedback(){
-  const qVal = document.getElementById("q") ? document.getElementById("q").value.trim() : "";
-  showFeedback(qVal);
-} 
-
-function hideFeedback(){
-  const fb = document.getElementById("feedbackBox");
-  if (fb) fb.innerHTML = "";
-} 
 
 // 이벤트 리스너 및 초기화
 const lr = document.getElementById("lr");

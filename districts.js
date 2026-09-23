@@ -65,7 +65,7 @@ const DISTRICTS = {
     },
     contacts: [
       { area: "동광동, 보수동, 부평동, 영주1동, 영주2동 6개 공동주택(흥아거북맨션, 금호타운, 동아아파트, 동주파크맨션, 영주아파트 2동 가, 나, 다, 라, 3동 나, 라, 동남파크맨션)", areaEn: "Jung-gu 1 Areas", tel: "051244-0441", label: "(주)영진" },
-      { area: "중앙동, 대청동, 광복동, 남포동, 영주2동(6개 공동주택 제외)", areaEn: "Jung-gu 2 Areas", tel: "051242-8850", label: "(주)신아환경" }
+      { area: "중앙동, 대청동, 광복동, 남포동, 영주2동(6개 공동주택 제외)", areaEn: "Jung-gu 2 Areas", tel: "0512428850", label: "(주)신아환경" }
     ],
     bulk: [
       { area: "중구 전 지역", areaEn: "Jung-gu All Areas", url: "https://yeogiro24.co.kr/web/index.html", label: "여기로 사이트", urlLabel: "온라인 수거 신청"}
@@ -147,8 +147,8 @@ const DISTRICTS = {
     contacts: [
       { area: "부전동, 양정동, 부암1동", areaEn: "Busanjin-gu 1 Areas", tel: "0518091864", label: "화성환경(주)" },
       { area: "전포2동, 부암3동, 당감동, 개금3동", areaEn: "Busanjin-gu 2 Areas", tel: "0518958382", label: "(주)명신환경" },
-      { area: "가야동, 개금1동, 개금2동, 범천2동", areaEn: "Busanjin-gu ３ Areas", tel: "0518912359", label: "(주)남양산업" },
-      { area: "초읍동, 연지동, 전포1동, 범천1동", areaEn: "Busanjin-gu ４ Areas", tel: "0515080006", label: "(주)케이알씨산업" }
+      { area: "가야동, 개금1동, 개금2동, 범천2동", areaEn: "Busanjin-gu 3 Areas", tel: "0518912359", label: "(주)남양산업" },
+      { area: "초읍동, 연지동, 전포1동, 범천1동", areaEn: "Busanjin-gu 4 Areas", tel: "0515080006", label: "(주)케이알씨산업" }
     ],
     bulk: [
       { area: "부전1동, 연지동, 초읍동, 양정동, 부암동, 당감동", areaEn: "Busanjin-gu 1 Areas", 
@@ -217,7 +217,7 @@ const DISTRICTS = {
     ],
     bulk: [
       { area: "남구 전 지역", areaEn: "Nam-gu All Areas", tel: "0516317868", label: "경인산업"},
-      { area: "남구 전 지역", areaEn: "Nam-gu All Areas", tel: "0516284373", label: "고려산업"},
+      { area: "남구 전 지역", areaEn: "Nam-gu All Areas", tel: "0516284373", label: "고려산업"}
 
     ],
     foodstoreUrl: "",
@@ -324,12 +324,12 @@ const DISTRICTS = {
     govTitle: { ko: "부산 금정구 공식누리집", en: "Geumjeong-gu Official Website", zh: "釜山金井区官方网站", vi: "Trang web Geumjeong-gu", ru: "Официальный сайт Кымджон-гу" },
     govSub:   { ko: "생활폐기물 배출안내 바로가기 →", en: "Waste Disposal Guide →", zh: "垃圾分类指南 →", vi: "Hướng dẫn xử lý rác →", ru: "Руководство по утилизации →" },
     scheduleImages: {
-      ko: "schedule-guemjeong-ko.jpg",
-      en: "schedule-guemjeong-en.jpg",
-      zh: "schedule-guemjeong-zh.jpg",
-      vi: "schedule-.jpg",
-      ru: "schedule-.jpg"
-     },
+      ko: "schedule-geumjeong-ko.jpg",
+      en: "schedule-geumjeong-en.jpg",
+      zh: "schedule-geumjeong-zh.jpg",
+      vi: "schedule-geumjeong-ko.jpg",
+      ru: "schedule-geumjeong-ko.jpg"
+  },
     contacts: [
       { area: "청룡노포동, 남산동, 구서2동", areaEn: "Geumjeong-gu 1 Areas", tel: "0515828572", label: "부광자원(주)" },
       { area: "부곡1,4동, 장전동, 구서1동, 금성동", areaEn: "Geumjeong-gu 2 Areas", tel: "0515142212", label: "(주)세명기업사" },
@@ -357,9 +357,9 @@ const DISTRICTS = {
     scheduleImages: {
       ko: "schedule-gangseo-ko.jpg",
       en: "schedule-gangseo-en.jpg",
-      zh: "schedule-.jpg",
-      vi: "schedule-.jpg",
-      ru: "schedule-.jpg"
+      zh: "schedule-gangseo-en.jpg",
+      vi: "schedule-gangseo-en.jpg",
+      ru: "schedule-gangseo-en.jpg"
      },
     contacts: [
       { area: "대저1~2동, 강동동, 가락동", areaEn: "Gangseo-gu 1 Areas", tel: "0519737787", label: "(주)대원공영" },
@@ -453,7 +453,7 @@ const DISTRICTS = {
      },
     contacts: [
       { area: "삼락동, 모라동, 덕포동, 괘법동", areaEn: "Sasang-gu 1 Areas", tel: "0513018201", label: "청신산업(주)" },
-      { area: "감전동, 주례동, 학장동, 엄궁동", areaEn: "Sasang-gu 2l Areas", tel: "0513038260", label: "대성기업(주)" },
+      { area: "감전동, 주례동, 학장동, 엄궁동", areaEn: "Sasang-gu 2 Areas", tel: "0513038260", label: "대성기업(주)" },
     ],
     bulk: [
       { area: "사상구 전 지역", areaEn: "Sasang-gu All Areas", tel: "0513244600", label: "유한회사 우리환경",
