@@ -13,6 +13,16 @@ function nRu(s){return String(s||"").toLowerCase().replace(/ё/g,"е").replace(/
 let cur = "ko";
 let curDistrict = "donggu"; // 현재 선택된 구군
 
+// 사용자 입력을 innerHTML 에 넣기 전에 반드시 이스케이프한다 (XSS 방지)
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#39;");
+}
+
 const params = new URLSearchParams(window.location.search);
 const source = params.get("source") || "web";
 const districtParam = params.get("district");
@@ -30,7 +40,7 @@ async function saveSearchLog(searchWord, resultType = 'general', lang = 'ko') {
       .from('search_logs')
       .insert([
         { 
-          keyword: searchWord, 
+          keyword: searchWord.trim().slice(0, 100), 
           result_type: resultType, 
           language: lang, 
           source: source 
@@ -302,7 +312,7 @@ function go(){
   saveSearchLog(raw, detectedType, cur);
 
   if (!matches.length) {
-    let html = `<div class="nf">${l.ui.nf(raw)}</div>`;
+    let html = `<div class="nf">${l.ui.nf(escapeHtml(raw))}</div>`;
     if (cur === "ko") {
       const url = "https://xn--oy2b29bd3a601b.kr/front/dischargeMethod/dictionary.do?niIdx=&pageIndex=1&searchCnd=1&searchWrd=" + encodeURIComponent(raw);
       html += `
@@ -423,7 +433,7 @@ function showFeedback(keyword = ""){
       desc: "Hãy cho chúng tôi biết nếu bị thiếu sản phẩm<br>hoặc kết quả tìm kiếm bị lỗi.",
       btn: "💬 Báo qua KakaoTalk",
       template: (k) => `[Ý kiến đóng góp]\n\nTừ khóa: ${k}\n\nNội dung:\n□ Không tìm thấy\n□ Phân loại sai\n□ Lỗi dịch\n□ Khác\n`,
-      copySuccess: "Đã sao chép từ khóa.\n\nVui lòng dán vào KakaoTalk 및 gửi.",
+      copySuccess: "Đã sao chép từ khóa.\n\nVui lòng dán vào KakaoTalk và gửi.",
       copyFail: "Mở KakaoTalk.\n\nVui lòng tự nhập từ khóa để báo cáo."
     },
     ru: {

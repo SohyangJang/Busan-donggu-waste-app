@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "krds-uiux": "^1.1.0"
+  },
+  "devDependencies": {
+    "supabase": "^2.118.0"
   }
 }

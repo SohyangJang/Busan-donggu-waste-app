@@ -1,4 +1,4 @@
- /* =========================
+/* =========================
    어디에버리지 Admin Login
 ========================= */
 
@@ -23,57 +23,76 @@ body {
     max-width: 380px;
     background: #ffffff;
     border-radius: 20px;
-    padding: 35px 25px;
+    padding: 40px 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     text-align: center;
 }
 
+.login-logo {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
 .login-box h1 {
     color: #7B4DFF;
-    font-size: 30px;
+    font-size: 28px;
     margin-bottom: 8px;
 }
 
 .subtitle {
     color: #777;
     font-size: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
-input {
+/* Google 로그인 버튼 */
+.google-btn {
     width: 100%;
-    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
     border: 2px solid #e5e7eb;
     border-radius: 12px;
-    font-size: 16px;
-    margin-bottom: 16px;
-    outline: none;
-    transition: .2s;
-}
-
-input:focus {
-    border-color: #7B4DFF;
-}
-
-button {
-    width: 100%;
-    border: none;
-    border-radius: 12px;
-    padding: 14px;
-    background: #7B4DFF;
-    color: white;
-    font-size: 16px;
+    padding: 14px 20px;
+    background: #ffffff;
+    color: #333;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: .2s;
 }
 
-button:hover {
-    background: #6940e6;
+.google-btn:hover {
+    border-color: #7B4DFF;
+    background: #faf8ff;
+    color: #7B4DFF;
+}
+
+.google-btn:active {
+    transform: scale(0.98);
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* 로딩 상태 */
+.google-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 #message {
-    margin-top: 16px;
-    font-size: 14px;
+    margin-top: 20px;
+    font-size: 13px;
     color: #e53935;
+    line-height: 1.5;
+}
+
+#message.info {
+    color: #7B4DFF;
 }
