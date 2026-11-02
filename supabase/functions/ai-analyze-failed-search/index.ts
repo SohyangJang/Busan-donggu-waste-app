@@ -199,6 +199,11 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // 모델명은 Supabase Secret(GEMINI_MODEL)로 교체 가능. 없거나 형식이 이상하면 기본값 사용.
+    const modelEnv = (Deno.env.get("GEMINI_MODEL") ?? "").trim();
+    const GEMINI_MODEL = /^[A-Za-z0-9._-]{1,80}$/.test(modelEnv)
+      ? modelEnv
+      : "gemini-3.5-flash-lite";
     const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
 
     if (!GEMINI_API_KEY) {
@@ -298,7 +303,7 @@ ${existingContext || "(제공된 기존 데이터 없음)"}
 `;
 
     const geminiResponse = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
+      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`,
       {
         method: "POST",
         headers: {
