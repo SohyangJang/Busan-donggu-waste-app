@@ -281,6 +281,15 @@ function buildChips(l){
   });
 }
 
+// 유사 결과 안내 문구 (정확히 일치하지 않는 품목을 정확 일치처럼 보이지 않게 함)
+const SIMILAR_TEXT = {
+  ko:{banner:q=>`"${q}"와(과) 정확히 일치하는 품목이 없어 비슷한 품목을 보여드려요. 품목에 따라 배출 방법이 다를 수 있으니 확인해 주세요.`, tag:"유사 품목"},
+  en:{banner:q=>`No exact match for "${q}". Showing similar items; the disposal method may differ, so please check.`, tag:"Similar item"},
+  zh:{banner:q=>`没有与"${q}"完全匹配的项目，以下为相似项目。处理方法可能不同，请确认。`, tag:"相似项目"},
+  vi:{banner:q=>`Không có mục khớp chính xác với "${q}". Dưới đây là các mục tương tự, cách vứt có thể khác nhau nên hãy kiểm tra.`, tag:"Mục tương tự"},
+  ru:{banner:q=>`Точного совпадения для "${q}" нет. Показаны похожие позиции; способ утилизации может отличаться, проверьте.`, tag:"Похожая позиция"}
+};
+
 function go(){
   const raw = document.getElementById("q").value.trim();
   const l = LANGS[cur];
@@ -288,22 +297,25 @@ function go(){
   if (!q) return;
 
   const area = document.getElementById("ra");
-  const matches = l.db.filter(item => item.t.some(t => {
+  const qc = q.replace(/\s+/g, "");
+  const isExactTerm = t => l.norm(t).replace(/\s+/g, "") === qc;
+  const isMatchTerm = t => {
     const nt = l.norm(t);
-    return nt.includes(q) || q.includes(nt) || (nt.split(" ").some(w => w.length > 1 && q.includes(w)));
-  }));
+    return nt.includes(q) || q.includes(nt) || (nt.split(" ").some(w => w.length > 1 && q.includes(w))) || isExactTerm(t);
+  };
+  const matches = l.db.filter(item => item.t.some(isMatchTerm));
 
 // 검색어와 정확히 일치하는 품목을 먼저 표시
   matches.sort((a, b) => {
-  const aExact = a.t.some(t => l.norm(t) === q);
-  const bExact = b.t.some(t => l.norm(t) === q);
+  const aExact = a.t.some(isExactTerm);
+  const bExact = b.t.some(isExactTerm);
 
   if (aExact && !bExact) return -1;
   if (!aExact && bExact) return 1;
 
   return 0;
 });
-  
+
   let detectedType = "none";
   if (matches && matches.length > 0) {
     detectedType = matches[0].c; 
@@ -327,10 +339,18 @@ function go(){
     return;
   }
 
-  area.innerHTML = matches.map(m => {
+  const sim = SIMILAR_TEXT[cur] || SIMILAR_TEXT.ko;
+  const hasExact = matches.some(m => m.t.some(isExactTerm));
+  const banner = hasExact ? "" : `<div class="sim-banner">${escapeHtml(sim.banner(raw))}</div>`;
+
+  area.innerHTML = banner + matches.map(m => {
     const bl = l.ui.bl[m.c];
     const ko = m.c === "food" ? "음식물쓰레기전용용기" : m.c === "general" ? "종량제봉투" : "";
+    const isExact = m.t.some(isExactTerm);
+    const simTerm = isExact ? "" : (m.t.find(isMatchTerm) || "");
+    const simTag = isExact ? "" : `<div class="sim-tag">${escapeHtml(sim.tag)}${simTerm ? ": " + escapeHtml(simTerm) : ""}</div>`;
     return `<div class="rc ${m.c}">
+      ${simTag}
       <div class="rh">
         <span class="bdg ${m.c}">${l.ui.tl[m.c]}</span>
         ${bl ? `<div class="btag">${bl}<small>${ko}</small></div>` : ""}
