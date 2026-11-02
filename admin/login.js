@@ -6,7 +6,7 @@ const SUPABASE_URL = "https://ootgfnycumxevuilhmwl.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vdGdmbnljdW14ZXZ1aWxobXdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyMzAyMDIsImV4cCI6MjA5OTgwNjIwMn0.bk5abiU_GzTYYCx1Vww5NOnRc85AxdyaTj9IAZyVE5w";
 
 // ✅ 접근을 허용할 구글 이메일 목록 (여기에 본인 이메일을 추가하세요)
-const ALLOWED_EMAILS = ["yabaezzae@gmail.com"];
+const ALLOWED_EMAILS = ["yabaezzae@gmail.com", "judge.demo@example.com"];
 
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -48,6 +48,39 @@ googleBtn.addEventListener("click", async () => {
         resetBtn();
     }
 });
+
+/* ----------------------------------------------------------
+   심사위원 이메일·비밀번호 로그인 (구글 로그인과 별개로 동작)
+   - 계정은 Supabase Auth에서 직접 만든 읽기 전용 임시 계정입니다.
+   - 접근 가능 여부는 ALLOWED_EMAILS와 DB 정책(RLS)이 함께 결정합니다.
+---------------------------------------------------------- */
+const judgeForm  = document.getElementById("judgeForm");
+const judgeBtn   = document.getElementById("judgeBtn");
+
+if (judgeForm) {
+    judgeForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email    = document.getElementById("judgeEmail").value.trim().toLowerCase();
+        const password = document.getElementById("judgePw").value;
+
+        judgeBtn.disabled = true;
+        judgeBtn.textContent = "로그인 중...";
+        messageEl.textContent = "";
+
+        const { data, error } = await db.auth.signInWithPassword({ email, password });
+
+        if (error || !data?.user) {
+            showError("이메일 또는 비밀번호가 올바르지 않습니다.");
+            judgeBtn.disabled = false;
+            judgeBtn.textContent = "로그인";
+            return;
+        }
+
+        await checkAndRedirect(data.user.email);
+        judgeBtn.disabled = false;
+        judgeBtn.textContent = "로그인";
+    });
+}
 
 /* ----------------------------------------------------------
    이메일 허용 여부 확인 후 리다이렉트

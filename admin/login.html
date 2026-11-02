@@ -25,6 +25,17 @@
         Google 계정으로 로그인
     </button>
 
+    <div class="or-divider"><span>또는</span></div>
+
+    <details id="judgeBox" class="judge-box">
+        <summary>심사위원 로그인 (이메일)</summary>
+        <form id="judgeForm" autocomplete="off">
+            <input id="judgeEmail" type="email" placeholder="이메일" autocomplete="username" required>
+            <input id="judgePw" type="password" placeholder="비밀번호" autocomplete="current-password" required>
+            <button id="judgeBtn" class="judge-btn" type="submit">로그인</button>
+        </form>
+    </details>
+
     <p id="message"></p>
 
 </div>

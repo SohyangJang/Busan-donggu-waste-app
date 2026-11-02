@@ -37,7 +37,7 @@ function escapeHtml(value){
    ========================================================== */
 
 // ✅ 접근을 허용할 구글 이메일 목록 (login.js와 동일하게 유지하세요)
-const ALLOWED_EMAILS = ["yabaezzae@gmail.com"];
+const ALLOWED_EMAILS = ["yabaezzae@gmail.com", "judge.demo@example.com"];
 
 // OAuth 콜백 직후에도 세션을 안정적으로 감지하기 위해
 // INITIAL_SESSION 이벤트를 기다립니다.

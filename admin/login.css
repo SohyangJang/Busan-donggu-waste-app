@@ -96,3 +96,64 @@ body {
 #message.info {
     color: #7B4DFF;
 }
+
+
+/* 심사위원 이메일 로그인 */
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 14px;
+    color: #9ca3af;
+    font-size: 12px;
+}
+.or-divider::before,
+.or-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.judge-box {
+    text-align: left;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px 14px;
+}
+.judge-box summary {
+    cursor: pointer;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+}
+.judge-box[open] summary {
+    margin-bottom: 12px;
+}
+.judge-box input {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 12px 14px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 14px;
+}
+.judge-box input:focus {
+    outline: none;
+    border-color: #7B4DFF;
+}
+.judge-btn {
+    width: 100%;
+    padding: 12px;
+    border: 0;
+    border-radius: 10px;
+    background: #7B4DFF;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.judge-btn:disabled {
+    opacity: .7;
+    cursor: not-allowed;
+}
