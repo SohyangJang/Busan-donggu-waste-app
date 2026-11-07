@@ -38,7 +38,8 @@ ko:{name:"한국어",norm:nKo,
     {t:["밀가루","상한 밀가루","유통기한 지난 밀가루","부침가루","튀김가루"],"c":"food","d":"밀가루 및 가공 곡물가루 (부침가루·튀김가루 포함)","s":["음식물쓰레기 전용용기에 넣어 배출"]}, 
     {t:["고추가루","고춧가루","가루고추"],c:"food",d:"고추를 말려서 빻은 양념류",s:["음식물쓰레기 전용봉투에 배출",]},
     {t: ["멸치똥","멸치내장","디포리내장"], c: "food",  d: "멸치 등 건어물의 내장 및 똥",  s: [ "음식물쓰레기로 배출",
-  "물기를 최대한 제거하고 전용 용기에 담아 배출"]}
+  "물기를 최대한 제거하고 전용 용기에 담아 배출"]},
+    {t:["두부", "순두부", "연두부"],c:"food",d:"두부 및 콩가공품류",s:["물기를 최대한 제거한 후 음식물쓰레기 전용용기에 배출", "덩어리가 큰 경우 잘게 부수어 배출"]}
   ]
 },
     
@@ -79,7 +80,8 @@ en:{name:"English",norm:nEn,
     {t:["rice","old rice","stale rice","uncooked rice","white rice","brown rice"],c:"food",d:"Rice,old rice, uncooked rice",s:["Dispose of in a food waste container."]},
     {t:["potato","sprouted potato","sweet potato","spoiled sweet potato"],c:"food",d:"Potato,sprouted potato,sweet potato,spoiled sweet potato",s:["food waste bag (음식물쓰레기 전용용기)"]},
     {t:["Flour", "Spoiled flour", "Expired flour", "Pancake mix", "Frying mix"],c: "food",d: "Flour and processed grain flour (including pancake mix and frying mix)",s: ["food waste bag (음식물쓰레기 전용용기)"]},
-    {t: ["anchovy entrails","dried fish guts"], c: "food",  d: "Entrails and internal organs of dried anchovies",  s: ["Dispose of as food waste",  "Remove moisture as much as possible before putting in the designated food waste bin"]}
+    {t: ["anchovy entrails","dried fish guts"], c: "food",  d: "Entrails and internal organs of dried anchovies",  s: ["Dispose of as food waste",  "Remove moisture as much as possible before putting in the designated food waste bin"]},
+    {t:["tofu", "soft tofu"],c:"food",d:"Tofu and processed soy products",s:["Remove as much moisture as possible and dispose of in the food waste bin", "Break into smaller pieces if large"]}
   ]
 },
 
@@ -121,7 +123,8 @@ zh:{name:"中文",norm:nZh,
     {t:["大米","陈米","旧米","生米","白米","糙米"],c:"food",d:"大米, 陈米,旧米,生米,白米,糙米",s:["请放入厨余垃圾专用容器。"]},
     {t:["土豆","发芽土豆","红薯","变质红薯"],c:"food",d:"土豆,发芽土豆,红薯,变质红薯",s:["请放入厨余垃圾专用袋。"]},
     {t:["面粉", "变质面粉", "过期面粉", "煎饼粉", "炸粉"],c: "food",d: "面粉及加工谷物粉（包括煎饼粉、炸粉",s: ["请放入厨余垃圾专用袋。"]},
-    {t: ["鳀鱼内脏","鱼肠"], c: "food",  d: "鳀鱼等干鱼类的内脏",  s: ["作为厨余垃圾排放", "尽量沥干水分后投入专用垃圾桶"]}
+    {t: ["鳀鱼内脏","鱼肠"], c: "food",  d: "鳀鱼等干鱼类的内脏",  s: ["作为厨余垃圾排放", "尽量沥干水分后投入专用垃圾桶"]},
+    {t:["豆腐", "嫩豆腐"],c:"food",d:"豆腐及豆制品",s:["尽量沥干水分后投入厨余垃圾专用容器", "块头较大时请切碎后排放"]}
   ]
 },
 
@@ -163,7 +166,8 @@ vi:{name:"Tiếng Việt",norm:nVi,
     {t:["khoai tây","khoai tây mọc mầm","khoai lang","khoai lang hỏng"],c:"food",d:"Khoai tây,khoai tây mọc mầm,khoai lang,khoai lang hỏng",s:["Bỏ vào túi đựng rác thực phẩm."]},
     {t:["Bột mì", "Bột mì bị hỏng", "Bột mì hết hạn", "Bột bánh xèo", "Bột chiên giòn"],c: "food",d: "Bột mì và bột ngũ cốc chế biến (bao gồm bột bánh xèo và bột chiên giòn)", s: ["Bỏ vào túi đựng rác thực phẩm."]},
     {t: ["nội tạng cá cơm", "ruột cá cơm khô"], c: "food",  d: "Nội tạng của cá khô như cá cơm",  s: [ "Phân loại là rác thải thực phẩm",
-  "Làm ráo nước tối đa trước khi cho vào thùng đựng rác thực phẩm chuyên dụng"]}
+  "Làm ráo nước tối đa trước khi cho vào thùng đựng rác thực phẩm chuyên dụng"]},
+    {t:["đậu phụ", "đậu hũ"],c:"food",d:"Đậu phụ và các sản phẩm từ đậu nành",s:["Loại bỏ nước càng nhiều càng tốt rồi bỏ vào thùng rác thực phẩm", "Cắt nhỏ nếu miếng quá lớn"]}
   ]
 },
 
@@ -208,7 +212,8 @@ ru:{name:"Русский",norm:nRu,
 {t:["картофель","проросший картофель","батат","испорченный батат"],c:"food",d:"Картофель,проросший картофель,батат,испорченный батат",s:["Выбрасывать в пакет для пищевых отходов."]},    
 {t:["Мука", "Испорченная мука", "Просроченная мука", "Мука для блинов", "Мука для панировки"],c: "food",d: "Мука и переработанная злаковая мука (включая муку для блинов и панировки)",s:["Выбрасывать в пакет для пищевых отходов."]},
 {t: ["потроха анчоуса","внутренности сушеной рыбы"], c: "food",  d: "Внутренности и кишки сушеных анчоусов",  s: [
-  "Утилизировать как пищевые отходы", "Максимально удалить влагу перед помещением в специальный контейнер для пищевых отходов"]}
+  "Утилизировать как пищевые отходы", "Максимально удалить влагу перед помещением в специальный контейнер для пищевых отходов"]},
+    {t:["тофу", "соевый творог"],c:"food",d:"Тофу и соевые продукты",s:["Максимально отжать от влаги и выбросить в контейнер для пищевых отходов", "Крупные куски измельчить перед утилизацией"]}
 ]
    }
 };
