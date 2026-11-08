@@ -37,6 +37,43 @@ function escapeHtml(value){
    ========================================================== */
 
 // ✅ 접근을 허용할 구글 이메일 목록 (login.js와 동일하게 유지하세요)
+/* ------------------------------------------------------
+   품목 DB(data.js) 대조
+   시민 화면(app.js go())과 같은 매칭 규칙으로 실패 검색어를 현재 DB와 비교한다.
+   - exact  : 검색어와 정확히 일치하는 품목 → "추가 완료"
+   - similar: 부분 일치(유사) 품목 → AI 분석 때 참고 자료로 전달
+   ------------------------------------------------------ */
+function findDbMatches(keyword, lang){
+    const empty = { exact: [], similar: [] };
+    if (typeof LANGS === "undefined") return empty;
+    const l = LANGS[lang] || LANGS.ko;
+    if (!l || !Array.isArray(l.db)) return empty;
+    const q = l.norm(String(keyword || ""));
+    if (!q) return empty;
+    const qc = q.replace(/\s+/g, "");
+    const isExactTerm = t => l.norm(t).replace(/\s+/g, "") === qc;
+    const isMatchTerm = t => {
+        const nt = l.norm(t);
+        if (!nt) return false;
+        return nt.includes(q) || q.includes(nt) ||
+            nt.split(" ").some(w => w.length > 1 && q.includes(w)) || isExactTerm(t);
+    };
+    const exact = l.db.filter(item => item.t.some(isExactTerm));
+    const similar = l.db.filter(item => !exact.includes(item) && item.t.some(isMatchTerm));
+    return { exact, similar };
+}
+
+function buildExistingContext(matches){
+    const list = [
+        ...matches.exact.map(item => ["정확히 일치", item]),
+        ...matches.similar.map(item => ["유사", item]),
+    ].slice(0, 8);
+    if (!list.length) return "";
+    return list.map(([kind, item]) =>
+        `[${kind}] ` + JSON.stringify({ t: item.t, c: item.c, d: item.d, s: item.s })
+    ).join("\n");
+}
+
 const ALLOWED_EMAILS = ["yabaezzae@gmail.com", "judge.demo@example.com"];
 
 // OAuth 콜백 직후에도 세션을 안정적으로 감지하기 위해
@@ -762,6 +799,62 @@ async function loadTopKeywords(){
    18. FAILED SEARCH
    ========================================================== */
 
+/* ------------------------------------------------------
+   저장된 AI 판단 결과(ai_analysis_results) 불러오기
+   같은 검색어(언어 + 정규화 기준)마다 모델별 최신 판단만 남긴다.
+   표가 아직 없거나 읽을 수 없으면 표시 없이 넘어간다.
+   ------------------------------------------------------ */
+function failedKey(keyword, lang){
+    const l = (typeof LANGS !== "undefined" && LANGS[lang]) ? LANGS[lang] : null;
+    const raw = String(keyword || "");
+    return lang + "|" + (l ? l.norm(raw) : raw.trim().toLowerCase()).replace(/\s+/g, "");
+}
+
+async function loadAiVerdicts(){
+    const verdicts = new Map();
+    try{
+        const { data, error } = await db
+            .from("ai_analysis_results")
+            .select("keyword,language,provider,category,need_registration,created_at")
+            .order("created_at", { ascending:false })
+            .limit(1000);
+        if(error) throw error;
+        (data || []).forEach(function(row){
+            const key = failedKey(row.keyword, row.language || "ko");
+            if(!verdicts.has(key)) verdicts.set(key, {});
+            const byProvider = verdicts.get(key);
+            if(!byProvider[row.provider]) byProvider[row.provider] = row;   // 최신 것만
+        });
+    }catch(err){
+        console.warn("AI 판단 결과를 불러오지 못했습니다(표시 생략):", err && err.message);
+    }
+    return verdicts;
+}
+
+// 두 모델(있는 것만) 모두 일반쓰레기 → 등록 대상 아님 / 판단이 엇갈림 → 검토 필요
+function verdictBadge(byProvider){
+    const rows = Object.values(byProvider || {});
+    if(!rows.length) return "";
+    const cats = rows.map(r => r.category);
+    const pill = (text, bg, color, title) => `<span class="verdict-badge" title="${title}" style="
+                margin-left:6px;
+                padding:2px 8px;
+                border-radius:999px;
+                background:${bg};
+                color:${color};
+                font-size:12px;
+                font-weight:600;
+                white-space:nowrap;
+           ">${text}</span>`;
+    if(cats.every(c => c === "general")){
+        return pill("등록 대상 아님", "#eeeef1", "#6b6b76", "AI가 음식물 유래 폐기물이 아니라고 판단했어요");
+    }
+    if(new Set(cats).size > 1){
+        return pill("검토 필요", "#fff1e0", "#b25e00", "두 모델의 판단이 서로 달라요");
+    }
+    return "";
+}
+
 async function loadFailedSearches(){
 
     const area =
@@ -775,11 +868,17 @@ async function loadFailedSearches(){
        ------------------------------------------------------ */
 
     window.analyzeFailedSearch =
-    async function(keyword, resultArea){
+    async function(keyword, resultArea, lang, providerOverride){
+
+        // 현재 품목 DB와 대조한 결과(정확히 일치·유사 품목)를 AI에 함께 전달
+        const dbMatches = findDbMatches(keyword, lang || "ko");
+        const existingContext = buildExistingContext(dbMatches);
 
         // 선택한 분석 모델 (Gemini / Solar)
         const provider =
-            document.querySelector('input[name="aiModel"]:checked')?.value || "gemini";
+            providerOverride ||
+            document.querySelector('input[name="aiModel"]:checked')?.value ||
+            "gemini";
         const providerLabel =
             provider === "solar" ? "Solar" : "Gemini";
 
@@ -803,7 +902,8 @@ async function loadFailedSearches(){
                     },
                     body:JSON.stringify({
                         keyword:keyword,
-                        existingContext:"",
+                        existingContext:existingContext,
+                        language:lang || "ko",
                         provider:provider
                     })
                 }
@@ -812,9 +912,15 @@ async function loadFailedSearches(){
 
             if(!response.ok){
 
+                let serverMessage = "";
+                try{
+                    serverMessage = (await response.json()).error || "";
+                }catch(e){}
+
                 throw new Error(
                     "AI 분석 요청 실패: " +
-                    response.status
+                    response.status +
+                    (serverMessage ? " · " + serverMessage : "")
                 );
 
             }
@@ -874,6 +980,13 @@ async function loadFailedSearches(){
                     ">
                         ${escapeHtml((result.provider === "solar" ? "Solar" : "Gemini") + (result.model ? " · " + result.model : ""))}
                     </span>
+                </div>
+                <div style="
+                    margin-bottom:8px;
+                    color:#666;
+                    font-size:12px;
+                ">
+                    기존 DB 대조: 정확히 일치 ${dbMatches.exact.length}건 · 유사 ${dbMatches.similar.length}건
                 </div>
             `;
 
@@ -981,6 +1094,11 @@ async function loadFailedSearches(){
                언어별 DB 코드 생성 함수
                ------------------------------------------------ */
 
+            // data.js 에 그대로 붙여 넣는 한 줄 형식 (끝에 쉼표 포함)
+            function makeDbLine(item){
+                return `{t:${JSON.stringify(item.t || [])},c:${JSON.stringify(item.c || "food")},d:${JSON.stringify(item.d || "")},s:${JSON.stringify(item.s || [])}},`;
+            }
+
             function makeDbCode(item){
 
                 return `{t: ${JSON.stringify(item.t || [], null, 2)}, c: ${JSON.stringify(item.c || "food")},  d: ${JSON.stringify(item.d || "")},  s: ${JSON.stringify(item.s || [], null, 2)}}`;
@@ -1051,7 +1169,8 @@ languages.forEach(function(lang){
     const copyIndex =
         copyCodeList.length;
 
-    copyCodeList.push(dbCode);
+    // 화면에는 보기 좋게(dbCode), 복사는 data.js 한 줄 형식으로
+    copyCodeList.push(makeDbLine(item));
 
 
     html += `
@@ -1113,12 +1232,9 @@ languages.forEach(function(lang){
    ------------------------------------------------ */
 
 const allDataCode =
-`{ko:${JSON.stringify(candidateData.ko)},
-  en:${JSON.stringify(candidateData.en)},
-  zh:${JSON.stringify(candidateData.zh)},
-  vi:${JSON.stringify(candidateData.vi)},
-  ru:${JSON.stringify(candidateData.ru)}}`;
-
+    languages.map(function(lang){
+        return "// " + lang[0] + " (" + lang[1] + ")\n" + makeDbLine(candidateData[lang[0]]);
+    }).join("\n");
 
 const allDataCopyIndex =
     copyCodeList.length;
@@ -1261,7 +1377,10 @@ if(allCopyButton){
                     color:#d33;
                     font-size:13px;
                 ">
-                    AI 분석에 실패했습니다.
+                    AI 분석에 실패했습니다 (${escapeHtml(providerLabel)}).
+                    <div style="margin-top:4px;color:#999;font-size:12px;">
+                        ${escapeHtml(err && err.message ? err.message : "")}
+                    </div>
                 </div>
             `;
 
@@ -1273,6 +1392,84 @@ if(allCopyButton){
     /* ------------------------------------------------------
        AI DB 코드 복사
        ------------------------------------------------------ */
+
+    /* ------------------------------------------------------
+       AI 분석 비교 팝업
+       같은 검색어를 Gemini 와 Solar 에 동시에 보내고
+       결과를 좌우(좁은 화면은 위아래) 두 칸에 나란히 보여준다.
+       ------------------------------------------------------ */
+
+    function aiModalEsc(e){
+        if(e.key === "Escape") closeAiCompareModal();
+    }
+
+    window.closeAiCompareModal =
+    function(){
+        const overlay = document.getElementById("aiCompareModal");
+        if(overlay) overlay.remove();
+        document.body.classList.remove("ai-modal-open");
+        document.removeEventListener("keydown", aiModalEsc);
+    };
+
+    window.openAiCompareModal =
+    function(keyword, lang){
+
+        closeAiCompareModal();
+
+        const matches = findDbMatches(keyword, lang || "ko");
+
+        const overlay = document.createElement("div");
+        overlay.id = "aiCompareModal";
+        overlay.className = "ai-modal-overlay";
+        overlay.innerHTML = `
+            <div class="ai-modal" role="dialog" aria-modal="true" aria-labelledby="aiModalTitle">
+                <div class="ai-modal-head">
+                    <div>
+                        <div class="ai-modal-title" id="aiModalTitle">
+                            🤖 AI 분석 비교 · ‘${escapeHtml(keyword)}’
+                        </div>
+                        <div class="ai-modal-sub">
+                            두 모델에 같은 질문을 보냈습니다 ·
+                            기존 DB 대조: 정확히 일치 ${matches.exact.length}건 · 유사 ${matches.similar.length}건
+                        </div>
+                    </div>
+                    <button type="button" class="ai-modal-close" aria-label="닫기">✕</button>
+                </div>
+                <div class="ai-modal-body">
+                    <section class="ai-modal-col">
+                        <div class="ai-col-head gemini">Gemini</div>
+                        <div class="ai-col-result" id="aiCompareGemini"></div>
+                    </section>
+                    <section class="ai-modal-col">
+                        <div class="ai-col-head solar">Solar (Upstage)</div>
+                        <div class="ai-col-result" id="aiCompareSolar"></div>
+                    </section>
+                </div>
+                <div class="ai-modal-foot">
+                    ⚠️ AI 결과는 초안입니다. 두 결과를 비교해 담당자가 확인한 내용만 data.js에 반영하세요.
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(overlay);
+        document.body.classList.add("ai-modal-open");
+
+        overlay.addEventListener("click", function(e){
+            if(e.target === overlay) closeAiCompareModal();
+        });
+        overlay.querySelector(".ai-modal-close")
+            .addEventListener("click", closeAiCompareModal);
+        document.addEventListener("keydown", aiModalEsc);
+
+        Promise.allSettled([
+            analyzeFailedSearch(keyword, overlay.querySelector("#aiCompareGemini"), lang, "gemini"),
+            analyzeFailedSearch(keyword, overlay.querySelector("#aiCompareSolar"), lang, "solar"),
+        ]).then(function(){
+            // 저장된 판단을 반영해 목록 표시(등록 대상 아님 / 검토 필요) 새로고침
+            if(typeof loadFailedSearches === "function") loadFailedSearches();
+        });
+    };
+
 
     window.copyAiDbCode =
     async function(button, code){
@@ -1323,7 +1520,7 @@ if(allCopyButton){
 
         .from("search_logs")
 
-        .select("keyword,created_at")
+        .select("keyword,created_at,language")
 
         .eq(
             "result_type",
@@ -1337,13 +1534,39 @@ if(allCopyButton){
             }
         )
 
-        .limit(20);
+        .limit(300);
 
 
         if(error) throw error;
 
 
-        if(data.length===0){
+        // 같은 검색어(언어 + 시민 화면과 같은 정규화 기준)는 한 줄로 합치고 횟수를 센다.
+        // 최신 기록이 먼저 오므로 처음 나온 표기와 시각을 대표로 쓴다.
+        const groups = [];
+        const groupByKey = new Map();
+
+        (data || []).forEach(function(row){
+            const lang = row.language || "ko";
+            const l = (typeof LANGS !== "undefined" && LANGS[lang]) ? LANGS[lang] : null;
+            const raw = String(row.keyword || "");
+            const norm = (l ? l.norm(raw) : raw.trim().toLowerCase()).replace(/\s+/g, "");
+            if(!norm) return;
+            const key = lang + "|" + norm;
+            if(groupByKey.has(key)){
+                groupByKey.get(key).count++;
+            }else{
+                const g = { keyword: row.keyword, language: lang, created_at: row.created_at, count: 1 };
+                groupByKey.set(key, g);
+                groups.push(g);
+            }
+        });
+
+        const rows = groups.slice(0, 20);
+
+        const aiVerdicts = await loadAiVerdicts();
+
+
+        if(rows.length===0){
 
             area.innerHTML=
             "검색 실패 데이터 없음";
@@ -1356,7 +1579,41 @@ if(allCopyButton){
         let html="";
 
 
-data.forEach((item,index)=>{
+rows.forEach((item,index)=>{
+
+    // 지금 DB에 정확히 일치하는 품목이 있으면 이미 반영된 검색어
+    const isAdded =
+        findDbMatches(item.keyword, item.language || "ko").exact.length > 0;
+
+    const addedBadge = isAdded
+        ? `<span class="added-badge" title="현재 품목 DB에 등록되어 있어요" style="
+                margin-left:6px;
+                padding:2px 8px;
+                border-radius:999px;
+                background:#e6f7ed;
+                color:#1f8f4e;
+                font-size:12px;
+                font-weight:600;
+                white-space:nowrap;
+           ">✅ 추가 완료</span>`
+        : "";
+
+    // 이미 DB에 있으면 "추가 완료"가 우선, 아니면 저장된 AI 판단 표시
+    const aiBadge = isAdded
+        ? ""
+        : verdictBadge(aiVerdicts.get(failedKey(item.keyword, item.language || "ko")));
+
+    const countBadge = item.count > 1
+        ? `<span class="fail-count" title="같은 검색어 실패 횟수" style="
+                margin-left:6px;
+                padding:2px 7px;
+                border-radius:999px;
+                background:#f1f1f4;
+                color:#666;
+                font-size:12px;
+                white-space:nowrap;
+           ">${item.count}회</span>`
+        : "";
 
     html += `
         <div class="fail-row"
@@ -1368,9 +1625,14 @@ data.forEach((item,index)=>{
                 flex-wrap:wrap;
              ">
 
-            <span>
-                ${escapeHtml(item.keyword)}
-            </span>
+            <div style="display:flex;align-items:center;flex-wrap:wrap;">
+                <span>
+                    ${escapeHtml(item.keyword)}
+                </span>
+                ${countBadge}
+                ${addedBadge}
+                ${aiBadge}
+            </div>
 
             <button
                 type="button"
@@ -1389,11 +1651,6 @@ data.forEach((item,index)=>{
                 AI 분석
             </button>
 
-            <div
-                id="ai-result-${index}"
-                style="width:100%;"
-            ></div>
-
         </div>
     `;
 
@@ -1411,12 +1668,7 @@ data.forEach((item,index)=>{
                     Number(button.dataset.index);
 
                 const item =
-                    data[index];
-
-                const resultArea =
-                    document.getElementById(
-                        `ai-result-${index}`
-                    );
+                    rows[index];
 
                 if(!item){
                     console.error(
@@ -1426,9 +1678,9 @@ data.forEach((item,index)=>{
                     return;
                 }
 
-                analyzeFailedSearch(
+                openAiCompareModal(
                     String(item.keyword),
-                    resultArea
+                    item.language || "ko"
                 );
 
             });

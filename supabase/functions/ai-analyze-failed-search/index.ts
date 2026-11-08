@@ -279,6 +279,50 @@ async function callSolar(prompt: string): Promise<{ result: any; model: string }
   return { result: JSON.parse(text), model };
 }
 
+
+// ─────────────────────────────────────────────────────────────
+// 분석 결과 저장 (ai_analysis_results 표, supabase/ai-analysis-results.sql)
+// 대시보드의 "등록 대상 아님 / 검토 필요" 표시에 쓰입니다.
+// 저장에 실패해도 분석 결과 응답은 그대로 돌려줍니다.
+// ─────────────────────────────────────────────────────────────
+const LANGUAGES = ["ko", "en", "zh", "vi", "ru"];
+
+async function saveAnalysisResult(row: {
+  keyword: string; language: string; provider: string; model: string; analysis: any;
+}): Promise<void> {
+  const supabaseUrl = Deno.env.get("SUPABASE_URL");
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (!supabaseUrl || !serviceKey) {
+    console.warn("SUPABASE_SERVICE_ROLE_KEY가 없어 분석 결과를 저장하지 않았습니다.");
+    return;
+  }
+  try {
+    const res = await fetch(`${supabaseUrl}/rest/v1/ai_analysis_results`, {
+      method: "POST",
+      headers: {
+        apikey: serviceKey,
+        Authorization: `Bearer ${serviceKey}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({
+        keyword: row.keyword.slice(0, 100),
+        language: LANGUAGES.includes(row.language) ? row.language : "ko",
+        provider: row.provider,
+        model: row.model,
+        category: String(row.analysis?.category ?? "").slice(0, 20) || null,
+        need_registration: typeof row.analysis?.needRegistration === "boolean"
+          ? row.analysis.needRegistration
+          : null,
+        reason: String(row.analysis?.reason ?? "").slice(0, 1000) || null,
+      }),
+    });
+    if (!res.ok) console.error("분석 결과 저장 실패:", res.status, await res.text());
+  } catch (e) {
+    console.error("분석 결과 저장 오류:", e);
+  }
+}
+
 Deno.serve(async (req) => {
   // CORS preflight
   if (req.method === "OPTIONS") {
@@ -418,6 +462,14 @@ ${existingContext || "(제공된 기존 데이터 없음)"}
     if (result.analysis && result.analysis.category !== "food") {
       result.analysis.needRegistration = false;
     }
+
+    await saveAnalysisResult({
+      keyword,
+      language: String(body.language ?? "ko"),
+      provider,
+      model,
+      analysis: result.analysis,
+    });
 
     return new Response(
       JSON.stringify({
