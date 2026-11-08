@@ -165,6 +165,120 @@ async function authenticateAdmin(
   return { ok: true };
 }
 
+
+// ─────────────────────────────────────────────────────────────
+// AI 모델 연결부
+// AI 호출은 이 부분에만 모여 있습니다. 제공자를 추가하려면
+// call<제공자>(prompt) 함수를 하나 더 만들고 resolveProvider 에 이름을 넣으면 됩니다.
+//   - gemini: GEMINI_API_KEY, GEMINI_MODEL(선택, 기본 gemini-3.5-flash-lite)
+//   - solar : UPSTAGE_API_KEY(또는 SOLAR_API_KEY), SOLAR_MODEL(선택, 기본 solar-pro4)
+//   - 기본 제공자: AI_PROVIDER(선택, gemini | solar, 기본 gemini)
+// ─────────────────────────────────────────────────────────────
+type Provider = "gemini" | "solar";
+const PROVIDERS: Provider[] = ["gemini", "solar"];
+
+class AiCallError extends Error {
+  detail: string;
+  constructor(message: string, detail = "") {
+    super(message);
+    this.detail = detail;
+  }
+}
+
+function resolveProvider(requested: unknown): Provider {
+  const pick = (v: unknown) => String(v ?? "").trim().toLowerCase() as Provider;
+  if (PROVIDERS.includes(pick(requested))) return pick(requested);
+  const fromEnv = pick(Deno.env.get("AI_PROVIDER"));
+  return PROVIDERS.includes(fromEnv) ? fromEnv : "gemini";
+}
+
+function modelFromEnv(name: string, fallback: string): string {
+  const v = (Deno.env.get(name) ?? "").trim();
+  return /^[A-Za-z0-9._-]{1,80}$/.test(v) ? v : fallback;
+}
+
+async function callGemini(prompt: string): Promise<{ result: any; model: string }> {
+  const model = modelFromEnv("GEMINI_MODEL", "gemini-3.5-flash-lite");
+  const apiKey = Deno.env.get("GEMINI_API_KEY");
+  if (!apiKey) throw new Error("GEMINI_API_KEY가 Supabase Secret에 없습니다.");
+
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+    {
+      method: "POST",
+      headers: { "x-goog-api-key": apiKey, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: outputSchema,
+        },
+      }),
+    },
+  );
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    console.error("Gemini API error:", errorText);
+    throw new AiCallError("Gemini API 호출에 실패했습니다.", errorText);
+  }
+
+  const data = await res.json();
+  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!text) throw new Error("Gemini 응답에서 JSON 데이터를 찾을 수 없습니다.");
+  return { result: JSON.parse(text), model };
+}
+
+// Upstage structured outputs 는 모든 객체에 additionalProperties:false 가 필요하므로
+// 같은 스키마를 변환해서 사용합니다(내용은 Gemini 와 동일).
+function toStrictSchema(schema: any): any {
+  if (Array.isArray(schema)) return schema.map(toStrictSchema);
+  if (!schema || typeof schema !== "object") return schema;
+  const out: any = {};
+  for (const [k, v] of Object.entries(schema)) {
+    out[k] = k === "properties"
+      ? Object.fromEntries(Object.entries(v as any).map(([pk, pv]) => [pk, toStrictSchema(pv)]))
+      : toStrictSchema(v);
+  }
+  if (out.type === "object") out.additionalProperties = false;
+  return out;
+}
+
+async function callSolar(prompt: string): Promise<{ result: any; model: string }> {
+  const model = modelFromEnv("SOLAR_MODEL", "solar-pro4");
+  const apiKey = Deno.env.get("UPSTAGE_API_KEY") ?? Deno.env.get("SOLAR_API_KEY");
+  if (!apiKey) throw new Error("UPSTAGE_API_KEY가 Supabase Secret에 없습니다.");
+
+  const res = await fetch("https://api.upstage.ai/v1/chat/completions", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model,
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 4000,
+      response_format: {
+        type: "json_schema",
+        json_schema: { name: "failed_search_analysis", strict: true, schema: toStrictSchema(outputSchema) },
+      },
+    }),
+  });
+
+  if (!res.ok) {
+    const errorText = await res.text();
+    console.error("Solar API error:", errorText);
+    throw new AiCallError("Solar API 호출에 실패했습니다.", errorText);
+  }
+
+  const data = await res.json();
+  const choice = data?.choices?.[0];
+  if (choice?.finish_reason === "length") {
+    throw new Error("Solar 응답이 길이 제한으로 잘렸습니다.");
+  }
+  const text = choice?.message?.content;
+  if (!text) throw new Error("Solar 응답에서 JSON 데이터를 찾을 수 없습니다.");
+  return { result: JSON.parse(text), model };
+}
+
 Deno.serve(async (req) => {
   // CORS preflight
   if (req.method === "OPTIONS") {
@@ -186,7 +300,7 @@ Deno.serve(async (req) => {
     );
   }
 
-  // 인증: 허용된 관리자만 호출할 수 있습니다 (Gemini 사용량 보호)
+  // 인증: 허용된 관리자만 호출할 수 있습니다 (AI 사용량 보호)
   const auth = await authenticateAdmin(req);
   if (!auth.ok) {
     return new Response(
@@ -199,18 +313,10 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // 모델명은 Supabase Secret(GEMINI_MODEL)로 교체 가능. 없거나 형식이 이상하면 기본값 사용.
-    const modelEnv = (Deno.env.get("GEMINI_MODEL") ?? "").trim();
-    const GEMINI_MODEL = /^[A-Za-z0-9._-]{1,80}$/.test(modelEnv)
-      ? modelEnv
-      : "gemini-3.5-flash-lite";
-    const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
-
-    if (!GEMINI_API_KEY) {
-      throw new Error("GEMINI_API_KEY가 Supabase Secret에 없습니다.");
-    }
-
     const body = await req.json();
+
+    // 사용할 AI 제공자: 요청의 provider → AI_PROVIDER 시크릿 → 기본값 gemini
+    const provider = resolveProvider(body.provider);
 
     const keyword = String(body.keyword ?? "").trim();
     const existingContext = String(body.existingContext ?? "").trim();
@@ -302,75 +408,23 @@ ${keyword}
 ${existingContext || "(제공된 기존 데이터 없음)"}
 `;
 
-    const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`,
-      {
-        method: "POST",
-        headers: {
-          "x-goog-api-key": GEMINI_API_KEY,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: prompt,
-                },
-              ],
-            },
-          ],
-
-          generationConfig: {
-            responseMimeType: "application/json",
-            responseSchema: outputSchema,
-          },
-        }),
-      },
-    );
-
-    if (!geminiResponse.ok) {
-      const errorText = await geminiResponse.text();
-
-      console.error("Gemini API error:", errorText);
-
-      return new Response(
-        JSON.stringify({
-          error: "Gemini API 호출에 실패했습니다.",
-          detail: errorText,
-        }),
-        {
-          status: 502,
-          headers: {
-            ...corsHeaders,
-            "Content-Type": "application/json",
-          },
-        },
-      );
-    }
-
-    const geminiData = await geminiResponse.json();
-
-    const text =
-      geminiData?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (!text) {
-      throw new Error("Gemini 응답에서 JSON 데이터를 찾을 수 없습니다.");
-    }
-
-    const result = JSON.parse(text);
+    const { result, model } = provider === "solar"
+      ? await callSolar(prompt)
+      : await callGemini(prompt);
 
     // 안전장치:
     // 음식물 유래 폐기물(food)이 아닌 경우에는
     // 어떤 경우에도 신규 DB 등록 대상으로 처리하지 않음
-    if (result.analysis?.category !== "food") {
-  result.analysis.needRegistration = false;
+    if (result.analysis && result.analysis.category !== "food") {
+      result.analysis.needRegistration = false;
     }
 
     return new Response(
       JSON.stringify({
         success: true,
         keyword,
+        provider,
+        model,
         ...result,
       }),
       {
@@ -383,6 +437,16 @@ ${existingContext || "(제공된 기존 데이터 없음)"}
     );
   } catch (error) {
     console.error("AI analysis error:", error);
+
+    if (error instanceof AiCallError) {
+      return new Response(
+        JSON.stringify({ success: false, error: error.message, detail: error.detail }),
+        {
+          status: 502,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        },
+      );
+    }
 
     return new Response(
       JSON.stringify({

@@ -168,6 +168,17 @@
 
             <h2>⚠ 검색 실패 목록</h2>
 
+            <div id="aiModelPicker" role="radiogroup" aria-label="AI 분석 모델"
+                 style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:-4px 0 12px;font-size:13px;color:#555;">
+                <span style="font-weight:600;">분석 모델</span>
+                <label style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid #ddd;border-radius:999px;cursor:pointer;">
+                    <input type="radio" name="aiModel" value="gemini" checked> Gemini
+                </label>
+                <label style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid #ddd;border-radius:999px;cursor:pointer;">
+                    <input type="radio" name="aiModel" value="solar"> Solar (Upstage)
+                </label>
+            </div>
+
             <div id="failedSearches"></div>
 
         </div>

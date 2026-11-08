@@ -777,8 +777,14 @@ async function loadFailedSearches(){
     window.analyzeFailedSearch =
     async function(keyword, resultArea){
 
+        // 선택한 분석 모델 (Gemini / Solar)
+        const provider =
+            document.querySelector('input[name="aiModel"]:checked')?.value || "gemini";
+        const providerLabel =
+            provider === "solar" ? "Solar" : "Gemini";
+
         resultArea.innerHTML =
-        "AI 분석 중...";
+        "AI 분석 중... (" + providerLabel + ")";
 
         try{
 
@@ -797,7 +803,8 @@ async function loadFailedSearches(){
                     },
                     body:JSON.stringify({
                         keyword:keyword,
-                        existingContext:""
+                        existingContext:"",
+                        provider:provider
                     })
                 }
             );
@@ -856,6 +863,17 @@ async function loadFailedSearches(){
                     margin-bottom:8px;
                 ">
                     🤖 AI 분석 결과
+                    <span style="
+                        margin-left:6px;
+                        padding:2px 8px;
+                        border-radius:999px;
+                        background:#ece6ff;
+                        color:#5b35d5;
+                        font-size:12px;
+                        font-weight:600;
+                    ">
+                        ${escapeHtml((result.provider === "solar" ? "Solar" : "Gemini") + (result.model ? " · " + result.model : ""))}
+                    </span>
                 </div>
             `;
 
