@@ -1,4 +1,4 @@
-const CACHE_NAME = 'donggu-waste-v261111b';
+const CACHE_NAME = 'donggu-waste-v261111c';
 
 const urlsToCache = [
   './',
