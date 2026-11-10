@@ -150,11 +150,7 @@ python -m http.server 8080
 # 브라우저에서 http://localhost:8080 접속
 ```
 
-<<<<<<< Updated upstream
-기본 설정이 운영 중인 Supabase에 연결되어 있어 서버를 따로 설치하지 않아도 시민 화면이 동작합니다. 관리자 로그인은 배포 주소 사용을 권장합니다.
-=======
 공공 GitLab 제출본은 보안 검사(Gitleaks) 정책에 따라 Supabase 공개(anon) 키를 `YOUR_SUPABASE_ANON_KEY`로 비워 두었습니다. 직접 실행할 때는 `app.js`·`supabase.js`·`admin/login.js`·`admin/dashboard.js`의 이 값을 Supabase 프로젝트의 anon 키로 바꾸세요. 심사는 위 배포 주소에서 설치 없이 바로 확인할 수 있습니다.
->>>>>>> Stashed changes
 
 ---
 
@@ -189,10 +185,7 @@ Busan-donggu-waste-app/
 ---
 
 ## 🔒 개인정보·보안
-<<<<<<< Updated upstream
-=======
 - 공개(anon) 키도 제출 저장소에는 두지 않고, 데이터 접근은 RLS 권한으로 제한합니다.
->>>>>>> Stashed changes
 - 회원가입·개인 식별 정보를 받지 않습니다. 검색 기록은 검색어·결과 유형·언어·유입 경로(QR/웹)만 저장합니다.
 - 검색 기록과 AI 판단은 RLS로 허용된 관리자 계정만 조회할 수 있고, AI 판단 저장은 서버 함수만 할 수 있습니다.
 - AI 분석 함수는 관리자 로그인 토큰과 `ADMIN_EMAILS`로 호출자를 확인합니다.
